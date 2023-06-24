@@ -5,6 +5,7 @@ import { LenguageService } from '@app/core/services/lenguage.service';
 import { ModuleService } from '@app/core/services/module.service';
 import { RoleService } from '@app/core/services/role.service';
 import { UsersService } from '@app/core/services/users.service';
+import { environment } from '@encoding/environment';
 import { emit, on } from 'cluster';
 import { DropzoneComponent, DropzoneConfigInterface, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -85,6 +86,7 @@ export class AddEditUsersComponent implements OnInit {
         
         this.UsersSrv.getUserById(this.id)
         .subscribe((next: any) => {
+          console.log(next)
           this.form = this.formBuilder.group({
             first_name: [next['first_name'], [Validators.required]],
             last_name: [next['last_name'], [Validators.required]],
@@ -99,7 +101,7 @@ export class AddEditUsersComponent implements OnInit {
             status: [next['status'], [Validators.required]]
           });
 
-          this.url = `${next['user_images']}`;
+          this.url = `${environment.API_URL}images/${next['user_images']}`;
           this.selectedSearchLanguageId = next['language_id'];          
           this.selectedSearchRolId = next['rol_id'];
           this.selectedStatus = next['status']

@@ -6,32 +6,32 @@
       <div class="card">
         <div class="row">
           <div class="col-md-4 pe-md-0">
-            <div class="auth-side-wrapper" [ngStyle]="{ 'background-image': 'url(assets/images/image-solar2.png)' }">
+            <div class="auth-side-wrapper" [ngStyle]="{ 'background-image': 'url(assets/images/login2.png)' }">
   
             </div>
           </div>
           <div class="col-md-8 ps-md-0">
             <div class="auth-form-wrapper px-4 py-5">
-              <a routerLink="." class="nobleui-logo d-block mb-2">Initiate<span>365</span></a>
-              <h5 class="text-muted fw-normal mb-4">Log in to your account.</h5>
+              <a routerLink="." class="nobleui-logo d-block mb-2">Tribunal Supremo<span> Electoral</span></a>
+              <h5 class="text-muted fw-normal mb-4">Accede a tu cuenta.</h5>
               <form class="forms-sample" [formGroup]="loginForm" (ngSubmit)="onLogin()">
                 
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
-                  <input type="email" [ngClass]="{ 'is-invalid': submitted && position['email']?.errors }" formControlName="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                  <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
+                  <input type="email" [ngClass]="{ 'is-invalid': submitted && position['email']?.errors }" formControlName="email" class="form-control" id="exampleInputEmail1" placeholder="Correo">
                   <div class="invalid-feedback">
                     <mat-error *ngIf="isValidField('email')" >
                         {{getErrorMessage('email')}}
                     </mat-error>
                   </div>
                   <div *ngIf="submitted && position['email']?.errors" class="invalid-feedback">
-                      <mat-error *ngIf="position['email']?.errors.required">Email es requerido</mat-error>
+                      <mat-error *ngIf="position['email']?.errors.required">Correo es requerido</mat-error>
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Password</label>
-                  <input [ngClass]="{ 'is-invalid': submitted && position['password']?.errors }" formControlName="password" type="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password" placeholder="Password">
+                  <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                  <input [ngClass]="{ 'is-invalid': submitted && position['password']?.errors }" formControlName="password" type="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password" placeholder="Contraseña">
                   <div class="invalid-feedback">
                     <mat-error *ngIf="isValidField('password')" >
                         {{getErrorMessage('password')}}
@@ -45,14 +45,14 @@
                 <div class="form-check mb-3">
                   <input type="checkbox" class="form-check-input" id="authCheck">
                   <label class="form-check-label" for="authCheck">
-                    Remember me
+                    Recordar
                   </label>
                 </div>
 
                 <div>
-                  <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" (click)="onSubmit()">Login</button>
+                  <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" (click)="onSubmit()">Ingresar</button>
                 </div>
-                <a class="d-block mt-3 text-muted">Forgot password</a>
+                <a class="d-block mt-3 text-muted">Olvidé mi contraseña</a>
               </form>
             </div>
           </div>
