@@ -1,0 +1,61 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size = "medium" color = "transparent" [fullScreen] = "true">
+    <lottie-player style="margin-top:-30px;" src="https://assets5.lottiefiles.com/private_files/lf30_tcux3hw6.json"  background="transparent"  speed="1"  style="width: 250px; height: 250px;"  loop  autoplay></lottie-player>
+  </ngx-spinner>
+
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/providers/view">Provider</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{this.title}}</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header">
+          <h6 class="card-title">Information of the providers</h6></div>
+            <form [formGroup]="form" (ngSubmit)="saveProvider()">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label">Provider name</label>
+                    <input type="text" [ngClass]="{ 'is-invalid': submitted && position['name_provider'].errors }" formControlName="name_provider" name="name_provider" id="name_provider" onkeydown="return /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control" placeholder="Enter name">
+                    <div *ngIf="submitted && position['name_provider']?.errors" class="invalid-feedback">
+                        <mat-error *ngIf="position['name_provider']?.hasError('required')">Name is required</mat-error>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Provider description</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && position['description_provider'].errors }" formControlName="description_provider" name="description_provider" id="description_provider" onkeydown="return /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control" placeholder="Enter name">
+                      <div *ngIf="submitted && position['description_provider']?.errors" class="invalid-feedback">
+                          <mat-error *ngIf="position['description_provider']?.hasError('required')">Description is required</mat-error>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="mb-3">
+                      <label class="form-label">Status</label>
+                      <ng-select [items]="status"
+                          bindLabel="name"
+                          bindValue="id"
+                          class="data-ng-select"
+                          [ngModelOptions]="{standalone: true}"
+                          placeholder="type to search"
+                          [(ngModel)]="selectedSearchStatusId">
+                      </ng-select>
+                  </div>
+                </div>
+
+              </div>
+              <button [swal]="{ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true, title: 'successfully', icon: 'success'}" [disabled]="!form.valid" (click)="onSubmit()" type="submit" class="btn btn-primary submit">{{this.title}} <i class="mdi mdi-file-document-edit"></i> </button>
+              <button id="_btn-back" routerLink="/providers/view" type="submit" name="submitButton" class="btn">Go Back <i class="mdi mdi-arrow-left"></i> </button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>

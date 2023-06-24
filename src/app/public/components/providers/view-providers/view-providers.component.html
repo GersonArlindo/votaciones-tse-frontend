@@ -1,0 +1,232 @@
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Provider</li>
+    </ol>
+  </nav>
+
+  
+  
+  <div class="row">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+        <div class="headercard">
+          <h5 id="_title-header-h5">Types Provider of the leads clients</h5>
+          <div class="btn-text-right headercard">
+            <button *ngIf="create == 1" status="success" id="_btn-success" (click)="editProviderModal(contentUpdate, 0)"
+                class="dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0"
+                type="button">
+                <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i>  Add Provider</span>
+              </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive table table-hover mb-0">
+            <p-table #dt class="data-config-header" [value]="provider" dataKey="id" [rowHover]="true" [rows]="100"
+              [showCurrentPageReport]="true" [paginator]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+              [globalFilterFields]="['provider_id','name_provider','status','description_provider','date_created','date_modify']">
+  
+              <ng-template pTemplate="caption">
+                <div class="table-header">
+                  Search provider
+                  <span class="p-input-icon-left">
+                    <div class="btn-text-right">
+                      <input pInputText type="text" class="form-control" id="_bck-color"
+                        (input)="applyFilterGlobal($event, 'contains')" />
+                    </div>
+                  </span>
+                </div>
+              </ng-template>
+  
+              <ng-template pTemplate="header">
+                <tr>
+                  <!-- <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                  </th> -->
+  
+                  <th pSortableColumn="provider_id" style="min-width: 8rem">
+                    <div class="flex justify-content-between align-items-center">
+                      Id
+                      <p-sortIcon field="provider_id"></p-sortIcon>
+                    </div>
+                  </th>
+  
+                  <th pSortableColumn="name_provider" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                      Name
+                      <p-sortIcon field="name_provider"></p-sortIcon>
+                    </div>
+                  </th>
+
+                  <th pSortableColumn="description_provider" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                      Description
+                      <p-sortIcon field="description_provider"></p-sortIcon>
+                    </div>
+                  </th>
+
+                  <th pSortableColumn="status" style="min-width: 14rem">
+                    <div class="flex justify-content-between align-items-center">
+                      Status
+                      <p-sortIcon field="status"></p-sortIcon>
+                    </div>
+                  </th>
+  
+                  <th style="min-width: 09rem" *ngIf="deleted == 1 || update == 1">
+                    <div class="flex justify-content-between align-items-center">
+                      Actions
+                    </div>
+                  </th>
+                </tr>
+              </ng-template>
+  
+              <ng-template pTemplate="body" let-provider>
+                <tr class="p-selectable-row">
+                  <!-- <td>
+                    <p-tableCheckbox [value]="provider"></p-tableCheckbox>
+                  </td> -->
+                  <td>
+                    <span class="rounded-pill">&nbsp; {{provider.provider_id}} &nbsp;</span>
+                  </td>
+                  <td>
+                    <i class="mdi mdi-solar-power-variant"></i>
+                    {{provider.name_provider}}
+                  </td>
+                  <td>
+                    <i class="mdi mdi-text-long"></i>
+                    {{provider.description_provider}}
+                  </td>
+                  <td>
+                    <span class="badge {{
+                      getClassBasedOnStatus(provider.status)
+                    }}">
+                    {{ this.convertStatus(provider.status) }}
+                  </span>
+                  </td>
+                  <td style="text-align: left; margin-left: -5px;" *ngIf="deleted == 1 || update == 1">
+                    <a *ngIf="deleted == 1" (click)="deleteProviderModal(contentDelete, provider.provider_id)"
+                      class="p-button p-button-rounded p-button-warning" style="margin-left: -8px;"><i
+                        class="mdi mdi-trash-can-outline"></i></a>&nbsp;
+                    <a *ngIf="update == 1" (click)="editProviderModal(contentUpdate,  provider.provider_id)" class="p-button p-button-rounded p-button-success"><i
+                        class="mdi mdi-pencil"></i></a>&nbsp;
+                        <a (click)="viewProviderModal(contentView, provider.provider_id)" class="p-button p-button-rounded p-button-view"><i
+                          class="mdi mdi-eye"></i></a>
+                  </td>
+                </tr>
+                <ng-template #contentView let-d="dismiss">
+                  <div class="modal-header modaltitle">
+                    <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-map-marker-radius"></i> Provider</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card">
+                      <div class="card-body cardview">
+                        <div class="img animate__animated animate__zoomInDown"><img src="assets/images/provider.png" alt=""></div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label class="labelDetails text-center"><i class="mdi mdi-map-marker-radius"></i>Provider Name</label>
+                            <p class="pDetails">{{provider.name_provider}}</p>
+                            <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock"></i> Date Created</label>
+                            <p class="pDetails">{{provider.date_created}}</p>
+                          </div>
+                          
+                          <div class="col-md-6">
+                            <label class="labelDetails text-center"><i class="mdi mdi-list-status"></i>Status</label>
+                            <p class="pDetails">{{ this.convertStatus(provider.status) }}</p>
+                            <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock-outline"></i> Date
+                              Modify</label>
+                            <p class="pDetails">{{provider.date_modify}}</p>
+                          </div>
+                        </div>
+                        <label class="labelDetails text-center"><i class="mdi mdi-card-text"></i>Description Provider</label>
+                            <p class="pDetails">{{provider.description_provider}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button id="_btn-back" routerLink="/providers/view" type="submit" name="submitButton"
+                      class="btn btn-outline-dark" (click)="d('Cross click')">Go Back</button>
+                  </div>
+                </ng-template>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="8">No providers found.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+            
+            <ng-template #contentUpdate let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Information of the Provider</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12 stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                          <form [formGroup]="form">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <div class="mb-3">
+                                  <label class="form-label">Provider name</label>
+                                  <input type="text" [ngClass]="{ 'is-invalid': submitted && position['name_provider'].errors }" formControlName="name_provider" name="name_provider" id="name_provider" onkeydown=" /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control" placeholder="Enter name">
+                                  <div *ngIf="submitted && position['name_provider']?.errors" class="invalid-feedback">
+                                      <mat-error *ngIf="position['name_provider']?.hasError('required')">Name is required</mat-error>
+                                  </div>
+                                </div>
+                              </div>
+              
+                              <div class="col-sm-12">
+                                  <div class="mb-3">
+                                    <label class="form-label">Provider description</label>
+                                    <input type="text" [ngClass]="{ 'is-invalid': submitted && position['description_provider'].errors }" formControlName="description_provider" name="description_provider" id="description_provider" onkeydown=" /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control" placeholder="Enter name">
+                                    <div *ngIf="submitted && position['description_provider']?.errors" class="invalid-feedback">
+                                        <mat-error *ngIf="position['description_provider']?.hasError('required')">Description is required</mat-error>
+                                    </div>
+                                  </div>
+                              </div>
+              
+                              <div class="col-sm-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <ng-select [items]="status"
+                                        bindLabel="name"
+                                        bindValue="id"
+                                        class="data-ng-select"
+                                        [ngModelOptions]="{standalone: true}"
+                                        placeholder="type to search"
+                                        [(ngModel)]="selectedSearchStatusId">
+                                    </ng-select>
+                                </div>
+                              </div>
+              
+                            </div>
+                            <button [disabled]="!form.valid" (click)="c('yes')" type="submit" class="btn btn-primary submit">{{this.title}} <i class="mdi mdi-file-document-edit"></i> </button>&nbsp;
+                            <button id="_btn-back" (click)="d('Cross click')"  class="btn btn-outline-dark">Go Back <i class="mdi mdi-arrow-left"></i> </button>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </ng-template>
+
+            <ng-template #contentDelete let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure to delete the language</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+                <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>
+              </div>
+            </ng-template>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

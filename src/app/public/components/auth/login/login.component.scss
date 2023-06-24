@@ -1,0 +1,165 @@
+:host {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545; 
+  }
+  
+  
+  .was-validated {
+    .form-control {
+      &:invalid {
+        ~ {
+          .invalid-feedback {
+            display: block;
+          }
+          .invalid-tooltip {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .form-control.is-invalid {
+    ~ {
+      .invalid-feedback {
+        display: block;
+      }
+      .invalid-tooltip {
+        display: block;
+      }
+    }
+  }
+  
+  .was-validated {
+    .custom-select {
+      &:invalid {
+        ~ {
+          .invalid-feedback {
+            display: block;
+          }
+          .invalid-tooltip {
+            display: block;
+          }
+        }
+      }
+    }
+    .form-control-file {
+      &:invalid {
+        ~ {
+          .invalid-feedback {
+            display: block;
+          }
+          .invalid-tooltip {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .custom-select.is-invalid {
+    ~ {
+      .invalid-feedback {
+        display: block;
+      }
+      .invalid-tooltip {
+        display: block;
+      }
+    }
+  }
+  .form-control-file.is-invalid {
+    ~ {
+      .invalid-feedback {
+        display: block;
+      }
+      .invalid-tooltip {
+        display: block;
+      }
+    }
+  }
+  
+  
+  .was-validated {
+    .form-check-input {
+      &:invalid {
+        ~ {
+          .invalid-feedback {
+            display: block;
+          }
+          .invalid-tooltip {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .form-check-input.is-invalid {
+    ~ {
+      .invalid-feedback {
+        display: block;
+      }
+      .invalid-tooltip {
+        display: block;
+      }
+    }
+  }
+  
+  .was-validated {
+    .custom-control-input {
+      &:invalid {
+        ~ {
+          .invalid-feedback {
+            display: block;
+          }
+          .invalid-tooltip {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .custom-control-input.is-invalid {
+    ~ {
+      .invalid-feedback {
+        display: block;
+      }
+      .invalid-tooltip {
+        display: block;
+      }
+    }
+  }
+  
+  
+  .was-validated {
+    .custom-file-input {
+      &:invalid {
+        ~ {
+          .invalid-feedback {
+            display: block;
+          }
+          .invalid-tooltip {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .custom-file-input.is-invalid {
+    ~ {
+      .invalid-feedback {
+        display: block;
+      }
+      .invalid-tooltip {
+        display: block;
+      }
+    }
+  }
+  

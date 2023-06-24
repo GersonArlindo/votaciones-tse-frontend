@@ -1,0 +1,53 @@
+.form-control {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 12px !important;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #eff0f7;
+    background-clip: padding-box;
+    border: 1px solid #eff0f7;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+::placeholder{
+    color: black !important;
+}
+
+.card-title{
+	margin-top: 7px !important;
+}
+
+.card-header{
+	background-color: #0c1427;
+	height: 15%;
+	color: floralwhite;
+	margin-bottom: 25px;
+}
+
+
+
+select {
+	display: block;
+	font-size: 16px;
+	font-family: 'Verdana', sans-serif;
+	font-weight: 400;
+	color: #444;
+	line-height: 1.3;
+	padding: .4em 1.4em .3em .8em;
+	width: 400px;
+	max-width: 100%; 
+	box-sizing: border-box;
+	border-radius: .3em;
+	appearance: none;
+	background-color: #fff;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom,  #eff0f7 0%, #eff0f7 100%);
+	background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
+  }

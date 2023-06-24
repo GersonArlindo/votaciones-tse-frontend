@@ -1,0 +1,237 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Roof</li>
+  </ol>
+</nav>
+
+<!--   <div class="container-xxl flex-grow-1 container-p-y">
+    <div id="_div-container">
+      <div class="dataTables_wrapper">
+        <div class="card-header flex-column flex-md-row">
+          <div class="dt-action-buttons text-end pt-3 pt-md-0">
+            <div class="dt-buttons">
+              <button status="success" id="_btn-success" routerLink="/type-roof/add"
+                class="dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0"
+                type="button">
+                <span class="d-none d-sm-inline-block">Add Roof</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mt-3 mb-3">
+      <div id="_div-header">
+        <h5 id="_title-header-h5">Roof List</h5>
+      </div>
+    </div>
+  </div> -->
+
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="headercard">
+        <h5 id="_title-header-h5">Roof List</h5>
+        <div class="btn-text-right headercard">
+          <button *ngIf="create == 1" status="success" id="_btn-success"
+            (click)="editRoofModal(contentUpdate, 0)" class="dt-button create-new btn btn-primary ml-2"
+            tabindex="0" aria-controls="DataTables_Table_0" type="button">
+            <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i> Add Roof</span>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive table table-hover mb-0">
+          <p-table #dt class="data-config-header" [value]="roof" dataKey="id" [rowHover]="true" [rows]="100"
+            [showCurrentPageReport]="true" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            [globalFilterFields]="['roof_id ','roof_name','description_roof','date_created','date_modify']">
+
+            <ng-template pTemplate="caption">
+              <div class="table-header">
+                Search Roof
+                <span class="p-input-icon-left">
+                  <div class="btn-text-right">
+                    <input pInputText type="text" class="form-control" id="_bck-color"
+                      (input)="applyFilterGlobal($event, 'contains')" />
+                  </div>
+                </span>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+              <tr>
+                <!--  <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                  </th> -->
+
+                <th pSortableColumn="roof_id" style="min-width: 4rem">
+                  <div class="flex justify-content-between align-items-center">
+                    Id
+                    <p-sortIcon field="roof_id"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th pSortableColumn="roof_name" style="min-width: 8rem">
+                  <div class="flex justify-content-between align-items-center">
+                    Name
+                    <p-sortIcon field="roof_name"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th pSortableColumn="description_roof" style="min-width: 25rem">
+                  <div class="flex justify-content-between align-items-center">
+                    Description
+                    <p-sortIcon field="description_roof"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th style="min-width: 09rem" *ngIf="deleted == 1 || update == 1">
+                  <div class="flex justify-content-between align-items-center">
+                    Actions
+                  </div>
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-roof>
+              <tr class="p-selectable-row">
+                <!-- <td>
+                    <p-tableCheckbox [value]="roof"></p-tableCheckbox>
+                  </td> -->
+                <td>
+                  <span class="rounded-pill">&nbsp; {{roof.roof_id}} &nbsp;</span>
+                </td>
+                <td>
+                  <i class="mdi mdi-home-roof"></i>
+                  {{roof.roof_name}}
+                </td>
+                <td class="description">
+                  <i class="mdi mdi-text-long"></i>
+                  {{roof.description_roof}}
+                </td>
+
+                <td style="text-align: left; margin-left: -5px;" *ngIf="deleted == 1 || update == 1">
+                  <a *ngIf="deleted == 1" (click)="deleteRoofModal(contentDelete,roof.roof_id)"
+                    class="p-button p-button-rounded p-button-warning" style="margin-left: -8px;"><i
+                      class="mdi mdi-trash-can-outline"></i></a>&nbsp;
+                  <a *ngIf="update == 1" (click)="editRoofModal(contentUpdate, roof.roof_id )"
+                    class="p-button p-button-rounded p-button-success"><i class="mdi mdi-pencil"></i></a>&nbsp;
+                    <a (click)="viewRoofModal(contentView, roof.roof_id)" class="p-button p-button-rounded p-button-view"><i
+                      class="mdi mdi-eye"></i></a>
+                </td>
+              </tr>
+              <ng-template #contentView let-d="dismiss">
+                <div class="modal-header modaltitle">
+                  <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-home-roof"></i>Type Roof</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="card">
+                    <div class="card-body cardview">
+                      <div class="img animate__animated animate__zoomInDown"><img src="assets/images/typeroof.png" alt=""></div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="labelDetails text-center"><i class="mdi mdi-home-roof"></i>Roof Name</label>
+                          <p class="pDetails">{{roof.roof_name}}</p>
+                          
+                        </div>
+                        
+                        <div class="col-md-6">
+                          <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock"></i> Date Created</label>
+                          <p class="pDetails">{{roof.date_created}}</p>
+                        </div>
+                        </div>
+                        <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock"></i> Date Modify</label>
+                          <p class="pDetails">{{roof.date_modify}}</p>
+                        <label class="labelDetails text-center"><i class="mdi mdi-card-text"></i>Description Roof</label>
+                      <p class="pDetails">{{roof.description_roof}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button id="_btn-back" routerLink="/type-roof/view" type="submit" name="submitButton"
+                    class="btn btn-outline-dark" (click)="d('Cross click')">Go Back</button>
+                </div>
+              </ng-template>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="8">No type roof found.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+          <ng-template #contentUpdate let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Information of the Type Roof</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12 stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <form [formGroup]="form">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <div class="mb-3">
+                              <label class="form-label">Roof Name</label>
+                              <input type="text" [ngClass]="{ 'is-invalid': submitted && position['roof_name'].errors }"
+                                formControlName="roof_name" name="roof_name" id="roof_name"
+                                onkeydown=" /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control"
+                                placeholder="Enter name">
+                              <div *ngIf="submitted && position['roof_name']?.errors" class="invalid-feedback">
+                                <mat-error *ngIf="position['roof_name']?.hasError('required')">Name is
+                                  required</mat-error>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12">
+                            <div class="mb-3">
+                              <label class="form-label">Roof Description</label>
+                              <input type="text"
+                                [ngClass]="{ 'is-invalid': submitted && position['description_roof'].errors }"
+                                formControlName="description_roof" name="description_roof" id="description_roof"
+                                onkeydown=" /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control"
+                                placeholder="Enter name">
+                              <div *ngIf="submitted && position['description_roof']?.errors" class="invalid-feedback">
+                                <mat-error *ngIf="position['description_roof']?.hasError('required')">Description is
+                                  required</mat-error>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <button [swal]="{ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true, title: 'successfully', icon: 'success'}" [disabled]="!form.valid" (click)="c('yes')" type="submit"
+                          class="btn btn-primary submit">{{this.title}} <i class="mdi mdi-file-document-edit"></i>
+                        </button>&nbsp;
+                        <button id="_btn-back" type="submit" name="submitButton" class="btn btn-outline-dark" (click)="d('Cross click')">Go Back <i
+                            class="mdi mdi-arrow-left"></i> </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-template #contentDelete let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure to delete the type roof</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+              <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

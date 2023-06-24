@@ -1,0 +1,98 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size = "medium" color = "transparent" [fullScreen] = "true">
+    <lottie-player style="margin-top:-30px;" src="https://assets5.lottiefiles.com/private_files/lf30_tcux3hw6.json"  background="transparent"  speed="1"  style="width: 250px; height: 250px;"  loop  autoplay></lottie-player>
+  </ngx-spinner>
+
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/sales-rep/view">Sales Rep</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{this.title}}</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header">
+          <h6 class="card-title">Information of the Sales Rep</h6></div>
+            <form [formGroup]="form" (ngSubmit)="saveSalesRep()">
+              <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label class="form-label">State</label>
+                        <ng-select [items]="state"
+                            bindLabel="name_state"
+                            bindValue="state_id"
+                            class="data-ng-select"
+                            [ngModelOptions]="{standalone: true}"
+                            placeholder="type to search"
+                            [(ngModel)]="selectedSearchStateId">
+                        </ng-select>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label class="form-label">User</label>
+                        <ng-select [items]="user"
+                            bindLabel="username"
+                            bindValue="user_id"
+                            class="data-ng-select"
+                            [ngModelOptions]="{standalone: true}"
+                            placeholder="type to search"
+                            [(ngModel)]="selectedSearchUserId">
+                        </ng-select>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Appt Type Availability</label>
+                      <select id="appointment_type_availability" name="appointment_type_availability" (ngModelChange)="getTypeAvailability($event)" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTypeAvailability" [ngClass]="{ 'is-invalid': submitted && position['appointment_type_availability'].errors }" class="form-control">
+                          <option *ngFor="let typeavailability of this.typeavailability" [value]="typeavailability.id">{{typeavailability.name}}</option>
+                      </select>
+                      <div *ngIf="submitted && position['appointment_type_availability']?.errors" class="invalid-feedback">
+                          <mat-error *ngIf="position['appointment_type_availability']?.hasError('required')">Appt Availability is required</mat-error>
+                      </div>
+                  </div>
+              </div>
+
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Status</label>
+                      <select id="appt_status" name="appt_status" (ngModelChange)="getStatus($event)" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedStatus" [ngClass]="{ 'is-invalid': submitted && position['appt_status'].errors }" class="form-control">
+                          <option *ngFor="let status of this.status" [value]="status.id">{{status.name}}</option>
+                      </select>
+                      <div *ngIf="submitted && position['appt_status']?.errors" class="invalid-feedback">
+                          <mat-error *ngIf="position['appt_status']?.hasError('required')">Status is required</mat-error>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label">Color</label>
+                    <input type="color" style="border-width: -1px;" [ngClass]="{ 'is-invalid': submitted && position['color_appt'].errors }" formControlName="color_appt" name="color_appt" id="color_appt" class="form-control" placeholder="Enter color">
+                    <div *ngIf="submitted && position['color_appt']?.errors" class="invalid-feedback">
+                        <mat-error *ngIf="position['color_appt']?.hasError('required')">Color is required</mat-error>
+                    </div>
+                  </div>
+                </div>
+                  
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Created By</label>
+                      <input type="text" class="form-control" [placeholder]="getName" disabled>
+                    </div>
+                  </div>
+              </div>
+              <button [disabled]="!form.valid" (click)="onSubmit()" type="submit" class="btn btn-primary submit">{{this.title}} <i class="mdi mdi-file-document-edit"></i> </button>&nbsp;
+              <button id="_btn-back" routerLink="/sales-rep/view" type="submit" name="submitButton" class="btn">Go Back <i class="mdi mdi-arrow-left"></i> </button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,332 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a routerLink="/leads">Leads</a> </li>
+    <li class="breadcrumb-item" aria-current="page">
+      Assign Appointment
+    </li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-header headercard">
+        <h5 id="_title-header-h5"><b>Assign Appointment</b></h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive table table-hover mb-0">
+        <form [formGroup]="form" (ngSubmit)="saveAssignAppointment()">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="provider_id">Provider</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getProvider($event)" [(ngModel)]="opcionSeleccionadaProvider">
+                  <ng-option *ngFor="let opcion of this.provider" [value]="opcion.provider_id">{{ opcion.name_provider }}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="lastName1">Source</label>
+                <input type="text" class="form-control" id="lastName1" [value]="this.source">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Campaign Name</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.campaign_name" readonly>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="firstName1">Ad Name</label>
+                <input type="text" class="form-control" id="firstName1" [value]="this.ad_name">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="lastName1">Ad Set Name</label>
+                <input type="text" class="form-control" id="lastName1" [value]="this.ad_set_name">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Project Manager</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getManager($event)" [(ngModel)]="opcionSeleccionadaManager">
+                  <ng-option *ngFor="let manager of this.manager" [value]="manager.user_id">{{ manager.first_name }}</ng-option>
+                </ng-select> 
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="first_name">Agent who made the appointment</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getUser($event)" [(ngModel)]="opcionSeleccionadaUser">
+                  <ng-option *ngFor="let user of this.user" [value]="user.user_id">{{ user.first_name }}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="lastName1">Appointment Outcome</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getOutCome($event)" [(ngModel)]="opcionSeleccionadaAppointmentOutcome">
+                  <ng-option *ngFor="let apptOutcome of this.apptOutcome" [value]="apptOutcome.apptm_outcome_id">{{ apptOutcome.apptm_outcome_name }}</ng-option>
+                </ng-select> 
+              </div>
+            </div>
+
+            <div class="col-sm-6" *ngIf="this.open_outcome == 1">
+              <div class="mb-3">
+                <label for="disqualification">Disqualification</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getDisqualification($event)" [(ngModel)]="opcionSeleccionadaDisqualification">
+                  <ng-option *ngFor="let disqualification of this.disqualification" [value]="disqualification.disqualification_id">{{ disqualification.disqualification_name }}</ng-option>
+                </ng-select> 
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Customer's First Name</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.first_name" >
+              </div>
+            </div>
+            
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Customer's Last Name</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.last_name" >
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Customer's Full Name</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.fullname" >
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Customer's Language</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getIdLanguage($event)" [(ngModel)]="opcionSeleccionadaLanguage">
+                  <ng-option *ngFor="let language of this.language" [value]="language.language_id">{{ language.language_name }}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Customer's Phone</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.phone_number">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Customer's Email</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.email">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Address</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.st_address" >
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="city">City</label>
+                <input type="text" class="form-control" [ngModelOptions]="{ standalone: true }" [value]="this.city" [(ngModel)]="opcionSeleccionadaCity">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">State</label>
+                <!-- <input type="text" class="form-control" id="userName1" [value]="this.state" >             -->
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getState($event)" [(ngModel)]="opcionSeleccionadaState">
+                  <ng-option *ngFor="let state of this.state" [value]="state.name_state">{{ state.name_state }}</ng-option>
+                </ng-select>  
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Zip Code</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.zip_code" >
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Full Address</label>
+                <input type="text" class="form-control" id="userName1" [value]="this.full_address !== 'N/A' ? this.full_address : this.zip_code + ' ' + this.city + ' ' + this.st_address">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Bill Amount</label>
+                <input formControlName="bill_amount" type="text" class="form-control" id="bill_amount" value="100+">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Credit Score</label>
+                <input formControlName = "credit_score" type="text" class="form-control" id="credit_score">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="bankrupcy">Bankrupcy</label>
+                <fieldset id="switch" class="radio">
+                  <input [ngModelOptions]="{ standalone: true }" (ngModelChange)="getBankrupcy($event)" [(ngModel)]="selectedBankrupcy" name="switch" id="yes" type="radio" [value]="1">
+                  <label for="yes">Yes</label>
+                  <input [ngModelOptions]="{ standalone: true }" (ngModelChange)="getBankrupcy($event)" [(ngModel)]="selectedBankrupcy" name="switch" id="no" type="radio" [value]="0">
+                  <label for="no">No</label>
+                </fieldset>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Utility Bill</label>
+                <input type="file" multiple class="form-control" id="userName1" placeholder="Utility Bill">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Account Number</label>
+                <input formControlName="account_number" type="number" class="form-control" id="account_number" placeholder="Account Number">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Meter Number</label>
+                <input formControlName="meter_number" type="number" class="form-control" id="meter_number" placeholder="Meter Number">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Meter location</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getMeterLocation($event)" [(ngModel)]="opcionSeleccionadaMeterLocation">
+                  <ng-option *ngFor="let meterLocation of this.meterLocation" [value]="meterLocation.id">{{ meterLocation.name }}</ng-option>
+                </ng-select>                
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Google Map's Image</label>
+                <input type="file"  multiple class="form-control" id="userName1" placeholder="Google Map's Image">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Call Recording</label>
+                <input type="file" multiple class="form-control" id="userName1" value="Select File">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Current Energy Provider</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getEnergyProvider($event)" [(ngModel)]="opcionSeleccionadaEnergyProvider">
+                  <ng-option *ngFor="let energy of this.energy" [value]="energy.energy_provider_id">{{ energy.energy_provider_name }}</ng-option>
+                </ng-select> 
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Anual Usage</label>
+                <input  formControlName="anual_usage" type="text" class="form-control" id="anual_usage" placeholder="Anual Usage">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Type Roof</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getRoof($event)" [(ngModel)]="opcionSeleccionadaRoof">
+                  <ng-option *ngFor="let roof of this.roof" [value]="roof.roof_id">{{ roof.roof_name }}</ng-option>
+                </ng-select> 
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label >Roof Age (In Years)</label>
+                <input formControlName="roof_age" type="text" class="form-control" id="roof_age" placeholder="Roof Age (In Years)">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="replace_roof">Does it require roof replacement?</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getReplaceRoof($event)" [(ngModel)]="opcionSeleccionadaReplace">
+                  <ng-option *ngFor="let replace of this.replace" [value]="replace.id">{{ replace.name }}</ng-option>
+                </ng-select> 
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Appointment Type</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getApptType($event)" [(ngModel)]="opcionSeleccionadaApptType">
+                  <ng-option *ngFor="let apptType of this.apptType" [value]="apptType.id">{{ apptType.name }}</ng-option>
+                </ng-select> 
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label >Appointment Date</label>
+                <input formControlName="appointment_datetime" type="datetime-local" class="form-control" id="appointment_datetime">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Time Zone</label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getTimeZone($event)" [(ngModel)]="opcionSeleccionadaTimeZone">
+                  <ng-option *ngFor="let timeZone of this.timeZone" [value]="timeZone.time_zone_id">{{ timeZone.time_zone_name }}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Assign this Appointment to </label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getSalesRep($event)" [(ngModel)]="opcionSeleccionadaUserRep">
+                  <ng-option *ngFor="let salesRep of this.salesRep" [value]="salesRep.sales_rep_id">{{ salesRep.tbl_user.first_name }}  {{ salesRep.tbl_user.last_name }}</ng-option>
+                </ng-select>
+              </div>
+            </div> 
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Presentation made with </label>
+                <ng-select [ngModelOptions]="{ standalone: true }" (ngModelChange)="getInstaller($event)" [(ngModel)]="opcionSeleccionadaInstaller">
+                  <ng-option *ngFor="let installer of this.installer" [value]="installer.installer_id">{{ installer.epc_name }}</ng-option>
+                </ng-select>                
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label>Request for design for this lead</label>
+                <div>
+                  <input (ngModelChange)="getRequestDesign($event)" formControlName="design_lead" type="checkbox">
+              </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label for="userName1">Any Additional adders</label>
+                <textarea rows="4" cols="50" class="form-control" id="userName1" placeholder="Any Aditional adders"></textarea>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Additional agent notes</label>
+                <textarea formControlName="design_notes" rows="4" cols="50" class="form-control" id="design_notes" placeholder="Additional agent notes"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center mt-2 mb-4">
+            <button (click)="onSubmit()" type="submit" class="btn btn-primary submit _color-sbm">Save Appointment <i class="mdi mdi-file-document-edit"></i> </button>
+            <button id="_btn-back" routerLink="/leads" type="submit" name="submitButton" class="btn">Go Back <i class="mdi mdi-arrow-left"></i> </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    

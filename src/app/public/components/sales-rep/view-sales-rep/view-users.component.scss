@@ -1,0 +1,35 @@
+#_title-header-h5{
+	padding: 14px;
+}
+
+
+#_div-header{
+	text-align: center;
+	background-color: #F7F7FC;
+}
+
+#_bck-color{
+	background-color: #F7F7FC !important;
+}
+
+#_title-activity{
+	color:#334D6E;
+}
+
+#_btn-success{
+	border-radius: 12px;
+}
+
+.data-config-header ::ng-deep .p-datatable .p-datatable-header{
+	background: transparent !important;
+	color: #343a40;
+	border: 0px solid transparent !important;
+	border-width: 1px 0 1px 0;
+	padding: 0.7rem 1rem;
+	font-weight: 700;
+	text-align: end !important;
+}
+
+.btn-text-right{
+	text-align: right;
+	}

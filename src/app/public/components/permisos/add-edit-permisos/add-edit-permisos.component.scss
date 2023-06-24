@@ -1,0 +1,195 @@
+
+.invalid-feedback {
+	display: none;
+	width: 100%;
+	margin-top: 0.25rem;
+	font-size: 80%;
+	color: #dc3545; 
+}
+.form-control {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 12px !important;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #eff0f7;
+    background-clip: padding-box;
+    border: 1px solid #eff0f7;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+}
+
+::placeholder{
+	color: #000000 !important;
+}
+
+#_btn-back{
+	margin-left: 20px; 
+	background-color: #fff;
+	border: solid 1px #6571ff;
+}
+
+.card-title{
+	margin-top: 7px !important;
+}
+
+.card-header{
+	background-color: #0c1427;
+	height: 25%;
+	color: floralwhite;
+	margin-bottom: 25px;
+}
+
+.was-validated {
+	.form-control {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.form-control.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+
+.was-validated {
+	.custom-select {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+	.form-control-file {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.custom-select.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+.form-control-file.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+
+
+.was-validated {
+	.form-check-input {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.form-check-input.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+
+.was-validated {
+	.custom-control-input {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.custom-control-input.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+
+
+.was-validated {
+	.custom-file-input {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.custom-file-input.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}

@@ -1,0 +1,205 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+       Sales Representative
+    </li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="headercard">
+        <h5 id="_title-header-h5">Register of the Sales Representative</h5>
+        <div class="btn-text-right headercard">
+          <button *ngIf="create == 1" status="success" id="_btn-success" routerLink="/sales-rep/add"
+            class="dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0"
+            type="button">
+            <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i> Add Sales Rep</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive table table-hover mb-0">
+          <p-table #dt class="data-config-header" [value]="salesRep" dataKey="id" [rowHover]="true" [rows]="100"
+            [showCurrentPageReport]="true" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            [globalFilterFields]="[
+              'sales_rep_id',
+              'tbl_users.username',
+              'tbl_states.name_state',
+              'appointment_type_availability',
+              'appt_status',
+              'created_by'
+            ]">
+            <ng-template pTemplate="caption">
+              <div class="table-header">
+                Search Sales Representative
+                <span class="p-input-icon-left">
+                  <div class="btn-text-right">
+                    <input pInputText type="text" class="form-control" id="_bck-color"
+                      (input)="applyFilterGlobal($event, 'contains')" />
+                  </div>
+                </span>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+              <tr>
+                <!-- <th style="width: 4rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th> -->
+
+                <th pSortableColumn="sales_rep_id" style="min-width: 6rem">
+                  <div class="flex justify-content-between align-items-center">
+                    Id
+                    <p-sortIcon field="sales_rep_id"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th pSortableColumn="user_id" style="min-width: 10rem">
+                  <div class="flex justify-content-between align-items-center">
+                    Name
+                    <p-sortIcon field="user_id"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th pSortableColumn="state_id" style="min-width: 10rem">
+                  <div class="flex justify-content-between align-items-center">
+                    State
+                    <p-sortIcon field="state_id"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th pSortableColumn="appointment_type_availability" style="min-width: 14rem">
+                  <div class="flex justify-content-between align-items-center">
+                    appt type availability
+                    <p-sortIcon field="appointment_type_availability"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th pSortableColumn="appt_status" style="min-width: 10rem">
+                  <div class="flex justify-content-between align-items-center">
+                    appt status
+                    <p-sortIcon field="appt_status"></p-sortIcon>
+                  </div>
+                </th>
+
+               
+
+                <th style="min-width: 09rem" *ngIf="deleted == 1 || update == 1">
+                  <div class="flex justify-content-between align-items-center">
+                    Actions
+                  </div>
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-salesRep>
+              <tr class="p-selectable-row">
+                <!-- <td>
+                            <p-tableCheckbox [value]="salesRep"></p-tableCheckbox>
+                        </td> -->
+                <td>
+                  <span class="rounded-pill">&nbsp; {{ salesRep.sales_rep_id }} &nbsp;</span>
+                </td>
+                <td>
+                  <i class="mdi mdi-account-tie"></i>
+                  {{ salesRep.tbl_user.username }}
+                </td>
+                <td>
+                  <i class="mdi mdi-map-marker-radius"></i>
+                  {{ salesRep.tbl_state.name_state }}
+                </td>
+                <td>
+                  {{
+                  this.convertApptAvailability(
+                  salesRep.appointment_type_availability
+                  )
+                  }}
+                </td>
+                <td>
+                  <span class="badge {{
+                      getClassBasedOnStatus(salesRep.appt_status)
+                    }}">
+                    {{ this.convertStatus(salesRep.appt_status) }}
+                  </span>
+                </td>
+               
+                <td style="text-align: left; margin-left: -5px" *ngIf="deleted == 1 || update == 1">
+                  <a *ngIf="deleted == 1" (click)="deleteSalesRepModal(contentDelete, salesRep.sales_rep_id)
+                    " class="p-button p-button-rounded p-button-warning" style="margin-left: -8px">
+                    <i class="mdi mdi-trash-can-outline"></i></a>&nbsp;
+                  <a *ngIf="update == 1"[routerLink]="['/sales-rep/edit', salesRep.sales_rep_id]" class="p-button p-button-rounded p-button-success"><i
+                      class="mdi mdi-pencil"></i></a>&nbsp;
+                      <a  (click)="viewSalesRepModal(contentView, salesRep.sales_rep_id)"class="p-button p-button-rounded p-button-primary"><i
+                          class="mdi mdi-eye"></i></a>
+                </td>
+              </tr>
+              <ng-template #contentView let-d="dismiss">
+                <div class="modal-header modaltitle">
+                  <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-currency-usd"></i> Sales Representative</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="card">
+                    <div class="card-body cardview">
+                      <div class="img animate__animated animate__zoomInDown"><img src="assets/images/sales.png" alt=""></div>
+                      <div class="row">
+                        <div class="col-md-6">
+                      <label class="labelDetails text-center"><i class="mdi mdi-currency-usd"></i>Sales Representative</label>
+                      <p class="pDetails">{{ salesRep.tbl_user.username }}</p>
+                      <label class="labelDetails text-center"><i class="mdi mdi-map-marker-radius"></i>State</label>
+                      <p class="pDetails">{{ salesRep.tbl_state.name_state }}</p>
+                      <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock"></i> Date Created</label>
+                      <p class="pDetails">{{salesRep.date_created}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="labelDetails text-center"><i class="mdi mdi-list-status"></i>Appointment Status</label>
+                      <p class="pDetails">{{ this.convertStatus(salesRep.appt_status)}}</p>
+                      <label class="labelDetails text-center"><i class="mdi mdi-monitor-account"></i>Appointment Type</label>
+                      <p class="pDetails">{{this.convertApptAvailability(salesRep.appointment_type_availability)}}</p>
+                      <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock"></i>Created By</label>
+                      <p class="pDetails">{{salesRep.created_by}}</p>
+                    </div>
+                      <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock-outline"></i> Date Modify</label>
+                      <p class="pDetails">{{salesRep.date_modify}}</p>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button id="_btn-back" routerLink="/sales-rep/view" type="submit" name="submitButton" class="btn btn-outline-dark"
+                    (click)="d('Cross click')">Go Back</button>
+                </div>
+              </ng-template>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="8">No Sales Rep found.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+          <ng-template #contentDelete let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure to delete the sales Rep</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">
+                Cancel
+              </button>
+              <button type="button" class="btn btn-outline-dark" (click)="c('yes')">
+                Yes
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

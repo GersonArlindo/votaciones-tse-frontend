@@ -1,0 +1,55 @@
+
+#_title-header-h5{
+	padding: 14px;
+	text-align: left;
+	margin-top: 11px;
+	margin-left: 11px;
+}
+
+.headercard{
+	background-color: #0c1427;
+	color: #F7F7FC;
+	height: 55px;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
+
+#_div-header{
+	text-align: center;
+	background-color: #F7F7FC;
+}
+
+#_bck-color{
+	background-color: #F7F7FC !important;
+}
+
+#_title-activity{
+	color:#334D6E;
+}
+
+#_btn-success{
+	border-radius: 12px;
+	margin-top: -3px !important;
+    margin-right: 35px;
+}
+
+.data-config-header ::ng-deep .p-datatable .p-datatable-header{
+	background: transparent !important;
+	color: #343a40;
+	border: 0px solid transparent !important;
+	border-width: 1px 0 1px 0;
+	padding: 0.7rem 1rem;
+	font-weight: 700;
+	text-align: end !important;
+}
+
+.btn-text-right{
+	text-align: end !important;
+	margin-top: -1.1cm;
+}
+
+.rounded-pill{
+	background-color: #6571FF;
+	font-weight: bold;
+	color: #ffffff;
+}

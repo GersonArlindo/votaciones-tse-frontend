@@ -1,0 +1,164 @@
+<nav class="sidebar ">
+    <div class="sidebar-header">
+      <a routerLink="/dashboard" class="sidebar-brand nobleui-logo">
+        TSE - <span>ES</span>
+      </a>
+      <div class="sidebar-toggler not-active" #sidebarToggler (click)="toggleSidebar($event)">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="sidebar-body" (mouseenter)="operSidebarFolded()" (mouseleave)="closeSidebarFolded()" [perfectScrollbar]>  
+      <ul class="sidebar-nav metismenu" id="sidebar-menu" #sidebarMenu>
+        <ng-container>
+          <li class="nav-item nav-category">Menu</li>
+      
+            <li class="nav-item">
+              <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/dashboard" [routerLinkActive]="['active']">
+                <i class="link-icon" [attr.data-feather]="'home'" appFeatherIcon ></i>
+                <span class="link-title">Panel</span>
+              </a>
+
+            <li class="nav-item">
+                <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                  <i class="link-icon" [attr.data-feather]="'calendar'" appFeatherIcon ></i>
+                  <span class="link-title">Item 1</span>
+            </a>
+
+            <li class="nav-item">
+              <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                <i class="link-icon" [attr.data-feather]="'book'" appFeatherIcon ></i>
+                <span class="link-title">Item 2</span>
+          </a>
+
+            <li class="nav-item">
+                <a class="nav-link side-nav-link-a-ref" >
+                  <i class="link-icon" [attr.data-feather]="'tool'" appFeatherIcon ></i>
+                  <span class="link-title">Administración</span>
+                  <span class="link-arrow" data-feather="chevron-down" appFeatherIcon></span>
+                </a>
+
+                <ul class="sidebar-nav sub-menu nav-third-level" aria-expanded="false">
+                  <li *ngIf="this.PermissionDisqualification == 1" class="nav-item" >
+                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Partidos Políticos
+                    </a>
+                  </li>
+                  <li  *ngIf="this.PermissionLanguage == 1" class="nav-item" >
+                    <a class="nav-link nav-link-ref" routerLink="/language/view" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Lenguajes
+                    </a>
+                  </li>
+                  <li *ngIf="this.PermissionDisqualification == 1" class="nav-item" >
+                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Item 2
+                    </a>
+                  </li>
+                  <li class="nav-item" >
+                    <a *ngIf="this.PermissionTimeZone == 1" class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Item
+                    </a>
+                  </li>
+                  <li class="nav-item" *ngIf="this.PermissionInstallers == 1">
+                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Item
+                    </a>
+                  </li>
+                  <li class="nav-item" *ngIf="this.PermissionEnergyProviders == 1">
+                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Item
+                    </a>
+                  </li>
+                  <li class="nav-item" *ngIf="this.PermissionStates == 1" >
+                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Item
+                    </a>
+                  </li>
+                  <li class="nav-item" *ngIf="this.PermissionProviders == 1">
+                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Item
+                    </a>
+                  </li>
+                  <li class="nav-item" *ngIf="this.PermissionRoof == 1">
+                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Item
+                    </a>
+                  </li>         
+                </ul>
+            </li>
+
+            <li class="nav-item">
+              <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                <i class="link-icon" [attr.data-feather]="'award'" appFeatherIcon ></i>
+                <span class="link-title"> Item</span>
+          </a></li>
+
+            <li class="nav-item">
+              <a class="nav-link side-nav-link-a-ref">
+                <i class="link-icon" [attr.data-feather]="'user'" appFeatherIcon ></i>
+                <span class="link-title">Usuarios</span>
+                <span class="link-arrow" data-feather="chevron-down" appFeatherIcon></span>
+              </a>
+
+              <ul class="sidebar-nav sub-menu nav-third-level" aria-expanded="false"  >
+                <li class="nav-item" *ngIf="this.PermissionUsers == 1" >
+                  <a class="nav-link nav-link-ref" routerLink="/modulos/view" [routerLinkActive]="['active']">
+                    <i class="link-icon" appFeatherIcon></i>
+                    Modulos
+                  </a>
+                </li>
+                <li class="nav-item" *ngIf="this.PermissionUsers == 1">
+                  <a class="nav-link nav-link-ref" routerLink="/users/view" [routerLinkActive]="['active']">
+                    <i class="link-icon" appFeatherIcon></i>
+                    Usuarios
+                  </a>
+                </li>
+                <li class="nav-item" *ngIf="this.PermissionUsers == 1">
+                  <a class="nav-link nav-link-ref" routerLink="/roles/view" [routerLinkActive]="['active']">
+                    <i class="link-icon" appFeatherIcon></i>
+                    Roles
+                  </a>
+                </li>
+              </ul>
+          </li>
+        </ng-container>
+
+      </ul>  
+    </div>
+
+  </nav>
+  <nav class="setting settings-sidebar">
+    <div class="sidebar-body">
+      <a href="" class="setting settings-sidebar-toggler" id="setting-toogle" (click)="toggleSettingsSidebar($event)">
+        <i class="icon feather icon-settings"></i>
+      </a>
+      <h6 class="text-muted mb-2">Sidebar:</h6>
+    <div class="mb-3 pb-3 border-bottom">
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="sidebarThemeSettings" (change)="onSidebarThemeChange($event)" id="sidebarLight" value="sidebar-light" >
+          <i class="input-frame"></i>
+          Light
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="sidebarThemeSettings" (change)="onSidebarThemeChange($event)" id="sidebarDark" value="sidebar-dark" checked>
+          <i class="input-frame"></i>
+          Dark
+        </label>
+      </div>
+    </div>
+  </div>
+</nav>

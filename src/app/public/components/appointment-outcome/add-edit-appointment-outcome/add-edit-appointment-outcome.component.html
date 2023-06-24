@@ -1,0 +1,36 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size = "medium" color = "transparent" [fullScreen] = "true">
+    <lottie-player style="margin-top:-30px;" src="https://assets5.lottiefiles.com/private_files/lf30_tcux3hw6.json"  background="transparent"  speed="1"  style="width: 250px; height: 250px;"  loop  autoplay></lottie-player>
+  </ngx-spinner>
+
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/appointment-outcome/view">Appointment Outcome</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{this.title}}</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header">
+          <h6 class="card-title">Information of the Appointment Outcome</h6></div>
+            <form [formGroup]="form" (ngSubmit)="saveAppointmentOutcome()">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="mb-3">
+                    <label class="form-label">Appoitment Outcome name</label>
+                    <input type="text" [ngClass]="{ 'is-invalid': submitted && position['apptm_outcome_name'].errors }" formControlName="apptm_outcome_name" name="apptm_outcome_name" id="apptm_outcome_name" onkeydown="return /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control" placeholder="Enter name">
+                    <div *ngIf="submitted && position['apptm_outcome_name']?.errors" class="invalid-feedback">
+                        <mat-error *ngIf="position['apptm_outcome_name']?.hasError('required')">Name is required</mat-error>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button [swal]="{ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true, title: 'successfully', icon: 'success'}" [disabled]="!form.valid" (click)="onSubmit()" type="submit" class="btn btn-primary submit">{{this.title}} <i class="mdi mdi-file-document-edit"></i> </button>
+              <button id="_btn-back" routerLink="/appointment-outcome/view" type="submit" name="submitButton" class="btn">Go Back <i class="mdi mdi-arrow-left"></i> </button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>

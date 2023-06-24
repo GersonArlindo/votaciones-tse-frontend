@@ -1,0 +1,62 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size = "medium" color = "transparent" [fullScreen] = "true">
+  <lottie-player style="margin-top:-30px;" src="https://assets3.lottiefiles.com/packages/lf20_9mUhwZOo8A.json"  background="transparent"  speed="1"  style="width: 250px; height: 250px;"  loop  autoplay></lottie-player>
+</ngx-spinner>
+<div class="row w-100 mx-0 auth-page">
+    <div class="col-md-8 col-xl-6 mx-auto">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-4 pe-md-0">
+            <div class="auth-side-wrapper" [ngStyle]="{ 'background-image': 'url(assets/images/image-solar2.png)' }">
+  
+            </div>
+          </div>
+          <div class="col-md-8 ps-md-0">
+            <div class="auth-form-wrapper px-4 py-5">
+              <a routerLink="." class="nobleui-logo d-block mb-2">Initiate<span>365</span></a>
+              <h5 class="text-muted fw-normal mb-4">Log in to your account.</h5>
+              <form class="forms-sample" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" [ngClass]="{ 'is-invalid': submitted && position['email']?.errors }" formControlName="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                  <div class="invalid-feedback">
+                    <mat-error *ngIf="isValidField('email')" >
+                        {{getErrorMessage('email')}}
+                    </mat-error>
+                  </div>
+                  <div *ngIf="submitted && position['email']?.errors" class="invalid-feedback">
+                      <mat-error *ngIf="position['email']?.errors.required">Email es requerido</mat-error>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input [ngClass]="{ 'is-invalid': submitted && position['password']?.errors }" formControlName="password" type="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password" placeholder="Password">
+                  <div class="invalid-feedback">
+                    <mat-error *ngIf="isValidField('password')" >
+                        {{getErrorMessage('password')}}
+                    </mat-error>
+                  </div>
+                  <div *ngIf="submitted && position['password']?.errors" class="invalid-feedback">
+                      <div *ngIf="position['password']?.errors.required">Contraseña es requerido</div>
+                  </div>
+                </div>
+
+                <div class="form-check mb-3">
+                  <input type="checkbox" class="form-check-input" id="authCheck">
+                  <label class="form-check-label" for="authCheck">
+                    Remember me
+                  </label>
+                </div>
+
+                <div>
+                  <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" (click)="onSubmit()">Login</button>
+                </div>
+                <a class="d-block mt-3 text-muted">Forgot password</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
