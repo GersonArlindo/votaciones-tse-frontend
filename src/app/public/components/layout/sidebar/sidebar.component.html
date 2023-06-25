@@ -42,12 +42,12 @@
 
                 <ul class="sidebar-nav sub-menu nav-third-level" aria-expanded="false">
                   <li *ngIf="this.PermissionDisqualification == 1" class="nav-item" >
-                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
+                    <a class="nav-link nav-link-ref" routerLink="/partidos-politicos/view" [routerLinkActive]="['active']">
                       <i class="link-icon" appFeatherIcon></i>
                       Partidos Políticos
                     </a>
                   </li>
-                  <li  *ngIf="this.PermissionLanguage == 1" class="nav-item" >
+                  <li  *ngIf="this.PermissionLanguage == 1" class="nav-item">
                     <a class="nav-link nav-link-ref" routerLink="/language/view" [routerLinkActive]="['active']">
                       <i class="link-icon" appFeatherIcon></i>
                       Lenguajes

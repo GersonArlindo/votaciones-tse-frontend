@@ -1,0 +1,133 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size = "medium" color = "transparent" [fullScreen] = "true">
+    <lottie-player style="margin-top:-30px;" src="https://assets5.lottiefiles.com/private_files/lf30_tcux3hw6.json"  background="transparent"  speed="1"  style="width: 250px; height: 250px;"  loop  autoplay></lottie-player>
+  </ngx-spinner>
+
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/partidos-politicos/view">Partidos Politicos</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{this.title}}</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+          <div class="card-header">
+          <h6 class="card-title">Informacion de los Partidos Politicos</h6></div>
+          <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="savePartidosPoliticos()">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" [ngClass]="{ 'is-invalid': submitted && position['nombre'].errors }" formControlName="nombre" name="nombre" id="nombre" class="form-control" placeholder="Ingrese el nombre">
+                    <div *ngIf="submitted && position['nombre']?.errors" class="invalid-feedback">
+                        <mat-error *ngIf="position['nombre']?.hasError('required')">Nombre es requerido</mat-error>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Sigla</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && position['sigla'].errors }" formControlName="sigla" name="sigla" id="sigla" class="form-control" placeholder="Ingrese las siglas">
+                      <div *ngIf="submitted && position['sigla']?.errors" class="invalid-feedback">
+                          <mat-error *ngIf="position['sigla']?.hasError('required')">Sigla es requerido</mat-error>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Direccion</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && position['direccion'].errors }" formControlName="direccion" name="direccion" id="direccion" class="form-control" placeholder="Ingrese la direccion">
+                      <div *ngIf="submitted && position['direccion']?.errors" class="invalid-feedback">
+                          <mat-error *ngIf="position['direccion']?.hasError('required')">Direccion es requerido</mat-error>
+                      </div>
+                    </div>
+                  </div>
+
+                    <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Telefono</label>
+                      <input prefix="+1 " mask="(000) 0000-0000" [showMaskTyped] = "true" [ngClass]="{ 'is-invalid': submitted && position['telefono'].errors }" formControlName="telefono" name="telefono" id="telefono" class="form-control" placeholder="Ingrese el numero de telefono">
+                      <div *ngIf="submitted && position['telefono']?.errors" class="invalid-feedback">
+                          <mat-error *ngIf="position['telefono']?.hasError('required')">Telefono es requerido</mat-error>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Representante Legal</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && position['representante_legal'].errors }" formControlName="representante_legal" name="representante_legal" id="representante_legal" class="form-control" placeholder="Ingrese el representante Legal">
+                      <div *ngIf="submitted && position['representante_legal']?.errors" class="invalid-feedback">
+                          <mat-error *ngIf="position['representante_legal']?.hasError('required')">Representante Legal es requerido</mat-error>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Estado</label>
+                      <select
+                        id="estado"
+                        name="estado"
+                        (ngModelChange)="getStatus($event)"
+                        [ngModelOptions]="{ standalone: true }"
+                        [(ngModel)]="selectedStatus"
+                        [ngClass]="{
+                          'is-invalid': submitted && position['estado'].errors
+                        }"
+                        class="form-control"
+                      >
+                        <option
+                          *ngFor="let status of this.status"
+                          [value]="status.id"
+                        >
+                          {{ status.name }}
+                        </option>
+                      </select>
+                      <div
+                        *ngIf="submitted && position['estado']?.errors"
+                        class="invalid-feedback"
+                      >
+                        <mat-error *ngIf="position['estado']?.hasError('required')"
+                          >Estado es requerido</mat-error
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                  <div class="col-md-6 mt-4 fv-plugins-icon-container">
+                    <label for="formValidationFile" class="form-label">Imagen</label>
+                    <div class="installer text-center" id="col-img">
+                      <div class="profile"> 
+                        <div class="row">
+                          <div class="col-md-6">
+                            <img [src]="url"> 
+                          </div>
+                          <div class="col-md-9">
+                            <div class="form-group">
+                              <div class="custom-file" class="btn btn-default button-rounded-36 float-bottom-right img-data">
+                                <input (change)="onFileSelect($event)" class="form-control custom-file-input cursor-pointer" id="attachment" name="attachment" type="file" id="formFile">
+                              </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+              <button  [disabled]="!form.valid" (click)="onSubmit()" type="submit" class="btn btn-primary submit">{{this.title}} <i class="mdi mdi-file-document-edit"></i> </button>
+              <button id="_btn-back" routerLink="/partidos-politicos/view" type="submit" name="submitButton" class="btn">Regresar <i class="mdi mdi-arrow-left"></i> </button>
+            </form>
+          </div>
+        </div>
+      
+    </div>
+</div>
+

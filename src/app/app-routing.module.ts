@@ -109,6 +109,10 @@ const routes: Routes = [
 
       },
       {
+        path: 'partidos-politicos',
+        loadChildren: () => import('./public/components/partidos-politicos/partidos-politicos.module').then(m => m.PartidosPoliticosModule)
+      },
+      {
         path: 'assign-appmt',
         loadChildren: () => import('./public/components/assign-appmt/assign-appmt.module').then(m => m.AssignAppmtModule)
       },
