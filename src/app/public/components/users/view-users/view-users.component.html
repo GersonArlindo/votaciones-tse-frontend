@@ -1,7 +1,7 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Users</li>
+    <li class="breadcrumb-item"><a routerLink="/dashboard">Panel</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
   </ol>
 </nav>
 
@@ -9,12 +9,12 @@
   <div class="col-md-12 stretch-card">
     <div class="card">
       <div class="headercard">
-        <h5 id="_title-header-h5">User List</h5>
+        <h5 id="_title-header-h5">Lista de Usuarios</h5>
         <div class="btn-text-right headercard">
           <button *ngIf="create == 1" status="success" id="_btn-success" routerLink="/users/add"
               class="dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0"
               type="button">
-              <span class="d-none d-sm-inline-block"><i class="mdi mdi-plus"></i> Add User</span>
+              <span class="d-none d-sm-inline-block"><i class="mdi mdi-plus"></i> Agregar Usuario</span>
           </button>
         </div>
       </div>
@@ -27,7 +27,7 @@
 
             <ng-template pTemplate="caption">
               <div class="table-header">
-                Search installer
+                Buscar Usuario
                 <span class="p-input-icon-left">
                   <div class="btn-text-right">
                     <input pInputText type="text" class="form-control" id="_bck-color"
@@ -48,16 +48,16 @@
 
                 <th pSortableColumn="first_name" style="min-width: 12rem">
                   <div class="flex justify-content-between align-items-center">
-                    User
+                    Usuario
                     <p-sortIcon field="first_name"></p-sortIcon>
                   </div>
                 </th>
 
-                
+
 
                 <th pSortableColumn="rol_id" style="min-width: 10rem">
                   <div class="flex justify-content-between align-items-center">
-                    Role
+                    Rol
                     <p-sortIcon field="rol_id"></p-sortIcon>
                   </div>
                 </th>
@@ -71,8 +71,8 @@
 
                 <th style="min-width: 09rem" *ngIf="deleted == 1 || update == 1">
                   <div class="flex justify-content-between align-items-center">
-                    Actions
-                  </div> 
+                    Acciones
+                  </div>
                 </th>
               </tr>
             </ng-template>
@@ -80,14 +80,14 @@
             <ng-template pTemplate="body" let-users>
               <tr class="p-selectable-row">
 
-                <td> 
-                  <span class="rounded-pill">&nbsp; {{users.user_id}} &nbsp;</span> 
+                <td>
+                  <span class="rounded-pill">&nbsp; {{users.user_id}} &nbsp;</span>
                 </td>
                 <td>
                   <i class="mdi mdi-account-circle"></i>
                   {{users.first_name}} {{users.last_name}}
                 </td>
-                
+
                 <td>
                   <i class="mdi mdi-account-key"></i>
                   {{users.tbl_role.rol_rol}}
@@ -112,7 +112,7 @@
 
               <ng-template #contentView let-d="dismiss">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="modal-basic-title">User</h4>
+                  <h4 class="modal-title" id="modal-basic-title">Usuario</h4>
                 </div>
                 <div class="modal-body">
                   <div class="usercard_body">
@@ -123,7 +123,7 @@
                         <h3 class="usercard_name">{{users.first_name}} <span
                             class="usercard_name-label">{{users.last_name}}</span></h3>
                         <span class="usercard_post">{{users.tbl_role.rol_rol}}</span>
-                        <span class="usercard_post">Birthdate: 🎂 {{users.birthdate}} 🎉</span>
+                        <span class="usercard_post">Cumpleaños: 🎂 {{users.birthdate}} 🎉</span>
                       </div>
                     </header>
                     <div class="usercard_content">
@@ -131,7 +131,7 @@
                         <div class="stats usercard_stats-item">
                           <i class="mdi mdi-web iconmodal"></i>
                           <div class="stats_info usercard_stats-info">
-                            <span class="stats_name usercard_stats-name">Language</span>
+                            <span class="stats_name usercard_stats-name">Idioma</span>
                             <span class="stats_value">{{users.tbl_language.language_name}}</span>
                           </div>
                         </div>
@@ -145,14 +145,14 @@
                         <div class="stats usercard_stats-item">
                           <i class="mdi mdi-phone iconmodal"></i>
                           <div class="stats_info usercard_stats-info">
-                            <span class="stats_name usercard_stats-name">Phone Number</span>
+                            <span class="stats_name usercard_stats-name">Telefono</span>
                             <span class="stats_value">{{users.phone_number}}</span>
                           </div>
                         </div>
                         <div class="stats usercard_stats-item">
                           <i class="mdi mdi-account iconmodal"></i>
                           <div class="stats_info usercard_stats-info">
-                            <span class="stats_name usercard_stats-name">Status</span>
+                            <span class="stats_name usercard_stats-name">Estado</span>
                             <span class="stats_value" >{{this.convertStatus(users.status)}}</span>
                           </div>
                         </div>
@@ -162,9 +162,9 @@
                 </div>
                 <div class="modal-footer">
                   <button id="_btn-back" routerLink="/users/view" type="submit" name="submitButton" class="btn"
-                    (click)="d('Cross click')">Go Back</button>
+                    (click)="d('Cross click')">Regresar</button>
                   <a [routerLink]="['/users/edit', users.user_id]" class="btn btn-sm btn-icon item-edit"
-                    (click)="d('Cross click')">Edit</a>
+                    (click)="d('Cross click')">Editar</a>
                 </div>
               </ng-template>
             </ng-template>
@@ -172,19 +172,19 @@
             <ng-template pTemplate="emptymessage">
 
               <tr>
-                <td colspan="8">No users found.</td>
+                <td colspan="8">Usuario no encontrado</td>
               </tr>
             </ng-template>
 
             <ng-template #contentDelete let-c="close" let-d="dismiss">
               <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+                <h4 class="modal-title" id="modal-basic-title">Confirmacion</h4>
               </div>
               <div class="modal-body">
-                <p>Are you sure to delete the user</p>
+                <p>¿Estás seguro de eliminar este usuario?</p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
-                <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>
+                <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancelar</button>
+                <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Eliminar</button>
               </div>
             </ng-template>

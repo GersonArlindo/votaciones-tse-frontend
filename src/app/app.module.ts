@@ -16,7 +16,7 @@ import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrol
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table'
 import {TableModule} from 'primeng/table';
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { LoginGuard } from './core/guards/login.guard';
@@ -39,7 +39,6 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
-    PublicModule,
     CoreModule,
     AuthModule,
     PerfectScrollbarModule,
@@ -56,7 +55,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TableModule
   ],
   providers: [
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, 
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     LoginGuard,
     {

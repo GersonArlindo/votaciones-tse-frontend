@@ -7,7 +7,7 @@ import { LoginGuard } from './core/guards/login.guard';
 
 const routes: Routes = [
   { path:'auth', loadChildren: () => import('./public/components/auth/auth.module').then(m => m.AuthModule) },
-  { 
+  {
     path: 'error',
     component: ErrorPageComponent,
     data: {
@@ -109,6 +109,10 @@ const routes: Routes = [
 
       },
       {
+        path: 'persona-natural',
+        loadChildren: () => import('./public/components/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
+      },
+      {
         path: 'assign-appmt',
         loadChildren: () => import('./public/components/assign-appmt/assign-appmt.module').then(m => m.AssignAppmtModule)
       },
@@ -116,10 +120,10 @@ const routes: Routes = [
         path: 'users',
         loadChildren: () => import('./public/components/users/users.module').then(m => m.UsersModule)
       },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },
-  { 
+  {
     path: 'error',
     component: ErrorPageComponent,
     data: {

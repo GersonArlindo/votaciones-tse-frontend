@@ -36,7 +36,7 @@ import { BrowserModule } from '@angular/platform-browser';
     HttpInterceptorModule,
   ],
   providers: [
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, 
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     AuthGuard,
   ]
