@@ -4,8 +4,8 @@
 
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-      <li class="breadcrumb-item"><a routerLink="/roles/view">Role</a></li>
+      <li class="breadcrumb-item"><a routerLink="/dashboard">Panel</a></li>
+      <li class="breadcrumb-item"><a routerLink="/roles/view">Rol</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{this.title}}</li>
     </ol>
 </nav>
@@ -15,32 +15,32 @@
       <div class="card">
         <div class="card-body">
           <div class="card-header">
-          <h6 class="card-title">Information of the Role</h6></div>
+          <h6 class="card-title">Informacion del rol</h6></div>
             <form [formGroup]="form" (ngSubmit)="saveRole()">
               <div class="row">
                 <div class="col-sm-6">
                   <div class="mb-3">
-                    <label class="form-label">Role name</label>
+                    <label class="form-label">Nombre</label>
                     <input type="text" [ngClass]="{ 'is-invalid': submitted && position['rol_rol'].errors }" formControlName="rol_rol" name="rol_rol" id="rol_rol" onkeydown="return /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control" placeholder="Enter name">
                     <div *ngIf="submitted && position['rol_rol']?.errors" class="invalid-feedback">
-                        <mat-error *ngIf="position['rol_rol']?.hasError('required')">Name is required</mat-error>
+                        <mat-error *ngIf="position['rol_rol']?.hasError('required')">Nombre es requerido</mat-error>
                     </div>
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Role Description</label>
+                      <label class="form-label">Descripcion</label>
                       <input type="text" [ngClass]="{ 'is-invalid': submitted && position['rol_descripcion'].errors }" formControlName="rol_descripcion" name="rol_descripcion" id="rol_descripcion" onkeydown="return /[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control" placeholder="Enter name">
                       <div *ngIf="submitted && position['rol_descripcion']?.errors" class="invalid-feedback">
-                          <mat-error *ngIf="position['rol_descripcion']?.hasError('required')">Description is required</mat-error>
+                          <mat-error *ngIf="position['rol_descripcion']?.hasError('required')">Descripcion es requerida</mat-error>
                       </div>
                     </div>
                   </div>
 
               </div>
               <button [disabled]="!form.valid" (click)="onSubmit()" type="submit" class="btn btn-primary submit">{{this.title}} <i class="mdi mdi-file-document-edit"></i> </button>
-              <button id="_btn-back" routerLink="/roles/view" type="submit" name="submitButton" class="btn">Go Back <i class="mdi mdi-arrow-left"></i> </button>
+              <button id="_btn-back" routerLink="/roles/view" type="submit" name="submitButton" class="btn">Regresar <i class="mdi mdi-arrow-left"></i> </button>
             </form>
         </div>
       </div>

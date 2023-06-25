@@ -1,8 +1,8 @@
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-      <li class="breadcrumb-item"><a routerLink="/roles/view">Role</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Permissions</li>
+      <li class="breadcrumb-item"><a routerLink="/dashboard">Panel</a></li>
+      <li class="breadcrumb-item"><a routerLink="/roles/view">Rol</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Permisos</li>
     </ol>
   </nav>
   
@@ -10,10 +10,10 @@
     <div class="col-md-12 stretch-card">
       <div class="card">
         <div class="headercard">
-          <h5 id="_title-header-h5">Types Permissions</h5>
+          <h5 id="_title-header-h5">Tipos de permisos</h5>
           <div class="btn-text-right headercard">
             <button status="success" id="_btn-success" [routerLink]="['/permisos/add', this.id]" class=" dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-              <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i>  Add Permissions</span>
+              <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i>  Agregar Permisos</span>
             </button>
           </div>
         </div>
@@ -33,7 +33,7 @@
                 
                 <ng-template pTemplate="caption">
                     <div class="table-header">
-                        Search permission
+                        Buscar permiso
                         <span class="p-input-icon-left">
                           <div class="btn-text-right">
                             <input pInputText type="text" class="form-control" id="_bck-color" (input)="applyFilterGlobal($event, 'contains')" />
@@ -57,21 +57,21 @@
   
                         <th pSortableColumn="mod_nombre" style="min-width: 10rem">
                           <div class="flex justify-content-between align-items-center">
-                              Module
+                              Modulo
                               <p-sortIcon field="mod_nombre"></p-sortIcon>
                           </div>
                         </th>
 
                         <th pSortableColumn="rol_rol" style="min-width: 10rem">
                           <div class="flex justify-content-between align-items-center">
-                              Role
+                              Rol
                               <p-sortIcon field="rol_rol"></p-sortIcon>
                           </div>
                         </th>
   
                         <th style="min-width: 09rem">
                           <div class="flex justify-content-between align-items-center">
-                              Actions
+                              Acciones
                           </div>
                         </th>
                     </tr>
@@ -100,21 +100,21 @@
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="8">No permisos found.</td>
+                        <td colspan="8">No se encontraron permisos.</td>
                     </tr>
                 </ng-template>
             </p-table>
   
             <ng-template #contentDelete let-c="close" let-d="dismiss">    
               <div class="modal-header">    
-                  <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>    
+                  <h4 class="modal-title" id="modal-basic-title">Confirmar</h4>    
               </div>    
               <div class="modal-body">    
-                  <p>Are you sure to delete the Permission</p>    
+                  <p>Seguro que deseas eliminar este permiso?</p>    
               </div>    
               <div class="modal-footer">    
-                  <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>    
-                  <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>    
+                  <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancelar</button>    
+                  <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Confirmar</button>    
               </div>    
             </ng-template>  
   

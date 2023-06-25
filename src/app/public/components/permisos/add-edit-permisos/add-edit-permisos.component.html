@@ -4,7 +4,7 @@
 
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/permisos/view">Permission</a></li>
+      <li class="breadcrumb-item"><a routerLink="/permisos/view">Permisos</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{this.title}}</li>
     </ol>
 </nav>
@@ -14,13 +14,13 @@
       <div class="card">
         <div class="card-body">
           <div class="card-header">
-          <h6 class="card-title">Information of the Permission</h6></div>
+          <h6 class="card-title">Informacion de los permisos</h6></div>
             <form [formGroup]="form" (ngSubmit)="savePermission()">
               <div class="row">
 
                 <div class="col-sm-6">
                     <div class="mb-3">
-                        <label class="form-label">Module</label>
+                        <label class="form-label">Modulo</label>
                         <ng-select [items]="module"
                             bindLabel="mod_nombre"
                             bindValue="mod_id"
@@ -34,7 +34,7 @@
 
                 <div class="col-sm-6">
                   <div class="mb-3">
-                    <label class="form-label">Role</label>
+                    <label class="form-label">Rol</label>
                     <input type="text" class="form-control" [placeholder]="this.rol_name" name="rol_id" id="rol_id" disabled>
                   </div>
                 </div>
@@ -42,7 +42,7 @@
                  
               </div>
               <button [disabled]="!form.valid" (click)="onSubmit()" type="submit" class="btn btn-primary submit">{{this.title}} <i class="mdi mdi-file-document-edit"></i> </button>
-              <button id="_btn-back" [routerLink]="['/permisos/view', this.type]" type="submit" name="submitButton" class="btn">Go Back <i class="mdi mdi-arrow-left"></i> </button>
+              <button id="_btn-back" [routerLink]="['/permisos/view', this.type]" type="submit" name="submitButton" class="btn">Regresar <i class="mdi mdi-arrow-left"></i> </button>
             </form>
         </div>
       </div>

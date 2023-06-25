@@ -1,31 +1,31 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item"><a routerLink="/roles/view">Role</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Role - Permiso</li>
+    <li class="breadcrumb-item"><a routerLink="/dashboard">Panel</a></li>
+    <li class="breadcrumb-item"><a routerLink="/roles/view">Rol</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Rol - Permiso</li>
   </ol>
 </nav>
 <div class="container card">
   <div class="row">
     <div class="card-container col-md-4" *ngFor="let permissions of permissions">
-      <h3>Module of {{permissions.tbl_modulo.mod_nombre}}</h3>
+      <h3>Modulo de {{permissions.tbl_modulo.mod_nombre}}</h3>
       <div class="buttons mb-3">
         <div class="row">
           <div class="checkbox-con col-sm"> 
             <input id="checkbox" type="checkbox" (change)="checkValue($event, permissions.per_id, permissions.tbl_modulo.mod_id, 1)" [(ngModel)]="permissions.create" />
-            <label>Create</label>
+            <label>Crear</label>
           </div>
           <div class="checkbox-con col-sm">
             <input id="checkbox" type="checkbox" (change)="checkValue($event, permissions.per_id, permissions.tbl_modulo.mod_id, 2)" [(ngModel)]="permissions.read" />
-            <label>Read</label>
+            <label>Ver</label>
           </div>
           <div class="checkbox-con col-sm">
             <input id="checkbox" type="checkbox" (change)="checkValue($event, permissions.per_id, permissions.tbl_modulo.mod_id, 3)" [(ngModel)]="permissions.update"/>
-            <label>Update</label>
+            <label>Actualizar</label>
           </div>
           <div class="checkbox-con col-sm">
             <input id="checkbox" type="checkbox" (change)="checkValue($event, permissions.per_id, permissions.tbl_modulo.mod_id, 4)" [(ngModel)]="permissions.deleted" />
-            <label>Delete</label>
+            <label>Eliminar</label>
           </div>
         </div>
       </div>
