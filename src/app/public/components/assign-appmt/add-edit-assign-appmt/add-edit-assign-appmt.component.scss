@@ -11,7 +11,7 @@ label{
 }
 
 .headercard{
-	background-color: #0c1427;
+	background-color: #000432;
 	color: #F7F7FC;
 	height: 55px;
 	border-top-right-radius: 15px;
@@ -21,7 +21,7 @@ label{
 fieldset {
     border: 0;
   }
-  
+
   /* Hide default radio */
   .radio input[type="radio"] {
     position: absolute;
@@ -30,7 +30,7 @@ fieldset {
     opacity: 0;
     z-index: -1;
   }
-  
+
   /* Customizing label */
   .radio label {
     position: relative;
@@ -42,12 +42,12 @@ fieldset {
     font-weight: 600;
     text-transform: uppercase;
   }
-  
+
   .radio label, .radio label::before {
     -webkit-transition: .25s all ease;
     transition: .25s all ease;
   }
-  
+
   .radio label::before {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -59,30 +59,30 @@ fieldset {
     height: 1em;
     border: 2px solid #2196F3;
   }
-  
+
   .radio input[type="radio"] + label::before {
     border-radius: 1em;
   }
-  
-  
+
+
   /* Checked toggle */
   .radio input[type="radio"]:checked + label {
     color: #fff;
     background: #2196F3;
     z-index: 1;
   }
-  
+
   .radio input[type="radio"]:checked + label {
     padding: 8px 18px 8px 18px;
   }
-  
+
   .radio input[type="radio"]:checked + label::before {
     top: 6px;
     width: 100%;
     height: 2em;
     z-index: -1;
   }
-  
+
   .radio:hover input[type="radio"]:checked + label {
     -webkit-box-shadow: #2195f338 0px 0px 0px 5px;
     box-shadow: #2195f338 0px 0px 0px 5px;
@@ -124,7 +124,7 @@ input:checked[type="checkbox"]:before {
   border-color: rgb(24, 196, 24);
   transform: rotate(45deg) translate(5px, -10px);
 }
-  
+
 ._color-sbm{
   background-color: #6571ff !important;
 }

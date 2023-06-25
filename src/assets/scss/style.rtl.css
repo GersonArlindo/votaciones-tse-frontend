@@ -20014,7 +20014,7 @@ body {
 }
 
 .sidebar-dark .sidebar .sidebar-header {
-  background: #0c1427;
+  background: #000432;
   border-bottom: 1px solid rgba(233, 236, 239, 0.1);
   border-left: 1px solid rgba(233, 236, 239, 0.1);
 }
@@ -20025,7 +20025,7 @@ body {
   background: #7987a1;
 }
 .sidebar-dark .sidebar .sidebar-body {
-  background: #0c1427;
+  background: #000432;
   border-left: 1px solid rgba(233, 236, 239, 0.1);
 }
 .sidebar-dark .sidebar .sidebar-body .sidebar-nav .nav-item.nav-category {

@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
   @ViewChild('sidebarMenu') sidebarMenu: any = ElementRef;
 
   public PermissionUsers: any;
+  public PermissionPersonaNatural: any;
   public PermissionAppointments: any;
   public PermissionLanguage: any;
   public PermissionDashBoard: any;
@@ -30,9 +31,9 @@ export class SidebarComponent implements OnInit {
   public PermissionRoof: any;
   public PermissionSalesRepresentative: any;
 
-  
 
-  constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2, private PermissionSrv: PermissionService, router: Router) { 
+
+  constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2, private PermissionSrv: PermissionService, router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this._activateMenuDropdown();
@@ -93,7 +94,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    new MetisMenu(this.sidebarMenu.nativeElement);    
+    new MetisMenu(this.sidebarMenu.nativeElement);
     this._activateMenuDropdown();
   }
 
@@ -148,7 +149,7 @@ export class SidebarComponent implements OnInit {
   resetMenuItems() {
 
     const links = document.getElementsByClassName('nav-link-ref');
-    
+
     for (let i = 0; i < links.length; i++) {
       const menuItemEl = links[i];
       menuItemEl.classList.remove('mm-active');
@@ -157,7 +158,7 @@ export class SidebarComponent implements OnInit {
       if (parentEl) {
           parentEl.classList.remove('mm-active');
           const parent2El = parentEl.parentElement;
-          
+
           if (parent2El) {
             parent2El.classList.remove('mm-show');
           }
@@ -192,12 +193,12 @@ export class SidebarComponent implements OnInit {
     const links: any = document.getElementsByClassName('nav-link-ref');
 
     let menuItemEl = null;
-    
+
     for (let i = 0; i < links.length; i++) {
         if (window.location.pathname === links[i]['pathname']) {
-          
+
             menuItemEl = links[i];
-            
+
             break;
         }
     }
@@ -251,7 +252,7 @@ export class SidebarComponent implements OnInit {
       return null;
     }
   }
-  
+
   getTokens() {
     return localStorage.getItem("login-token");
   }

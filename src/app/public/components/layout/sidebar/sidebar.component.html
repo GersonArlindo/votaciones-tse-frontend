@@ -1,7 +1,7 @@
 <nav class="sidebar ">
     <div class="sidebar-header">
       <a routerLink="/dashboard" class="sidebar-brand nobleui-logo">
-        TSE - <span>ES</span>
+        TSE - ES
       </a>
       <div class="sidebar-toggler not-active" #sidebarToggler (click)="toggleSidebar($event)">
         <span></span>
@@ -10,11 +10,11 @@
       </div>
     </div>
 
-    <div class="sidebar-body" (mouseenter)="operSidebarFolded()" (mouseleave)="closeSidebarFolded()" [perfectScrollbar]>  
+    <div class="sidebar-body" (mouseenter)="operSidebarFolded()" (mouseleave)="closeSidebarFolded()" [perfectScrollbar]>
       <ul class="sidebar-nav metismenu" id="sidebar-menu" #sidebarMenu>
         <ng-container>
           <li class="nav-item nav-category">Menu</li>
-      
+
             <li class="nav-item">
               <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/dashboard" [routerLinkActive]="['active']">
                 <i class="link-icon" [attr.data-feather]="'home'" appFeatherIcon ></i>
@@ -50,7 +50,7 @@
                   <li  *ngIf="this.PermissionLanguage == 1" class="nav-item">
                     <a class="nav-link nav-link-ref" routerLink="/language/view" [routerLinkActive]="['active']">
                       <i class="link-icon" appFeatherIcon></i>
-                      Lenguajes
+                      Personas Naturales
                     </a>
                   </li>
                   <li *ngIf="this.PermissionDisqualification == 1" class="nav-item" >
@@ -94,7 +94,7 @@
                       <i class="link-icon" appFeatherIcon></i>
                       Item
                     </a>
-                  </li>         
+                  </li>
                 </ul>
             </li>
 
@@ -134,7 +134,7 @@
           </li>
         </ng-container>
 
-      </ul>  
+      </ul>
     </div>
 
   </nav>

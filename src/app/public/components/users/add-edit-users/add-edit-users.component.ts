@@ -56,11 +56,11 @@ export class AddEditUsersComponent implements OnInit {
     this.status=[
       {
         id:0,
-        name:'inactive'
+        name:'Inactivo'
       },
       {
         id:1,
-        name:'active'
+        name:'Activo'
       }
     ]
 
@@ -77,13 +77,13 @@ export class AddEditUsersComponent implements OnInit {
       rol_id: [this.selectedSearchRolId],
       status: [this.eventStatus]
     });
- 
-    this.title = 'Add Users';
+
+    this.title = 'Agregar Usuario';
     if (this.id) {
         // edit mode
-        this.title = 'Edit Users';
+        this.title = 'Editar Usuario';
         this.loading = true;
-        
+
         this.UsersSrv.getUserById(this.id)
         .subscribe((next: any) => {
           console.log(next)
@@ -102,7 +102,7 @@ export class AddEditUsersComponent implements OnInit {
           });
 
           this.url = `${environment.API_URL}images/${next['user_images']}`;
-          this.selectedSearchLanguageId = next['language_id'];          
+          this.selectedSearchLanguageId = next['language_id'];
           this.selectedSearchRolId = next['rol_id'];
           this.selectedStatus = next['status']
         })
@@ -143,13 +143,13 @@ export class AddEditUsersComponent implements OnInit {
       this.formData.append("status", this.selectedStatus);
 
       this.spinner.show();
-  
+
       setTimeout(() => {
       this.UsersSrv.updateUsers(this.formData, this.id)
       .subscribe((res: any) => {
         if(res){
           this.spinner.hide();
-          this.router.navigate(['/users/view']); 
+          this.router.navigate(['/users/view']);
         }else{
         }
       })
@@ -170,18 +170,18 @@ export class AddEditUsersComponent implements OnInit {
       this.formData.append("status", this.selectedStatus);
 
       this.spinner.show();
-  
+
       setTimeout(() => {
       this.UsersSrv.createUsers(this.formData)
       .subscribe((res: any) => {
         if(res){
           this.spinner.hide();
-          this.router.navigate(['/users/view']); 
+          this.router.navigate(['/users/view']);
         }else{
         }
       })
       }, 1200);
-      
+
     }
   }
 
@@ -190,7 +190,7 @@ export class AddEditUsersComponent implements OnInit {
   }
 
   onFileSelect(event: any) {
-    if(event.target.files && event.target.files[0]) { 
+    if(event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onload = (event:any) => {
         this.url = event.target.result;
@@ -204,25 +204,25 @@ export class AddEditUsersComponent implements OnInit {
 
   onSubmit(): void{
     this.submitted = true;
-    if (this.submitted && this.position['user_name']?.errors) { 
+    if (this.submitted && this.position['user_name']?.errors) {
     }
-    if (this.submitted && this.position['last_name']?.errors) { 
+    if (this.submitted && this.position['last_name']?.errors) {
     }
-    if (this.submitted && this.position['username']?.errors) { 
+    if (this.submitted && this.position['username']?.errors) {
     }
-    if (this.submitted && this.position['user_images']?.errors) { 
+    if (this.submitted && this.position['user_images']?.errors) {
     }
-    if (this.submitted && this.position['email']?.errors) { 
+    if (this.submitted && this.position['email']?.errors) {
     }
-    if (this.submitted && this.position['password']?.errors) { 
+    if (this.submitted && this.position['password']?.errors) {
     }
-    if (this.submitted && this.position['phone_number']?.errors) { 
+    if (this.submitted && this.position['phone_number']?.errors) {
     }
-    if (this.submitted && this.position['language_id']?.errors) { 
+    if (this.submitted && this.position['language_id']?.errors) {
     }
-    if (this.submitted && this.position['rol_id']?.errors) { 
+    if (this.submitted && this.position['rol_id']?.errors) {
     }
-    if (this.submitted && this.position['status']?.errors) { 
+    if (this.submitted && this.position['status']?.errors) {
     }
   }
 
