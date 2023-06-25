@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InstallerService } from '@app/core/services/installer.service';
 import { PartidosPoliticosService } from '@app/core/services/partidos-politicos.service';
 import { UsersService } from '@app/core/services/users.service';
 import { environment } from '@encoding/environment';

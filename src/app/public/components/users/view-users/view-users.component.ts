@@ -6,7 +6,6 @@ import { Table } from 'primeng/table';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as FileSaver from 'file-saver';
 import { Router } from '@angular/router';
-import { installers } from '@app/core/models/installer.interface';
 import { users } from '@app/core/models/auth.interface';
 import { UsersService } from '@app/core/services/users.service';
 import { PermissionService } from '@app/core/services/permission.service';

@@ -34,64 +34,12 @@ const routes: Routes = [
         loadChildren: () => import('./public/components/language/language.module').then(m => m.LanguageModule)
       },
       {
-        path: 'calendar',
-        loadChildren: () => import('./public/components/calendar/calendar.module').then(m => m.CalendarModule)
-      },
-      {
-        path: 'disqualification',
-        loadChildren: () => import('./public/components/disqualification/disqualification.module').then(m => m.DisqualificationModule)
-      },
-      {
-        path: 'time-zone',
-        loadChildren: () => import('./public/components/time-zone/time-zone.module').then(m => m.TimeZoneModule)
-      },
-      {
-        path: 'installers',
-        loadChildren: () => import('./public/components/installers/installers.module').then(m => m.InstallersModule)
-      },
-      {
-        path: 'energy-providers',
-        loadChildren: () => import('./public/components/energy-providers/energy-providers.module').then(m => m.EnergyProvidersModule)
-      },
-      {
-        path: 'state',
-        loadChildren: () => import('./public/components/state/state.module').then(m => m.StateModule)
-      },
-      {
-        path: 'providers',
-        loadChildren: () => import('./public/components/providers/providers.module').then(m => m.ProvidersModule)
-      },
-      {
-        path: 'type-roof',
-        loadChildren: () => import('./public/components/type-roof/type-roof.module').then(m => m.TypeRoofModule)
-      },
-      {
         path: 'modulos',
         loadChildren: () => import('./public/components/modulos/modulos.module').then(m => m.ModulosModule)
       },
       {
-        path: 'sales-rep',
-        loadChildren: () => import('./public/components/sales-rep/sales-rep.module').then(m => m.SalesRepModule)
-      },
-      {
-        path: 'appointment-outcome',
-        loadChildren: () => import('./public/components/appointment-outcome/appointment-outcome.module').then(m => m.AppointmentOutcomeModule)
-      },
-      {
         path: 'rol-permiso',
         loadChildren: () => import('./public/components/rol-permiso/rol-permiso.module').then(m => m.RolPermisoModule)
-      },
-      {
-        path: 'leaderboards',
-        loadChildren: () => import('./public/components/leaderboards/leaderboards.module').then(m => m.LeaderboardsModule)
-      },
-      {
-        path: 'leads',
-        loadChildren: () => import('./public/components/leads/leads.module').then(m => m.LeadsModule)
-      },
-      {
-        path: 'type-roof',
-        loadChildren: () => import('./public/components/type-roof/type-roof.module').then(m => m.TypeRoofModule)
       },
       {
         path: 'modulos',
@@ -117,10 +65,6 @@ const routes: Routes = [
         path: 'persona-natural',
         loadChildren: () => import('./public/components/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
 
-      },
-      {
-        path: 'assign-appmt',
-        loadChildren: () => import('./public/components/assign-appmt/assign-appmt.module').then(m => m.AssignAppmtModule)
       },
       {
         path: 'users',
