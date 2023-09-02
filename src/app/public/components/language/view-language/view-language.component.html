@@ -1,7 +1,7 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Language</li>
+    <li class="breadcrumb-item"><a routerLink="/dashboard">Panel</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Idioma</li>
   </ol>
 </nav>
 
@@ -9,12 +9,12 @@
   <div class="col-md-12 stretch-card">
     <div class="card">
       <div class="headercard">
-        <h5 id="_title-header-h5">Types languages of the leads clients</h5>
+        <h5 id="_title-header-h5">Idiomas</h5>
         <div class="btn-text-right headercard">
           <button *ngIf="create == 1" status="success" id="_btn-success" (click)="editLanguageModal(contentUpdate, 0)"
             class="dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0"
             type="button">
-            <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i> Add Language</span>
+            <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i> Agregar Idioma</span>
           </button>
         </div>
       </div>
@@ -26,7 +26,7 @@
             [globalFilterFields]="['language_id','language_name','date_created','date_modify']">
             <ng-template pTemplate="caption">
               <div class="table-header">
-                Search language
+                Buscar Idioma
                 <span class="p-input-icon-left">
                   <div class="btn-text-right">
                     <input pInputText type="text" class="form-control" id="_bck-color"
@@ -45,25 +45,25 @@
                 </th>
                 <th pSortableColumn="language_name" style="min-width: 10rem">
                   <div class="flex justify-content-between align-items-center">
-                    Name
+                    Idioma
                     <p-sortIcon field="language_name"></p-sortIcon>
                   </div>
                 </th>
                 <th pSortableColumn="date_created" style="min-width: 14rem">
                   <div class="flex justify-content-between align-items-center">
-                    Created date
+                    Fecha de Creacion
                     <p-sortIcon field="date_created"></p-sortIcon>
                   </div>
                 </th>
                 <th pSortableColumn="date_modify" style="min-width: 14rem">
                   <div class="flex justify-content-between align-items-center">
-                    Modify date
+                    Fecha de Modificacion
                     <p-sortIcon field="date_modify"></p-sortIcon>
                   </div>
                 </th>
                 <th style="min-width: 09rem" *ngIf="deleted == 1 || update == 1">
                   <div class="flex justify-content-between align-items-center">
-                    Actions
+                    Acciones
                   </div>
                 </th>
               </tr>
@@ -96,49 +96,49 @@
               </tr>
               <ng-template #contentView let-d="dismiss" class="animate__animated animate__zoomInDown">
                 <div class="modal-header modaltitle">
-                  <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-earth"></i> Language</h4>
+                  <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-earth"></i> Idioma</h4>
                 </div>
                 <div class="modal-body">
                   <div class="card">
                     <div class="card-body cardview">
                       <div class="img animate__animated animate__zoomInDown"><img src="assets/images/language.png" alt=""></div>
-                      <label class="labelDetails text-center"><i class="mdi mdi-earth"></i>Language Name</label>
+                      <label class="labelDetails text-center"><i class="mdi mdi-earth"></i>Idioma</label>
                       <p class="pDetails">{{lenguage.language_name}}</p>
-                      <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock"></i> Date Created</label>
+                      <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock"></i> Fecha Creacion</label>
                       <p class="pDetails">{{lenguage.date_created}}</p>
-                      <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock-outline"></i> Date Modify</label>
+                      <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock-outline"></i> Fecha Modificacion</label>
                       <p class="pDetails">{{lenguage.date_modify}}</p>
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button id="_btn-back" routerLink="/language/view" type="submit" name="submitButton" class="btn btn-outline-dark"
-                    (click)="d('Cross click')">Go Back</button>
+                    (click)="d('Cross click')">Regresar</button>
                 </div>
               </ng-template>
             </ng-template>
             <ng-template pTemplate="emptymessage">
               <tr>
-                <td colspan="8">No language found.</td>
+                <td colspan="8">Idioma no encontrado.</td>
               </tr>
             </ng-template>
           </p-table>
           <ng-template #contentDelete let-c="close" let-d="dismiss">
             <div class="modal-header">
-              <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+              <h4 class="modal-title" id="modal-basic-title">Confirmacion</h4>
             </div>
             <div class="modal-body">
-              <p>Are you sure to delete the language</p>
+              <p>Seguro que quieres eliminar este idioma</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
-              <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>
+              <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancelar</button>
+              <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Eliminar</button>
             </div>
           </ng-template>
 
           <ng-template #contentUpdate let-c="close" let-d="dismiss">
             <div class="modal-header">
-              <h4 class="modal-title" id="modal-basic-title">Information of the language</h4>
+              <h4 class="modal-title" id="modal-basic-title">Informacion de Idioma</h4>
             </div>
             <div class="modal-body">
               <div class="row">
@@ -151,7 +151,7 @@
                         <div class="row">
                           <div class="col-sm-12">
                             <div class="mb-3">
-                              <label class="form-label">Language name</label>
+                              <label class="form-label">Idioma</label>
                               <input type="text"
                                 [ngClass]="{ 'is-invalid': submitted && position['language_name'].errors }"
                                 formControlName="language_name" name="language_name" id="language_name"
@@ -166,7 +166,7 @@
                         </div>
                         <button [swal]="{ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true, title: 'successfully', icon: 'success'}" [disabled]="!form.valid" (click)="c('yes')" type="submit" class="btn btn-primary submit">{{this.title}} <i
                             class="mdi mdi-file-document-edit"></i></button>&nbsp; 
-                          <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Go Back</button>
+                          <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
                       </form>
                     </div>
                   </div>

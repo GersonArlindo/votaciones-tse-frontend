@@ -116,16 +116,16 @@ export class ViewLanguageComponent implements OnInit {
         });
       })
     if (id >= 1) {
-      this.title = "Edit Language"
+      this.title = "Editar Idioma"
     } else if (id == 0) {
-      this.title = "Create Language"
+      this.title = "Crear Idioma"
     }
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
 
       if (result === 'yes') {
         if (id >= 1) {
-          this.title = "Edit Language"
+          this.title = "Editar Idioma"
 
           const formValue = this.form.value;
           this.spinner.show();
@@ -148,7 +148,7 @@ export class ViewLanguageComponent implements OnInit {
           }, 1200);
 
         } else if (id == 0) {
-          this.title = "Create Language"
+          this.title = "Crear Iidoma"
           const formValue = this.form.value;
           this.spinner.show();
 

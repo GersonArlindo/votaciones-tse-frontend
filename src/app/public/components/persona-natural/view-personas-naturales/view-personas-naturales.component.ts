@@ -39,7 +39,7 @@ export class ViewPersonasNaturalesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPersonasNaturales();
-    this.getPermissionRole(this.rol_id);
+    //this.getPermissionRole(this.rol_id);
   }
 
   public getPersonasNaturales(){
@@ -53,7 +53,7 @@ export class ViewPersonasNaturalesComponent implements OnInit {
     this.PermissionSrv.getPermissionsByRole(id)
       .subscribe((permission: any) => {
         for(let permiss of permission){
-          if(permiss.mod_id == 7){
+          if(permiss.mod_id == 22){
             this.update = permiss['update'];
             this.deleted = permiss['deleted'];
             this.create = permiss['create'];
@@ -94,6 +94,7 @@ export class ViewPersonasNaturalesComponent implements OnInit {
     this.PersonaNaturalSrv.getPersonaNaturalById(id)
     .subscribe((res: any) =>{
       if(res){
+        console.log(res)
         setTimeout(() =>{
           let currentUrl = this.router.url;
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;

@@ -1,17 +1,15 @@
-export interface personaNaturalRes{
-    personaNatural: personaNatural[]
-  }
   //se obtiene la información
   export interface personaNatural{
-    id_persona:number,
-    dui_persona:string,
-    nombre_persona:string,
-    apellidos_persona:string,
-    genero:string,
-    departamento:string,
-    municipio:string,
-    direccion_persona:string,
-    fecha_nacimiento:string
+    id_persona_natural: number
+    dui: string
+    nombres: string
+    apellidos: string
+    genero: string
+    detalle_direccion: string
+    fecha_nacimiento: string
+    id_municipio: number
+    fecha_vencimiento_dui: string
+    creado_en: string
   }
 
   export interface personaNaturalMsg{
@@ -19,16 +17,16 @@ export interface personaNaturalRes{
   }
   //se envia la infor
   export interface personaNaturalRequest{
-    dui_persona:string,
-    nombre_persona:string,
-    apellidos_persona:string,
-    genero:string,
-    departamento:string,
-    municipio:string,
-    direccion_persona:string,
-    fecha_nacimiento:string
+    dui: string
+    nombres: string
+    apellidos: string
+    genero: string
+    detalle_direccion: string
+    fecha_nacimiento: string
+    id_municipio: number
+    fecha_vencimiento_dui: string
   }
    export interface personaNaturalRequestMsg{
     msg : string;
-    id_persona:number,
+    id_persona_natural:number,
   }

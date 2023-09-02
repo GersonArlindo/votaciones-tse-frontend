@@ -41,7 +41,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     this.PermissionSrv.getPermissionsByRole(id)
       .subscribe((permission: any) => {
         for(let permiss of permission){
-          if(permiss.mod_id == 7){
+          if(permiss.mod_id == 21){
             this.update = permiss['update'];
             this.deleted = permiss['deleted'];
             this.create = permiss['create'];

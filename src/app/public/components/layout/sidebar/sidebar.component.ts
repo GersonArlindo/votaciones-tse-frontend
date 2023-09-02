@@ -17,9 +17,10 @@ export class SidebarComponent implements OnInit {
 
   public PermissionUsers: any;
   public PermissionPersonaNatural: any;
-  public PermissionAppointments: any;
+  public PermissionPartidosPoliticos: any;
   public PermissionLanguage: any;
   public PermissionDashBoard: any;
+  public PermissionPersonasNaturales: any;
   public PermissionAssignAppointment: any;
   public PermissionLeads: any;
   public PermissionInstallers: any;
@@ -62,32 +63,14 @@ export class SidebarComponent implements OnInit {
       for(let permiss of permission){
         if(permiss.mod_id == 1){
           this.PermissionUsers = permiss['read'];
-        }if(permiss.mod_id == 2){
-          this.PermissionAppointments = permiss['read'];
+        }if(permiss.mod_id == 21){
+          this.PermissionPartidosPoliticos = permiss['read'];
+        }if(permiss.mod_id == 22){
+          this.PermissionPersonasNaturales = permiss['read'];
         }if(permiss.mod_id == 3){
           this.PermissionLanguage = permiss['read'];
         }if(permiss.mod_id == 4){
           this.PermissionDashBoard = permiss['read'];
-        }if(permiss.mod_id == 5){
-          this.PermissionAssignAppointment = permiss['read'];
-        }if(permiss.mod_id == 6){
-          this.PermissionLeads = permiss['read'];
-        }if(permiss.mod_id == 7){
-          this.PermissionInstallers = permiss['read'];
-        }if(permiss.mod_id == 8){
-          this.PermissionEnergyProviders = permiss['read'];
-        }if(permiss.mod_id == 9){
-          this.PermissionDisqualification = permiss['read'];
-        }if(permiss.mod_id == 10){
-          this.PermissionTimeZone = permiss['read'];
-        }if(permiss.mod_id == 11){
-          this.PermissionStates = permiss['read'];
-        }if(permiss.mod_id == 12){
-          this.PermissionProviders = permiss['read'];
-        }if(permiss.mod_id == 13){
-          this.PermissionRoof = permiss['read'];
-        }if(permiss.mod_id == 14){
-          this.PermissionSalesRepresentative = permiss['read'];
         }
       }
     })

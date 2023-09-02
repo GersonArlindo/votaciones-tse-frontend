@@ -1,7 +1,7 @@
 <nav class="sidebar ">
     <div class="sidebar-header">
       <a routerLink="/dashboard" class="sidebar-brand nobleui-logo">
-        TSE - ES
+        TSE<span> - ES</span>
       </a>
       <div class="sidebar-toggler not-active" #sidebarToggler (click)="toggleSidebar($event)">
         <span></span>
@@ -16,7 +16,7 @@
           <li class="nav-item nav-category">Menu</li>
 
             <li class="nav-item">
-              <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/dashboard" [routerLinkActive]="['active']">
+              <a class="nav-link nav-link-ref" routerLink="/dashboard" [routerLinkActive]="['active']">
                 <i class="link-icon" [attr.data-feather]="'home'" appFeatherIcon ></i>
                 <span class="link-title">Panel</span>
               </a>
@@ -41,16 +41,22 @@
                 </a>
 
                 <ul class="sidebar-nav sub-menu nav-third-level" aria-expanded="false">
-                  <li *ngIf="this.PermissionDisqualification == 1" class="nav-item" >
+                  <li class="nav-item" >
                     <a class="nav-link nav-link-ref" routerLink="/partidos-politicos/view" [routerLinkActive]="['active']">
                       <i class="link-icon" appFeatherIcon></i>
                       Partidos Políticos
                     </a>
                   </li>
-                  <li   class="nav-item" >
+                  <li  class="nav-item" >
                     <a class="nav-link nav-link-ref" routerLink="/persona-natural/view" [routerLinkActive]="['active']">
                       <i class="link-icon" appFeatherIcon></i>
                       Personas Naturales
+                    </a>
+                  </li>
+                  <li class="nav-item" >
+                    <a class="nav-link nav-link-ref" routerLink="/language/view" [routerLinkActive]="['active']">
+                      <i class="link-icon" appFeatherIcon></i>
+                      Idioma
                     </a>
                   </li>
                   <!-- <li *ngIf="this.PermissionDisqualification == 1" class="nav-item" >
@@ -112,19 +118,19 @@
               </a>
 
               <ul class="sidebar-nav sub-menu nav-third-level" aria-expanded="false"  >
-                <li class="nav-item" *ngIf="this.PermissionUsers == 1" >
+                <li class="nav-item" >
                   <a class="nav-link nav-link-ref" routerLink="/modulos/view" [routerLinkActive]="['active']">
                     <i class="link-icon" appFeatherIcon></i>
                     Modulos
                   </a>
                 </li>
-                <li class="nav-item" *ngIf="this.PermissionUsers == 1">
+                <li class="nav-item">
                   <a class="nav-link nav-link-ref" routerLink="/users/view" [routerLinkActive]="['active']">
                     <i class="link-icon" appFeatherIcon></i>
                     Usuarios
                   </a>
                 </li>
-                <li class="nav-item" *ngIf="this.PermissionUsers == 1">
+                <li class="nav-item">
                   <a class="nav-link nav-link-ref" routerLink="/roles/view" [routerLinkActive]="['active']">
                     <i class="link-icon" appFeatherIcon></i>
                     Roles

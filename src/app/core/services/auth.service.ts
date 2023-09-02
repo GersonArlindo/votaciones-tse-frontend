@@ -30,7 +30,7 @@ export class AuthService {
 
   login(authData: login):Observable<loginRes | void> {
     return this.http
-    .post<loginRes>(`${environment.API_URL}auth/login`, authData)
+    .post<loginRes>(`${environment.API_URL_AUTH}auth/login`, authData)
     .pipe(
       map((res: loginRes) =>{
         //save token
