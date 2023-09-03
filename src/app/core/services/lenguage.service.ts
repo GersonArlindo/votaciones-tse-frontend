@@ -18,7 +18,7 @@ export class LenguageService {
   ) { }
 
   getLenguages(): Observable<lenguage[]>{
-    return this.http.get<languageRes>(`${environment.API_URL}language/show`)
+    return this.http.get<languageRes>(`${environment.API_URL_AUTH}language/show`)
     .pipe(
       map(
         response => response.lenguage
@@ -28,14 +28,14 @@ export class LenguageService {
   }
 
   getLenguageById(id:any): Observable<lenguage[]>{
-    return this.http.get<languageRes>(`${environment.API_URL}language/show/${id}`)
+    return this.http.get<languageRes>(`${environment.API_URL_AUTH}language/show/${id}`)
     .pipe(
       map((response:any) => response.lenguage)
     )
   }
 
   createLenguage(data:lenguageRequest) : Observable<lenguageRequestMsg | void>{
-    return this.http.post<lenguageRequestMsg>(`${environment.API_URL}language/add`, data)
+    return this.http.post<lenguageRequestMsg>(`${environment.API_URL_AUTH}language/add`, data)
     .pipe(
       map((res:lenguageRequestMsg)=> {
         return res;
@@ -45,7 +45,7 @@ export class LenguageService {
   }
 
   updateLenguage(data:lenguageRequest, id: any) : Observable<lenguageRequestMsg | void>{
-    return this.http.put<lenguageRequestMsg>(`${environment.API_URL}language/update/${id}`, data)
+    return this.http.put<lenguageRequestMsg>(`${environment.API_URL_AUTH}language/update/${id}`, data)
     .pipe(
       map((res:lenguageRequestMsg)=> {
         return res;
@@ -55,7 +55,7 @@ export class LenguageService {
   }
 
   deleteLanguage(id:any) : Observable<lenguageMsg>{
-    return this.http.delete<lenguageMsg>(`${environment.API_URL}language/delete/${id}`)
+    return this.http.delete<lenguageMsg>(`${environment.API_URL_AUTH}language/delete/${id}`)
     .pipe(
       map((res:lenguageMsg) => {
         return res;

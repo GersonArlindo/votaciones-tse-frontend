@@ -18,7 +18,7 @@ export class RoleService {
   ) { }
 
   getRole(): Observable<role[]>{
-    return this.http.get<roleRes>(`${environment.API_URL}role/show`)
+    return this.http.get<roleRes>(`${environment.API_URL_AUTH}role/show`)
     .pipe(
       map(
         response => response.role
@@ -28,14 +28,14 @@ export class RoleService {
   }
 
   getRoleById(id:any): Observable<role[]>{
-    return this.http.get<roleRes>(`${environment.API_URL}role/show/${id}`)
+    return this.http.get<roleRes>(`${environment.API_URL_AUTH}role/show/${id}`)
     .pipe(
       map((response:any) => response.role)
     )
   }
 
   createRole(data:roleRequest) : Observable<roleRequestMsg | void>{
-    return this.http.post<roleRequestMsg>(`${environment.API_URL}role/add`, data)
+    return this.http.post<roleRequestMsg>(`${environment.API_URL_AUTH}role/add`, data)
     .pipe(
       map((res:roleRequestMsg)=> {
         return res;
@@ -45,7 +45,7 @@ export class RoleService {
   }
 
   updateRole(data:roleRequest, id: any) : Observable<roleRequestMsg | void>{
-    return this.http.put<roleRequestMsg>(`${environment.API_URL}role/update/${id}`, data)
+    return this.http.put<roleRequestMsg>(`${environment.API_URL_AUTH}role/update/${id}`, data)
     .pipe(
       map((res:roleRequestMsg)=> {
         return res;
@@ -55,7 +55,7 @@ export class RoleService {
   }
 
   deleteRole(id:any) : Observable<roleMsg>{
-    return this.http.delete<roleMsg>(`${environment.API_URL}role/delete/${id}`)
+    return this.http.delete<roleMsg>(`${environment.API_URL_AUTH}role/delete/${id}`)
     .pipe(
       map((res:roleMsg) => {
         return res;
