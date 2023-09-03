@@ -67,6 +67,11 @@ const routes: Routes = [
 
       },
       {
+        path: 'candidatos',
+        loadChildren: () => import('./public/components/candidato/candidato.module').then(m => m.CandidatoModule)
+
+      },
+      {
         path: 'users',
         loadChildren: () => import('./public/components/users/users.module').then(m => m.UsersModule)
       },
