@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
     this.UsersSrv.getUserById(this.uid)
     .subscribe((next: any) => {
       console.log(next)
-      this.imageData = `${environment.API_URL}images/${next['user_images']}`;
+      this.imageData = `${environment.API_URL_AUTH}images/${next['user_images']}`;
       this.name = next['first_name'];
       this.lastName = next['last_name'];
       this.email = next['email'];

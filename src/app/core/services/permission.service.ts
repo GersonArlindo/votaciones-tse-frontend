@@ -19,7 +19,7 @@ export class PermissionService {
   ) { }
 
   getPermissions(): Observable<permission[]>{
-    return this.http.get<permissionsRes>(`${environment.API_URL}permission/show`)
+    return this.http.get<permissionsRes>(`${environment.API_URL_AUTH}permission/show`)
     .pipe(
       map((response:any) => response.permission),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
@@ -27,7 +27,7 @@ export class PermissionService {
   }
 
   getPermissionsByRole(id: any): Observable<permission[]>{
-    return this.http.get<permissionsRes>(`${environment.API_URL}permission/show/role/${id}`)
+    return this.http.get<permissionsRes>(`${environment.API_URL_AUTH}permission/show/role/${id}`)
     .pipe(
       map((response:any) => response.permission),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
@@ -35,7 +35,7 @@ export class PermissionService {
   }
 
   getPermissionsByModuleId(id:any): Observable<permissionByModule[]>{
-    return this.http.get<permissionByModuleRes>(`${environment.API_URL}module/show/${id}`)
+    return this.http.get<permissionByModuleRes>(`${environment.API_URL_AUTH}module/show/${id}`)
     .pipe(
       map((response:any) => response.permission),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
@@ -43,7 +43,7 @@ export class PermissionService {
   }
 
   getPermissionsById(id:any): Observable<permission[]>{
-    return this.http.get<permissionsRes>(`${environment.API_URL}permission/show/${id}`)
+    return this.http.get<permissionsRes>(`${environment.API_URL_AUTH}permission/show/${id}`)
     .pipe(
       map(
         (response:any) => response.permission
@@ -53,7 +53,7 @@ export class PermissionService {
   }
 
   createPermissions(data: FormData) : Observable<permissionMsg | void>{
-    return this.http.post<permissionMsg>(`${environment.API_URL}permission/add`, data)
+    return this.http.post<permissionMsg>(`${environment.API_URL_AUTH}permission/add`, data)
     .pipe(
       map((res:permissionMsg)=> {
         return res;
@@ -63,7 +63,7 @@ export class PermissionService {
   }
 
   updatePermissions(data: FormData, id: any) : Observable<permissionGlobalMsg | void>{
-    return this.http.put<permissionGlobalMsg>(`${environment.API_URL}permission/update/${id}`, data)
+    return this.http.put<permissionGlobalMsg>(`${environment.API_URL_AUTH}permission/update/${id}`, data)
     .pipe(
       map((res:permissionGlobalMsg)=> {
         return res;
@@ -73,7 +73,7 @@ export class PermissionService {
   }
 
   deletePermissions(id:any) : Observable<permissionGlobalMsg>{
-    return this.http.delete<permissionGlobalMsg>(`${environment.API_URL}permission/delete/${id}`)
+    return this.http.delete<permissionGlobalMsg>(`${environment.API_URL_AUTH}permission/delete/${id}`)
     .pipe(
       map((res:permissionGlobalMsg) => {
         return res;
@@ -83,6 +83,6 @@ export class PermissionService {
   }
 
   changePermissionByTyped(status: any, type: any, id: any){
-    return this.http.get(`${environment.API_URL}permission/change/${status}?type=${type}&id=${id}`)
+    return this.http.get(`${environment.API_URL_AUTH}permission/change/${status}?type=${type}&id=${id}`)
   }
 }

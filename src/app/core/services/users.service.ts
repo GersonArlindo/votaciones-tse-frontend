@@ -16,14 +16,14 @@ export class UsersService {
   constructor(private http: HttpClient, private router: Router, private HandlerErrorSrv: HandlerErrorService) { }
 
   getUsers(): Observable<users[]> {
-    return this.http.get<getUserResponse>(`${environment.API_URL}user/show`)
+    return this.http.get<getUserResponse>(`${environment.API_URL_AUTH}user/show`)
     .pipe(
       map(response => response.users)
     )
   }
 
   getUserById(id: any): Observable<users[]> {
-    return this.http.get<getUserResponseData>(`${environment.API_URL}user/show/${id}`)
+    return this.http.get<getUserResponseData>(`${environment.API_URL_AUTH}user/show/${id}`)
     .pipe(
       map((response: any) => response.user)
 
@@ -31,7 +31,7 @@ export class UsersService {
   }
 
   createUsers(data: FormData) : Observable<reponseUserMsg | void>{
-    return this.http.post<reponseUserMsg>(`${environment.API_URL}user/add`, data)
+    return this.http.post<reponseUserMsg>(`${environment.API_URL_AUTH}user/add`, data)
     .pipe(
       map((res:reponseUserMsg)=> {
         return res;
@@ -41,7 +41,7 @@ export class UsersService {
   }
 
   updateUsers(data: FormData, id: any) : Observable<reponseUserMsg | void>{
-    return this.http.put<reponseUserMsg>(`${environment.API_URL}user/update/${id}`, data)
+    return this.http.put<reponseUserMsg>(`${environment.API_URL_AUTH}user/update/${id}`, data)
     .pipe(
       map((res:reponseUserMsg)=> {
         return res;
@@ -51,7 +51,7 @@ export class UsersService {
   }
   
   deleteUsers(id:any) : Observable<reponseUserMsg>{
-    return this.http.delete<reponseUserMsg>(`${environment.API_URL}user/delete/${id}`)
+    return this.http.delete<reponseUserMsg>(`${environment.API_URL_AUTH}user/delete/${id}`)
     .pipe(
       map((res:reponseUserMsg) => {
         return res;
