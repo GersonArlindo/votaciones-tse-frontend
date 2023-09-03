@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PartidosPoliticosService } from '@app/core/services/partidos-politicos.service';
+import { PartidosPoliticosService } from '@app/core/services/partido-politico.service';
 import { UsersService } from '@app/core/services/users.service';
 import { environment } from '@encoding/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -26,7 +26,7 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
   public uploadFiles: any;
   public eventStatus: any;
   public selectedStatus!: number;
-  
+
 
 
   constructor(
@@ -43,66 +43,61 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
 
     this.status=[
       {
-        id:0,
-        name:'Inactivo'
+        id:'INACTIVO',
+        name:'INACTIVO'
       },
       {
-        id:1,
-        name:'Activo'
+        id:'ACTIVO',
+        name:'ACTIVO'
       }
     ]
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
-      sigla: ['', [Validators.required]],
-      direccion: ['', [Validators.required]],
-      telefono: ['', [Validators.required]],
-      representante_legal: ['', [Validators.required]],
+      siglas: ['', [Validators.required]],
       estado: [''],
-      imagen	: [''],
+      logo	: [''],
     });
 
     this.title = 'Agregar Partido';
     if (this.id) {
         // edit mode
-        this.title = 'Editar Partido';
+         this.title = 'Editar Partido';
         this.loading = true;
-        
+
         this.PartidosPoliticosSrv.getPartidosPoliticosById(this.id)
         .subscribe((next: any) => {
           this.form = this.formBuilder.group({
             nombre: [next['nombre'], [Validators.required]],
-            sigla: [next['sigla']],
-            direccion: [next['direccion']],
-            telefono: [next['telefono'],[Validators.pattern(this.emailPattern)]],
-            representante_legal: [next['representante_legal']],
+            siglas: [next['siglas']],
             estado: [next['estado']],
-            imagen: [next['imagen']]
+            logo: [next['logo']]
           });
 
-          this.url = `${environment.API_URL}images/${next['imagen']}`;
+
+          this.url = `${environment.API_URL}/${this.id}/${next['logo']}`;
           this.selectedStatus = next['estado']
         })
     }
   }
 
-  public savePartidosPoliticos(){
+
+
+
+   public savePartidosPoliticos(){
     if(this.id){
       this.formData.append("nombre", this.form.get('nombre')!.value);
-      this.formData.append("sigla", this.form.get('sigla')!.value);
-      this.formData.append("direccion", this.form.get('direccion')!.value);
-      this.formData.append("telefono", this.form.get('telefono')!.value);
-      this.formData.append("representante_legal", this.form.get('representante_legal')!.value);
+      this.formData.append("siglas", this.form.get('siglas')!.value);
       this.formData.append("estado", this.selectedStatus)
-      this.formData.append("imagen", this.uploadFiles)
+      this.formData.append("logo", this.uploadFiles)
 
       this.spinner.show();
-  
+
       setTimeout(() => {
       this.PartidosPoliticosSrv.updatePartidosPoliticos(this.formData, this.id)
       .subscribe((res: any) => {
         if(res){
           this.spinner.hide();
-          this.router.navigate(['/partidos-politicos/view']); 
+          this.router.navigate(['/partidos-politicos/view']);
         }else{
         }
       })
@@ -111,21 +106,18 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
     }else{
 
       this.formData.append("nombre", this.form.get('nombre')!.value);
-      this.formData.append("sigla", this.form.get('sigla')!.value);
-      this.formData.append("direccion", this.form.get('direccion')!.value);
-      this.formData.append("telefono", this.form.get('telefono')!.value);
-      this.formData.append("representante_legal", this.form.get('representante_legal')!.value);
+      this.formData.append("siglas", this.form.get('siglas')!.value);
       this.formData.append("estado", this.selectedStatus)
-      this.formData.append("imagen", this.uploadFiles)
+      this.formData.append("logo", this.uploadFiles)
 
       this.spinner.show();
-  
+
       setTimeout(() => {
       this.PartidosPoliticosSrv.createPartidosPoliticos(this.formData)
       .subscribe((res: any) => {
         if(res){
           this.spinner.hide();
-          this.router.navigate(['/partidos-politicos/view']); 
+          this.router.navigate(['/partidos-politicos/view']);
         }else{
         }
       })
@@ -138,7 +130,7 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
   }
 
   onFileSelect(event: any) {
-    if(event.target.files && event.target.files[0]) { 
+    if(event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onload = (event:any) => {
         this.url = event.target.result;
@@ -152,19 +144,13 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
 
   onSubmit(): void{
     this.submitted = true;
-    if (this.submitted && this.position['nombre']?.errors) { 
+    if (this.submitted && this.position['nombre']?.errors) {
     }
-    if (this.submitted && this.position['sigla']?.errors) { 
+    if (this.submitted && this.position['siglas']?.errors) {
     }
-    if (this.submitted && this.position['direccion']?.errors) { 
+    if (this.submitted && this.position['estado']?.errors) {
     }
-    if (this.submitted && this.position['telefono']?.errors) { 
-    }
-    if (this.submitted && this.position['representante_legal']?.errors) { 
-    }
-    if (this.submitted && this.position['estado']?.errors) { 
-    }
-    if (this.submitted && this.position['imagen']?.errors) { 
+    if (this.submitted && this.position['logo']?.errors) {
     }
 
   }
@@ -194,7 +180,7 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
       return null;
     }
   }
-  
+
   getTokens() {
     return localStorage.getItem("login-token");
   }
