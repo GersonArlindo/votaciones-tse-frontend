@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CandidatoService } from '@app/core/services/candidato.service';
 import { PermissionService } from '@app/core/services/permission.service';
@@ -22,13 +22,19 @@ export class ViewCandidatoComponent implements OnInit {
   update: any;
   deleted: any;
   create: any;
+  form!: FormGroup;
+
+  id?: string;
+  submitting = false;
+  submitted = false;
+  title!: string;
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private candidatoSrv: CandidatoService,
     private primengConfig: PrimeNGConfig,
-    private router: Router,
-    private PermissionSrv: PermissionService,
+    private router: Router,/* 
+    private PermissionSrv: PermissionService, */
     private spinner: NgxSpinnerService
   ) { }
 
@@ -43,7 +49,7 @@ export class ViewCandidatoComponent implements OnInit {
     })
   }
 
-  public getPermissionRole(id: any){
+  /* public getPermissionRole(id: any){
     this.PermissionSrv.getPermissionsByRole(id)
       .subscribe((permission: any) => {
         for(let permiss of permission){
@@ -55,6 +61,8 @@ export class ViewCandidatoComponent implements OnInit {
         }
       })
   }
+ */
+
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -80,6 +88,74 @@ export class ViewCandidatoComponent implements OnInit {
     var b = time.split(/\D/);
     return (b[0]%12 || 12) + ':' + b[1] +
            (b[0]<=11? ' am' : ' pm');
+  }
+
+  editCandidatoModal(content: any, id: any) {
+    this.candidatoSrv.getCandidatoById(id)
+      .subscribe((next: any) => {
+        this.form = this.formBuilder.group({
+          language_name: [next['language_name'], [Validators.required]],
+        });
+      })
+    if (id >= 1) {
+      this.title = "Editar Candidato"
+    } else if (id == 0) {
+      this.title = "Crear Candidato"
+    }
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+
+      if (result === 'yes') {
+        if (id >= 1) {
+          this.title = "Editar Candidato"
+
+          const formValue = this.form.value;
+          this.spinner.show();
+
+          setTimeout(() => {
+            this.candidatoSrv.updateCandidato(formValue, id)
+              .subscribe((res: any) => {
+                if (res) {
+                  this.spinner.hide();
+                  this.router.navigate(['/candidato/view'])
+                    .then(() => {
+                      let currentUrl = this.router.url;
+                      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                      this.router.onSameUrlNavigation = 'reload';
+                      this.router.navigate([currentUrl]);
+                    })
+                  } else {
+                }
+              })
+          }, 1200);
+
+        } else if (id == 0) {
+          this.title = "Crear Candidato"
+          const formValue = this.form.value;
+          this.spinner.show();
+
+          setTimeout(() => {
+            this.candidatoSrv.createCandidato(formValue)
+              .subscribe((res: any) => {
+                if (res) {
+                  this.spinner.hide();
+                  this.router.navigate(['/candidato/view'])
+                    .then(() => {
+                      let currentUrl = this.router.url;
+                      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                      this.router.onSameUrlNavigation = 'reload';
+                      this.router.navigate([currentUrl]);
+                    })
+                } else {
+                }
+              })
+          }, 1200);
+
+        }
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
 
