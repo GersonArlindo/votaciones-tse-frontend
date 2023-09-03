@@ -55,7 +55,7 @@ export class PartidosPoliticosService {
     );
   }
 
-  deletePartidosPoliticos(id:any) : Observable<any>{
+ /* deletePartidosPoliticos(id:any) : Observable<any>{
     return this.http.delete<any>(`${environment.API_URL}partido-politico/${id}`)
     .pipe(
       map((res:any) => {
@@ -63,5 +63,5 @@ export class PartidosPoliticosService {
       }),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
     )
-  }
+  }*/
 }

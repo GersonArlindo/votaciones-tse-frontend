@@ -5,6 +5,7 @@ import { PartidosPoliticosService } from '@app/core/services/partido-politico.se
 import { UsersService } from '@app/core/services/users.service';
 import { environment } from '@encoding/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-add-edit-partidos-politicos',
@@ -53,7 +54,7 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
     ]
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
-      siglas: ['', [Validators.required]],
+      siglas: [''],
       estado: [''],
       logo	: [''],
     });
@@ -65,21 +66,27 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
         this.loading = true;
 
         this.PartidosPoliticosSrv.getPartidosPoliticosById(this.id)
-        .subscribe((next: any) => {
-          this.form = this.formBuilder.group({
-            nombre: [next['nombre'], [Validators.required]],
-            siglas: [next['siglas']],
-            estado: [next['estado']],
-            logo: [next['logo']]
-          });
+        .pipe(
+          switchMap((data: any) => {
+            this.form = this.formBuilder.group({
+              nombre: [data['nombre'], [Validators.required]],
+              siglas: [data['siglas']],
+              estado: [data['estado']],
+              logo: [data['logo']]
+            });
 
+            this.url = `${environment.API_URL}/${this.id}/${data['logo']}`;
+            this.selectedStatus = data['estado'];
 
-          this.url = `${environment.API_URL}/${this.id}/${next['logo']}`;
-          this.selectedStatus = next['estado']
-        })
+            return Promise.resolve(); // Resuelve la promesa vacía para que el observable se complete
+          })
+        )
+        .toPromise()
+        .catch((error: any) => {
+          // Manejar errores aquí si es necesario
+        });
     }
   }
-
 
 
 
@@ -95,10 +102,13 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
       setTimeout(() => {
       this.PartidosPoliticosSrv.updatePartidosPoliticos(this.formData, this.id)
       .subscribe((res: any) => {
-        if(res){
+        if (res) {
           this.spinner.hide();
           this.router.navigate(['/partidos-politicos/view']);
-        }else{
+        } else {
+          // Manejar el caso en que la respuesta sea falsa o haya errores
+          console.error('Error en la solicitud:', res); // Imprime el error en la consola
+          // También puedes mostrar un mensaje de error al usuario si es necesario
         }
       })
       }, 1200);
