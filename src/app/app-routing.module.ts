@@ -6,7 +6,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { LoginGuard } from './core/guards/login.guard';
 
 const routes: Routes = [
-  { path:'auth', loadChildren: () => import('./public/components/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'auth', loadChildren: () => import('./public/components/auth/auth.module').then(m => m.AuthModule) },
   {
     path: 'error',
     component: ErrorPageComponent,
@@ -67,9 +67,13 @@ const routes: Routes = [
 
       },
       {
+        path: 'candidatos',
+        loadChildren: () => import('./public/components/candidato/candidato.module').then(m => m.CandidatoModule)
+      },
+
+      {
         path: 'jrv',
         loadChildren: () => import('./public/components/jrv/jrv.module').then(m => m.JrvModule)
-
       },
       {
         path: 'users',
@@ -95,7 +99,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top' })],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
