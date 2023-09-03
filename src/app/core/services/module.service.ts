@@ -19,7 +19,7 @@ export class ModuleService {
   ) { }
 
   getModules(): Observable<module[]>{
-    return this.http.get<moduleRes>(`${environment.API_URL}module/show`)
+    return this.http.get<moduleRes>(`${environment.API_URL_AUTH}module/show`)
     .pipe(
       map((response:any) => response.module),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
@@ -27,21 +27,21 @@ export class ModuleService {
   }
 
   getModuleByIdRole(id: any): Observable<module[]> {
-    return this.http.get<moduleRes>(`${environment.API_URL}module/rol_id/${id}`)
+    return this.http.get<moduleRes>(`${environment.API_URL_AUTH}module/rol_id/${id}`)
     .pipe(
       map((response) => response.module)
     )
   }
 
   getModulesById(id:any): Observable<module[]>{
-    return this.http.get<moduleRes>(`${environment.API_URL}module/show/${id}`)
+    return this.http.get<moduleRes>(`${environment.API_URL_AUTH}module/show/${id}`)
     .pipe(
       map((response:any) => response.module),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
     )
   }
   createModule(data:moduleRequest) : Observable<moduleRequestMsg | void>{
-    return this.http.post<moduleRequestMsg>(`${environment.API_URL}module/add`, data)
+    return this.http.post<moduleRequestMsg>(`${environment.API_URL_AUTH}module/add`, data)
     .pipe(
       map((res:moduleRequestMsg)=> {
         return res;
@@ -50,7 +50,7 @@ export class ModuleService {
     );
   }
   updateModule(data:moduleRequest, id: any) : Observable<moduleRequestMsg | void>{
-    return this.http.put<moduleRequestMsg>(`${environment.API_URL}module/update/${id}`, data)
+    return this.http.put<moduleRequestMsg>(`${environment.API_URL_AUTH}module/update/${id}`, data)
     .pipe(
       map((res:moduleRequestMsg)=> {
         return res;
@@ -59,7 +59,7 @@ export class ModuleService {
     );
   }
   deleteModule(id:any) : Observable<moduleMsg>{
-    return this.http.delete<moduleMsg>(`${environment.API_URL}module/delete/${id}`)
+    return this.http.delete<moduleMsg>(`${environment.API_URL_AUTH}module/delete/${id}`)
     .pipe(
       map((res:moduleMsg) => {
         return res;

@@ -67,6 +67,11 @@ const routes: Routes = [
 
       },
       {
+        path: 'jrv',
+        loadChildren: () => import('./public/components/jrv/jrv.module').then(m => m.JrvModule)
+
+      },
+      {
         path: 'users',
         loadChildren: () => import('./public/components/users/users.module').then(m => m.UsersModule)
       },
