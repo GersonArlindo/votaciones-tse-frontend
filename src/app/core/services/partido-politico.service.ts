@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@encoding/environment';
@@ -18,6 +18,7 @@ export class PartidosPoliticosService {
   ) { }
 
   getPartidosPoliticos(): Observable<any>{
+
     return this.http.get<any>(`${environment.API_URL}partido-politico`)
     .pipe(
       map((response:any) => response),
