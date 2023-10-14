@@ -29,41 +29,10 @@
 
                 <div class="col-sm-6">
                     <div class="mb-3">
-                      <label class="form-label">Sigla</label>
-                      <input type="text" [ngClass]="{ 'is-invalid': submitted && position['sigla'].errors }" formControlName="sigla" name="sigla" id="sigla" class="form-control" placeholder="Ingrese las siglas">
-                      <div *ngIf="submitted && position['sigla']?.errors" class="invalid-feedback">
+                      <label class="form-label">Siglas</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && position['siglas'].errors }" formControlName="siglas" name="siglas" id="siglas" class="form-control" placeholder="Ingrese las siglas">
+                      <div *ngIf="submitted && position['siglas']?.errors" class="invalid-feedback">
                           <mat-error *ngIf="position['sigla']?.hasError('required')">Sigla es requerido</mat-error>
-                      </div>
-                    </div>
-                  </div>
-
-                  
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                      <label class="form-label">Direccion</label>
-                      <input type="text" [ngClass]="{ 'is-invalid': submitted && position['direccion'].errors }" formControlName="direccion" name="direccion" id="direccion" class="form-control" placeholder="Ingrese la direccion">
-                      <div *ngIf="submitted && position['direccion']?.errors" class="invalid-feedback">
-                          <mat-error *ngIf="position['direccion']?.hasError('required')">Direccion es requerido</mat-error>
-                      </div>
-                    </div>
-                  </div>
-
-                    <div class="col-sm-6">
-                    <div class="mb-3">
-                      <label class="form-label">Telefono</label>
-                      <input prefix="+1 " mask="(000) 0000-0000" [showMaskTyped] = "true" [ngClass]="{ 'is-invalid': submitted && position['telefono'].errors }" formControlName="telefono" name="telefono" id="telefono" class="form-control" placeholder="Ingrese el numero de telefono">
-                      <div *ngIf="submitted && position['telefono']?.errors" class="invalid-feedback">
-                          <mat-error *ngIf="position['telefono']?.hasError('required')">Telefono es requerido</mat-error>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-6">
-                    <div class="mb-3">
-                      <label class="form-label">Representante Legal</label>
-                      <input type="text" [ngClass]="{ 'is-invalid': submitted && position['representante_legal'].errors }" formControlName="representante_legal" name="representante_legal" id="representante_legal" class="form-control" placeholder="Ingrese el representante Legal">
-                      <div *ngIf="submitted && position['representante_legal']?.errors" class="invalid-feedback">
-                          <mat-error *ngIf="position['representante_legal']?.hasError('required')">Representante Legal es requerido</mat-error>
                       </div>
                     </div>
                   </div>
@@ -99,15 +68,15 @@
                       </div>
                     </div>
                   </div>
-                  
+
 
                   <div class="col-md-6 mt-4 fv-plugins-icon-container">
-                    <label for="formValidationFile" class="form-label">Imagen</label>
+                    <label for="formValidationFile" class="form-label">Logo</label>
                     <div class="installer text-center" id="col-img">
-                      <div class="profile"> 
+                      <div class="profile">
                         <div class="row">
                           <div class="col-md-6">
-                            <img [src]="url"> 
+                            <img [src]="url">
                           </div>
                           <div class="col-md-9">
                             <div class="form-group">
@@ -127,7 +96,7 @@
             </form>
           </div>
         </div>
-      
+
     </div>
 </div>
 

@@ -40,7 +40,7 @@ const routes: Routes = [
     path: '',
     component: PartidosPoliticosComponent,
     children: [
-      
+
       {
         path: '',
         redirectTo: 'view',
