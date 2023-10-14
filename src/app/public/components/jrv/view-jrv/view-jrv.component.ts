@@ -22,6 +22,7 @@ export class ViewJrvComponent implements OnInit {
   submitting = false;
   submitted = false;
 
+  public token: any
   id_centro_votacion: any;
 
   public opcionSeleccionadaCentroVotacion: any;
@@ -58,12 +59,12 @@ export class ViewJrvComponent implements OnInit {
   }
 
   public getJrvs() {
-    this.jrvSrv.getJrv()
+    this.jrvSrv.getJrv(this.token)
       .subscribe((data: any) => {
+        console.log(data);
         for (let jrv of data){
           this.jrvs.push(jrv)
         }
-        console.log('data', this.jrvs);
       })
   }
 
@@ -232,5 +233,26 @@ export class ViewJrvComponent implements OnInit {
         (this.form.get(field) || this.form.get(field)?.dirty) && !this.form.get(field)?.valid
       );
     }
+
+    getUserInfo(inf: any) {
+      const token = this.getTokens();
+      this.token = token
+      let payload;
+      if (token) {
+        payload = token.split(".")[1];
+        payload = window.atob(payload);
+        return JSON.parse(payload)[`${inf}`];
+      } else {
+        return null;
+      }
+    }
+  
+    getTokens() {
+      return localStorage.getItem("login-token");
+    }
+  
+    rol_id: any = this.getUserInfo('rol');
+    
+    
  
 }

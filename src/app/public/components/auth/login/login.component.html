@@ -18,27 +18,27 @@
                 
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
-                  <input type="email" [ngClass]="{ 'is-invalid': submitted && position['email']?.errors }" formControlName="email" class="form-control" id="exampleInputEmail1" placeholder="Correo">
+                  <input type="text" [ngClass]="{ 'is-invalid': submitted && position['usuario']?.errors }" formControlName="usuario" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
                   <div class="invalid-feedback">
-                    <mat-error *ngIf="isValidField('email')" >
-                        {{getErrorMessage('email')}}
+                    <mat-error *ngIf="isValidField('usuario')" >
+                        {{getErrorMessage('usuario')}}
                     </mat-error>
                   </div>
-                  <div *ngIf="submitted && position['email']?.errors" class="invalid-feedback">
-                      <mat-error *ngIf="position['email']?.errors.required">Correo es requerido</mat-error>
+                  <div *ngIf="submitted && position['usuario']?.errors" class="invalid-feedback">
+                      <mat-error *ngIf="position['usuario']?.errors.required">Correo es requerido</mat-error>
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                  <input [ngClass]="{ 'is-invalid': submitted && position['password']?.errors }" formControlName="password" type="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password" placeholder="Contraseña">
+                  <input [ngClass]="{ 'is-invalid': submitted && position['clave']?.errors }" formControlName="clave" type="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password" placeholder="Contraseña">
                   <div class="invalid-feedback">
-                    <mat-error *ngIf="isValidField('password')" >
-                        {{getErrorMessage('password')}}
+                    <mat-error *ngIf="isValidField('clave')" >
+                        {{getErrorMessage('clave')}}
                     </mat-error>
                   </div>
-                  <div *ngIf="submitted && position['password']?.errors" class="invalid-feedback">
-                      <div *ngIf="position['password']?.errors.required">Contraseña es requerido</div>
+                  <div *ngIf="submitted && position['clave']?.errors" class="invalid-feedback">
+                      <div *ngIf="position['clave']?.errors.required">Contraseña es requerido</div>
                   </div>
                 </div>
 
