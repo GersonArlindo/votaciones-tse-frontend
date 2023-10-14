@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@encoding/environment';
@@ -16,8 +16,11 @@ export class JrvService {
     private HandlerErrorSrv: HandlerErrorService
   ) { }
 
-  getJrv(): Observable<any[]>{
-    return this.http.get<any>(`${environment.API_URL}junta-receptora-votos`)
+  getJrv(token: any): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}junta-receptora-votos`, { headers })
     .pipe(
       map(
         response => response
