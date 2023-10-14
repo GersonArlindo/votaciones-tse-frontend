@@ -26,4 +26,43 @@ export class CandidatoService {
       catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
     )
   }
+
+  getCandidatoById(id:any): Observable<any[]>{
+    return this.http.get<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`)
+    .pipe(
+      map((response:any) => response.lenguage)
+    )
+  }
+
+  createCandidato(data:any) : Observable<any | void>{
+    return this.http.post<any>(`${environment.API_URL_AUTH}candidato-politico`, data)
+    .pipe(
+      map((res:any)=> {
+        return res;
+      }),
+      catchError((err) => this.HandlerErrorSrv.handlerError(err))
+    );
+  }
+
+  
+  updateCandidato(data:any, id: any) : Observable<any | void>{
+    return this.http.put<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`, data)
+    .pipe(
+      map((res:any)=> {
+        return res;
+      }),
+      catchError((err) => this.HandlerErrorSrv.handlerError(err))
+    );
+  }
+
+  deleteCandidato(id:any) : Observable<any>{
+    return this.http.delete<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`)
+    .pipe(
+      map((res:any) => {
+        return res;
+      }),
+      catchError((err) => this.HandlerErrorSrv.handlerError(err))
+    )
+  }
+
 }

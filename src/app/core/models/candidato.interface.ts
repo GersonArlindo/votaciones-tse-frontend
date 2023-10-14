@@ -32,8 +32,6 @@
       export interface candidatoRequest{
         estado: string,
         foto_candidato: string,
-        creado_en: string,
-        modificado_en: string,
         id_partido_politico: number,
         id_persona_natural: number,
       }
