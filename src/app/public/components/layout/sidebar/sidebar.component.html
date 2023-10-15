@@ -1,177 +1,118 @@
-<nav class="sidebar ">
-    <div class="sidebar-header">
-      <a routerLink="/dashboard" class="sidebar-brand nobleui-logo">
-        TSE<span> - SV</span>
-      </a>
-      <div class="sidebar-toggler not-active" #sidebarToggler (click)="toggleSidebar($event)">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+<nav class="sidebar">
+  <div class="sidebar-header">
+
+    <!--- Logo -->
+    <a routerLink="/" class="sidebar-brand nobleui-logo">
+      TSE<span> - ES</span>
+    </a>
+
+    <!-- <a routerLink="/" class="sidebar-brand nobleui-logo">
+      <img src="assets/images/logo.png" alt="logo">
+    </a> -->
+
+    <!--- Toggler -->
+    <div class="sidebar-toggler not-active" #sidebarToggler (click)="toggleSidebar($event)">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
 
-    <div class="sidebar-body" (mouseenter)="operSidebarFolded()" (mouseleave)="closeSidebarFolded()" [perfectScrollbar]>
-      <ul class="sidebar-nav metismenu" id="sidebar-menu" #sidebarMenu>
-        <ng-container>
-          <li class="nav-item nav-category">Menu</li>
+  </div>
+  <div class="sidebar-body" (mouseenter)="operSidebarFolded()" (mouseleave)="closeSidebarFolded()" [perfectScrollbar]>
 
-            <li class="nav-item">
-              <a class="nav-link nav-link-ref" routerLink="/dashboard" [routerLinkActive]="['active']">
-                <i class="link-icon" [attr.data-feather]="'home'" appFeatherIcon ></i>
-                <span class="link-title">Panel</span>
-              </a>
+    <!--- Sidemenu start -->
 
-<!--             <li class="nav-item">
-                <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                  <i class="link-icon" [attr.data-feather]="'calendar'" appFeatherIcon ></i>
-                  <span class="link-title">Item 1</span>
-            </a>
-
-            <li class="nav-item">
-              <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                <i class="link-icon" [attr.data-feather]="'book'" appFeatherIcon ></i>
-                <span class="link-title">Item 2</span>
-          </a> -->
-
-            <li class="nav-item">
-                <a class="nav-link side-nav-link-a-ref" >
-                  <i class="link-icon" [attr.data-feather]="'tool'" appFeatherIcon ></i>
-                  <span class="link-title">Administración</span>
-                  <span class="link-arrow" data-feather="chevron-down" appFeatherIcon></span>
-                </a>
-
-                <ul class="sidebar-nav sub-menu nav-third-level" aria-expanded="false">
-                  <li class="nav-item" >
-                    <a class="nav-link nav-link-ref" routerLink="/partidos-politicos/view" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Partidos Políticos
-                    </a>
-                  </li>
-                  <li  class="nav-item" >
-                    <a class="nav-link nav-link-ref" routerLink="/persona-natural/view" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Personas Naturales
-                    </a>
-                  </li>
-                  <li class="nav-item" >
-                    <a class="nav-link nav-link-ref" routerLink="/candidatos/view" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Candidatos
-                    </a>
-                  </li>
-
-                  <li class="nav-item" >
-                    <a class="nav-link nav-link-ref" routerLink="/jrv/view" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                     JRV
-                    </a>
-                  </li>
-                  <!-- <li *ngIf="this.PermissionDisqualification == 1" class="nav-item" >
-                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Item 2
-                    </a>
-                  </li> -->
-                  <!-- <li class="nav-item" >
-                    <a *ngIf="this.PermissionTimeZone == 1" class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Item
-                    </a>
-                  </li>
-                  <li class="nav-item" *ngIf="this.PermissionInstallers == 1">
-                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Item
-                    </a>
-                  </li>
-                  <li class="nav-item" *ngIf="this.PermissionEnergyProviders == 1">
-                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Item
-                    </a>
-                  </li>
-                  <li class="nav-item" *ngIf="this.PermissionStates == 1" >
-                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Item
-                    </a>
-                  </li>
-                  <li class="nav-item" *ngIf="this.PermissionProviders == 1">
-                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Item
-                    </a>
-                  </li>
-                  <li class="nav-item" *ngIf="this.PermissionRoof == 1">
-                    <a class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                      <i class="link-icon" appFeatherIcon></i>
-                      Item
-                    </a>
-                  </li> -->
-                </ul>
-            </li>
-
-            <!-- <li class="nav-item">
-              <a *ngIf="this.PermissionDashBoard == 1" class="nav-link nav-link-ref" routerLink="/" [routerLinkActive]="['active']">
-                <i class="link-icon" [attr.data-feather]="'award'" appFeatherIcon ></i>
-                <span class="link-title"> Item</span>
-          </a></li> -->
-
-            <li class="nav-item">
-              <a class="nav-link side-nav-link-a-ref">
-                <i class="link-icon" [attr.data-feather]="'user'" appFeatherIcon ></i>
-                <span class="link-title">Usuarios</span>
+    <ul class="sidebar-nav metismenu" id="sidebar-menu" #sidebarMenu>
+      <ng-container *ngFor="let item of menuItems">
+        <li class="nav-item nav-category" *ngIf="item.isTitle">{{ item.label }}</li>
+    
+        <li class="nav-item" *ngIf="!item.isTitle" >
+    
+          <a class="nav-link" *ngIf="hasItems(item)" href="javascript:void(0);">
+            <i class="link-icon" [attr.data-feather]="item.icon" appFeatherIcon *ngIf="item.icon"></i>
+            <span class="link-title"> {{ item.label }}</span>
+            <span class="link-arrow" data-feather="chevron-down" appFeatherIcon></span>
+          </a>
+    
+          <a class="nav-link nav-link-ref" [routerLink]="item.link" *ngIf="!hasItems(item)"
+            [attr.data-parent]="item.parentId">
+            <i class="link-icon" [attr.data-feather]="item.icon" appFeatherIcon *ngIf="item.icon"></i>
+            <span class="link-title"> {{ item.label }}</span>
+            <span class="badge bg-{{item.badge.variant}}" *ngIf="item.badge">{{item.badge.text}}</span>
+          </a>
+    
+          <ul class="sidebar-nav sub-menu nav-second-level" *ngIf="hasItems(item)" aria-expanded="false">
+    
+            <li class="nav-item" *ngFor="let subitem of item.subItems" [ngClass]="{'side-nav-item': hasItems(subitem)}">
+              <a class="nav-link side-nav-link-a-ref" *ngIf="hasItems(subitem)" href="javascript:void(0);">
+                <i class="link-icon" [attr.data-feather]="subitem.icon" appFeatherIcon *ngIf="subitem.icon"></i>
+                <span class="link-title"> {{ subitem.label }}</span>
                 <span class="link-arrow" data-feather="chevron-down" appFeatherIcon></span>
               </a>
-
-              <ul class="sidebar-nav sub-menu nav-third-level" aria-expanded="false"  >
-                <li class="nav-item" >
-                  <a class="nav-link nav-link-ref" routerLink="/modulos/view" [routerLinkActive]="['active']">
-                    <i class="link-icon" appFeatherIcon></i>
-                    Modulos
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-link-ref" routerLink="/users/view" [routerLinkActive]="['active']">
-                    <i class="link-icon" appFeatherIcon></i>
-                    Usuarios
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-link-ref" routerLink="/roles/view" [routerLinkActive]="['active']">
-                    <i class="link-icon" appFeatherIcon></i>
-                    Roles
+    
+              <a class="nav-link nav-link-ref" [routerLink]="subitem.link" *ngIf="!hasItems(subitem)"
+                [attr.data-parent]="subitem.parentId">
+                <i class="link-icon" [attr.data-feather]="subitem.icon" appFeatherIcon *ngIf="subitem.icon"></i>
+                {{ subitem.label }}
+              </a>
+    
+              <ul class="sidebar-nav sub-menu nav-third-level" *ngIf="hasItems(subitem)" aria-expanded="false">
+                <li class="nav-item" *ngFor="let subSubitem of subitem.subItems">
+                  <a class="nav-link nav-link-ref" [routerLink]="subSubitem.link" [routerLinkActive]="['active']"
+                    [attr.data-parent]="subSubitem.parentId">
+                    <i class="link-icon" [attr.data-feather]="subitem.icon" appFeatherIcon *ngIf="subitem.icon"></i>
+                    {{ subSubitem.label }}
                   </a>
                 </li>
               </ul>
-          </li>
-        </ng-container>
+            </li>
+          </ul>
+        </li>
+      </ng-container>
+      <!-- <li class="nav-item nav-category">Docs</li>
+      <li class="nav-item">
+        <a href="https://www.nobleui.com/angular/documentation/docs.html" target="_blank" class="nav-link">
+          <i class="link-icon" data-feather="hash" appFeatherIcon></i>
+          <span class="link-title">Documentation</span>
+        </a>
+      </li> -->
+    </ul>
 
-      </ul>
-    </div>
+    <!--- Sidemenu end -->
 
-  </nav>
-  <nav class="setting settings-sidebar">
-    <div class="sidebar-body">
-      <a href="" class="setting settings-sidebar-toggler" id="setting-toogle" (click)="toggleSettingsSidebar($event)">
-        <i class="icon feather icon-settings"></i>
-      </a>
-      <h6 class="text-muted mb-2">Sidebar:</h6>
+  </div>
+</nav>
+<nav class="settings-sidebar">
+  <div class="sidebar-body">
+    <a href="" class="settings-sidebar-toggler" (click)="toggleSettingsSidebar($event)">
+      <i class="icon feather icon-settings"></i>
+    </a>
+    <h6 class="text-muted mb-2">Sidebar:</h6>
     <div class="mb-3 pb-3 border-bottom">
       <div class="form-check form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="sidebarThemeSettings" (change)="onSidebarThemeChange($event)" id="sidebarLight" value="sidebar-light" >
+          <input type="radio" class="form-check-input" name="sidebarThemeSettings" (change)="onSidebarThemeChange($event)" id="sidebarLight" value="sidebar-light" checked>
           <i class="input-frame"></i>
           Light
         </label>
       </div>
       <div class="form-check form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="sidebarThemeSettings" (change)="onSidebarThemeChange($event)" id="sidebarDark" value="sidebar-dark" checked>
+          <input type="radio" class="form-check-input" name="sidebarThemeSettings" (change)="onSidebarThemeChange($event)" id="sidebarDark" value="sidebar-dark">
           <i class="input-frame"></i>
           Dark
         </label>
       </div>
+    </div>
+    <div class="theme-wrapper">
+      <h6 class="text-muted mb-2">Light Theme:</h6>
+      <a class="theme-item active" href="https://www.nobleui.com/angular/template/demo1/">
+        <img src="assets/images/screenshots/light.jpg" alt="light theme">
+      </a>
+      <h6 class="text-muted mb-2">Dark Theme:</h6>
+      <a class="theme-item" href="https://www.nobleui.com/angular/template/demo2/">
+        <img src="assets/images/screenshots/dark.jpg" alt="dark theme">
+      </a>
     </div>
   </div>
 </nav>

@@ -28,13 +28,13 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  login(authData: login):Observable<loginRes | void> {
+  login(authData: login):Observable<any | void> {
     return this.http
-    .post<loginRes>(`${environment.API_URL_AUTH}auth/login`, authData)
+    .post<any>(`${environment.API_URL}auth/login`, authData)
     .pipe(
-      map((res: loginRes) =>{
+      map((res: any) =>{
         //save token
-        this.saveToken(res.token);
+        this.saveToken(res.access_token);
         this.loggedIn.next(true);
         return res;
       }),
@@ -67,7 +67,6 @@ export class AuthService {
 
   private saveToken(token:string):void{
     localStorage.setItem('login-token', token);
-  
   }
 
   IsLoggedIn() {

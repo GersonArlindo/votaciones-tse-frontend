@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
     this.getTokens();
 
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
-      password: ['',[Validators.required, Validators.minLength(6)]]
+      usuario: ['', [Validators.required]],
+      clave: ['',[Validators.required, Validators.minLength(6)]]
     });
 
   }
