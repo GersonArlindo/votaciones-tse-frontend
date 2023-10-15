@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HandlerErrorService } from './handler-error.service';
@@ -17,8 +17,11 @@ export class CandidatoService {
     private HandlerErrorSrv: HandlerErrorService
   ) { }
 
-  getCandidato(): Observable<any[]>{
-    return this.http.get<any>(`${environment.API_URL}candidato-politico`)
+  getCandidato(token:any): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}candidato-politico`, {headers})
     .pipe(
       map(
         response => response
@@ -27,15 +30,21 @@ export class CandidatoService {
     )
   }
 
-  getCandidatoById(id:any): Observable<any[]>{
-    return this.http.get<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`)
+  getCandidatoById(token:any, id:any): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`, {headers})
     .pipe(
       map((response:any) => response.lenguage)
     )
   }
 
-  createCandidato(data:any) : Observable<any | void>{
-    return this.http.post<any>(`${environment.API_URL_AUTH}candidato-politico`, data)
+  createCandidato(token:any, data:any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post<any>(`${environment.API_URL_AUTH}candidato-politico`, data, {headers})
     .pipe(
       map((res:any)=> {
         return res;
