@@ -20,14 +20,15 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
   loading = false;
   submitting = false;
   submitted = false;
-  public status : any[] = [];
+  public status: any[] = [];
   public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$";
   public url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg';
   public formData: any = new FormData();
   public uploadFiles: any;
   public eventStatus: any;
   public selectedStatus!: number;
-
+  public token: any
+  public partidospoliticos: any[] = [];
 
 
   constructor(
@@ -42,32 +43,37 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
 
-    this.status=[
+    this.status = [
       {
-        id:'INACTIVO',
-        name:'INACTIVO'
+        id: 'INACTIVO',
+        name: 'INACTIVO'
       },
       {
-        id:'ACTIVO',
-        name:'ACTIVO'
+        id: 'ACTIVO',
+        name: 'ACTIVO'
       }
     ]
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       siglas: [''],
       estado: [''],
-      logo	: [''],
+      logo: [''],
     });
 
     this.title = 'Agregar Partido';
-    if (this.id) {
-        // edit mode
-         this.title = 'Editar Partido';
-        this.loading = true;
+     if (this.id) {
+      // edit mode
+      this.title = 'Editar Partido';
+      this.loading = true;
 
-        this.PartidosPoliticosSrv.getPartidosPoliticosById(this.id)
+      this.PartidosPoliticosSrv.getPartidosPoliticosById(this.id,this.token)
         .pipe(
           switchMap((data: any) => {
+            console.log(data);
+            if (!data) {
+              throw new Error('Los datos del partido político son indefinidos o nulos.');
+            }
+
             this.form = this.formBuilder.group({
               nombre: [data['nombre'], [Validators.required]],
               siglas: [data['siglas']],
@@ -83,15 +89,19 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
         )
         .toPromise()
         .catch((error: any) => {
-          // Manejar errores aquí si es necesario
+          // Manejar errores aquí
+          console.error('Error en la solicitud HTTP:', error);
         });
     }
   }
 
 
 
-   public savePartidosPoliticos(){
-    if(this.id){
+
+
+
+  public savePartidosPoliticos() {
+    if (this.id) {
       this.formData.append("nombre", this.form.get('nombre')!.value);
       this.formData.append("siglas", this.form.get('siglas')!.value);
       this.formData.append("estado", this.selectedStatus)
@@ -100,20 +110,20 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
       this.spinner.show();
 
       setTimeout(() => {
-      this.PartidosPoliticosSrv.updatePartidosPoliticos(this.formData, this.id)
-      .subscribe((res: any) => {
-        if (res) {
-          this.spinner.hide();
-          this.router.navigate(['/partidos-politicos/view']);
-        } else {
-          // Manejar el caso en que la respuesta sea falsa o haya errores
-          console.error('Error en la solicitud:', res); // Imprime el error en la consola
-          // También puedes mostrar un mensaje de error al usuario si es necesario
-        }
-      })
+        this.PartidosPoliticosSrv.updatePartidosPoliticos(this.formData, this.id, this.token)
+          .subscribe((res: any) => {
+            if (res) {
+              this.spinner.hide();
+              this.router.navigate(['/partidos-politicos/view']);
+            } else {
+              // Manejar el caso en que la respuesta sea falsa o haya errores
+              console.error('Error en la solicitud:', res); // Imprime el error en la consola
+              // También puedes mostrar un mensaje de error al usuario si es necesario
+            }
+          })
       }, 1200);
 
-    }else{
+    } else {
 
       this.formData.append("nombre", this.form.get('nombre')!.value);
       this.formData.append("siglas", this.form.get('siglas')!.value);
@@ -123,14 +133,14 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
       this.spinner.show();
 
       setTimeout(() => {
-      this.PartidosPoliticosSrv.createPartidosPoliticos(this.formData)
-      .subscribe((res: any) => {
-        if(res){
-          this.spinner.hide();
-          this.router.navigate(['/partidos-politicos/view']);
-        }else{
-        }
-      })
+        this.PartidosPoliticosSrv.createPartidosPoliticos(this.formData, this.token)
+          .subscribe((res: any) => {
+            if (res) {
+              this.spinner.hide();
+              this.router.navigate(['/partidos-politicos/view']);
+            } else {
+            }
+          })
       }, 1200);
     }
   }
@@ -140,9 +150,9 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
   }
 
   onFileSelect(event: any) {
-    if(event.target.files && event.target.files[0]) {
+    if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-      reader.onload = (event:any) => {
+      reader.onload = (event: any) => {
         this.url = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
@@ -150,9 +160,9 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
     }
   }
 
-  get position() { return this.form.controls}
+  get position() { return this.form.controls }
 
-  onSubmit(): void{
+  onSubmit(): void {
     this.submitted = true;
     if (this.submitted && this.position['nombre']?.errors) {
     }
@@ -169,18 +179,19 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
     return !this.form.valid
   }
 
-  public getStatus(event:any){
+  public getStatus(event: any) {
     this.eventStatus = event;
   }
 
-  isValidField(field: string){
-    return(
+  isValidField(field: string) {
+    return (
       (this.form.get(field) || this.form.get(field)?.dirty) && !this.form.get(field)?.valid
     );
   }
 
   getUserInfo(inf: any) {
     const token = this.getTokens();
+    this.token = token
     let payload;
     if (token) {
       payload = token.split(".")[1];
@@ -195,8 +206,8 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
     return localStorage.getItem("login-token");
   }
 
-  uid: any = this.getUserInfo('uid');
-  FullName: any = this.getUserInfo('name');
+  rol_id: any = this.getUserInfo('rol');
+
 
 
 }

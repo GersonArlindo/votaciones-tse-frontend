@@ -17,44 +17,58 @@ export class PartidosPoliticosService {
     private HandlerErrorSrv: HandlerErrorService
   ) { }
 
-  getPartidosPoliticos(): Observable<any>{
-
-    return this.http.get<any>(`${environment.API_URL}partido-politico`)
+  getPartidosPoliticos(token: any): Observable<any>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}partido-politico`, { headers })
     .pipe(
       map((response:any) => response),
       catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
     )
   }
 
-  getPartidosPoliticosById(id:any): Observable<any>{
-    return this.http.get<any>(`${environment.API_URL}partido-politico/${id}`)
-    .pipe(
-      map(
-        (response:any) => response.partidosPoliticos
-      ),
-      catchError((err) => this.HandlerErrorSrv.handlerError(err))
-    )
+  getPartidosPoliticosById(id: any, token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(`${environment.API_URL}partido-politico/${id}`, { headers })
+      .pipe(
+        map((response: any) => response.partidosPoliticos),
+        catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
+      );
   }
 
-  createPartidosPoliticos(data: FormData) : Observable<any | void>{
-    return this.http.post<any>(`${environment.API_URL}partido-politico/`, data)
-    .pipe(
-      map((res:any)=> {
-        return res;
-      }),
-      catchError((err) => this.HandlerErrorSrv.handlerError(err))
-    );
+  createPartidosPoliticos(data: FormData, token: any): Observable<any | void> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.post<any>(`${environment.API_URL}partido-politico`, data, { headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        }),
+        catchError((err) => this.HandlerErrorSrv.handlerError(err))
+      );
   }
 
-  updatePartidosPoliticos(data: FormData, id: any) : Observable<any | void>{
-    return this.http.put<any>(`${environment.API_URL}partido-politico/${id}`, data)
-    .pipe(
-      map((res:any)=> {
-        return res;
-      }),
-      catchError((err) => this.HandlerErrorSrv.handlerError(err))
-    );
+
+  updatePartidosPoliticos(data: FormData, id: any, token: any): Observable<any | void> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`${environment.API_URL}partido-politico/${id}`, data, { headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        }),
+        catchError((err) => this.HandlerErrorSrv.handlerError(err))
+      );
   }
+
 
  /* deletePartidosPoliticos(id:any) : Observable<any>{
     return this.http.delete<any>(`${environment.API_URL}partido-politico/${id}`)
