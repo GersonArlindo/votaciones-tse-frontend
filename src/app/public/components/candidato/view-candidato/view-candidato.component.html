@@ -4,7 +4,7 @@
       <li class="breadcrumb-item active" aria-current="page">Candidatos</li>
     </ol>
   </nav>
-  
+
   <div class="row">
     <div class="col-md-12 stretch-card">
       <div class="card">
@@ -15,11 +15,11 @@
               class="dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0"
               type="button">
               <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i> Agregar Candidato</span>
-            </button> 
+            </button>
           </div>
         </div>
         <div class="card-body">
-          <div class="table-responsive table table-hover mb-0">
+          <div class="table-responsive table table-hover  mb-0">
             <p-table #dt class="data-config-header" [value]="candidato" dataKey="id" [rowHover]="true" [rows]="100"
               [showCurrentPageReport]="true" [paginator]="true"
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
@@ -68,7 +68,7 @@
                   </th>
                 </tr>
               </ng-template>
-            
+
               <ng-template pTemplate="body" let-candidato>
                 <tr class="p-selectable-row">
                   <td>
@@ -89,13 +89,13 @@
                         class="mdi mdi-trash-can-outline"></i></a>&nbsp;
                     <a *ngIf="update == 1" (click)="editLanguageModal(contentUpdate, lenguage.language_id)"
                       class="p-button p-button-rounded p-button-success"><i class="mdi mdi-pencil"></i></a>&nbsp;
-                      <a (click)="viewLanguageModal(contentView, lenguage.language_id)" 
+                      <a (click)="viewLanguageModal(contentView, lenguage.language_id)"
                       class="p-button p-button-rounded p-button-view"><i class="mdi mdi-eye"></i></a>
                   </td> -->
                 </tr>
                 <ng-template #contentView let-d="dismiss" class="animate__animated animate__zoomInDown">
                   <div class="modal-header modaltitle">
-                    <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-earth"></i> Idioma</h4>
+                    <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-earth"></i> Candidato</h4>
                   </div>
                   <div class="modal-body">
                     <div class="card">
@@ -125,14 +125,14 @@
                 <h4 class="modal-title" id="modal-basic-title">Confirmacion</h4>
               </div>
               <div class="modal-body">
-                <p>Seguro que quieres eliminar este Candidato</p>
+                <p>Seguro que quieres eliminar este candidato</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancelar</button>
                 <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Eliminar</button>
               </div>
             </ng-template>
-  
+
             <ng-template #contentUpdate let-c="close" let-d="dismiss">
               <div class="modal-header">
                 <h4 class="modal-title" id="modal-basic-title">Informacion de Candidato</h4>
@@ -169,7 +169,7 @@
                 </div>
               </div>
             </ng-template>
-  
+
           </div>
         </div>
       </div>
