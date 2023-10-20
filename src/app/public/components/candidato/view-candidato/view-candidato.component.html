@@ -135,23 +135,32 @@
   
             <ng-template #contentUpdate let-c="close" let-d="dismiss">
               <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-title">Informacion del candidato</h4>
+                <h4 class="modal-title" id="modal-basic-title">Informacion de Candidato</h4>
               </div>
               <div class="modal-body">
                 <div class="row">
                   <div class="col-md-12 stretch-card">
                     <div class="card">
                       <div class="card-body">
-        
-                       <form [formGroup]="form">
+                        <form [formGroup]="form">
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="mb-3">
-                                <label class="form-label">Idioma</label>
-                               </div>
+                                <label class="form-label">Nombre Candidato</label>
+                                <input type="text"
+                                  [ngClass]="{ 'is-invalid': submitted && position['candidato_nombre'].errors }"
+                                  formControlName="candidato_nombre" name="candidato_nombre" id="candidato_nombre"
+                                  onkeydown="/[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control"
+                                  placeholder="Enter name">
+                                <div *ngIf="submitted && position['candidato_nombre']?.errors" class="invalid-feedback">
+                                  <mat-error *ngIf="position['candidato_nombre']?.hasError('required')">Name is
+                                    required</mat-error>
+                                </div>
                               </div>
                             </div>
-                                
+                          </div>
+                          <button [swal]="{ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true, title: 'successfully', icon: 'success'}" [disabled]="!form.valid" (click)="c('yes')" type="submit" class="btn btn-primary submit">{{this.title}} <i
+                              class="mdi mdi-file-document-edit"></i></button>&nbsp; 
                             <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
                         </form>
                       </div>

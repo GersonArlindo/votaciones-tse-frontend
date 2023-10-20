@@ -136,7 +136,7 @@ export class ViewCandidatoComponent implements OnInit {
           this.spinner.show();
 
           setTimeout(() => {
-            this.candidatoSrv.createCandidato(this.token, formValue)
+            this.candidatoSrv.createCandidato( formValue, this.token)
               .subscribe((res: any) => {
                 if (res) {
                   this.spinner.hide();
@@ -160,6 +160,29 @@ export class ViewCandidatoComponent implements OnInit {
   }
 
 
+  get position() { return this.form.controls }
+
+  onSubmit(): void {
+    this.submitted = true;
+    if (this.submitted && this.position['language_name']?.errors) {
+    }
+    if (this.submitted && this.position['estado']?.errors) {
+    }
+    if (this.submitted && this.position['id_partido_politico']?.errors) {
+    }
+    if (this.submitted && this.position['id_persona_natural']?.errors) {
+    }
+  }
+
+  public isValid() {
+    return !this.form.valid
+  }
+
+  isValidField(field: string) {
+    return (
+      (this.form.get(field) || this.form.get(field)?.dirty) && !this.form.get(field)?.valid
+    );
+  }
 
 
   private getDismissReason(reason: any): string {
