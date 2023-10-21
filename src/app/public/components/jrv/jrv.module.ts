@@ -19,6 +19,9 @@ import { MatTableModule } from '@angular/material/table';
 import { TableModule } from 'primeng/table';
 import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { ManagementJrvComponent } from './management-jrv/management-jrv.component';
+// Ng-select
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -45,6 +48,10 @@ const routes: Routes = [
       {
         path: 'view',
         component: ViewJrvComponent,
+      },
+      {
+        path: 'management-jrv/:id',
+        component: ManagementJrvComponent,
       }
     ]
   },
@@ -53,7 +60,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     JrvComponent,
-    ViewJrvComponent
+    ViewJrvComponent,
+    ManagementJrvComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
@@ -68,6 +76,7 @@ const routes: Routes = [
     FeatherIconModule,
     AngularCropperjsModule,
     CarouselModule,
+    NgSelectModule,
     SortablejsModule.forRoot({
       animation: 150,
       ghostClass: 'bg-light',

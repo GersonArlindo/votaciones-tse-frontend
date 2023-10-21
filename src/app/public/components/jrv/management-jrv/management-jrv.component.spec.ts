@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewUsersComponent } from './view-users.component';
+import { ManagementJrvComponent } from './management-jrv.component';
 
-describe('ViewUsersComponent', () => {
-  let component: ViewUsersComponent;
-  let fixture: ComponentFixture<ViewUsersComponent>;
+describe('ManagementJrvComponent', () => {
+  let component: ManagementJrvComponent;
+  let fixture: ComponentFixture<ManagementJrvComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewUsersComponent ]
+      declarations: [ ManagementJrvComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ViewUsersComponent);
+    fixture = TestBed.createComponent(ManagementJrvComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

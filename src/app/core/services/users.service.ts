@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { environment} from '@encoding/environment';
@@ -15,10 +15,13 @@ export class UsersService {
 
   constructor(private http: HttpClient, private router: Router, private HandlerErrorSrv: HandlerErrorService) { }
 
-  getUsers(): Observable<users[]> {
-    return this.http.get<getUserResponse>(`${environment.API_URL_AUTH}user/show`)
+  getUsers(token: any): Observable<any[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}usuarios`, {headers})
     .pipe(
-      map(response => response.users)
+      map(response => response)
     )
   }
 

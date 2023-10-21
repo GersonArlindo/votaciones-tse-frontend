@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartidosPoliticosService } from '@app/core/services/partido-politico.service';
-import { UsersService } from '@app/core/services/users.service';
 import { environment } from '@encoding/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { switchMap } from 'rxjs';
@@ -35,8 +34,7 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private PartidosPoliticosSrv: PartidosPoliticosService,
-    private UserSrv: UsersService,
+    private PartidosPoliticosSrv: PartidosPoliticosService
   ) { }
 
   ngOnInit(): void {

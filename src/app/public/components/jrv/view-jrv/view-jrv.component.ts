@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CentroVotacionService } from '@app/core/services/centro-votacion.service';
 import { JrvService } from '@app/core/services/jrv.service';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal  } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Table } from 'primeng/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-jrv',
@@ -22,6 +24,8 @@ export class ViewJrvComponent implements OnInit {
   submitting = false;
   submitted = false;
 
+  dataLoadedJrv: boolean = false;
+
   public token: any
   id_centro_votacion: any;
 
@@ -29,6 +33,9 @@ export class ViewJrvComponent implements OnInit {
   
   public jrvs: any[] = [];
   public centro_votacion: any[] = []
+  public originalCentroVotaciones: any[] = []
+  public cv_asignado: any[] = []
+  
   
 
   constructor(
@@ -36,25 +43,18 @@ export class ViewJrvComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private formBuilder: FormBuilder,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private CentroVotacionSrv: CentroVotacionService
   ) { }
 
 
 
   ngOnInit(): void {
     this.getJrvs();
-    this.centro_votacion=[
-      {
-        id:2,
-        name:'Centro 1'
-      },
-      {
-        id:3,
-        name:'Centro 2'
-      }
-    ]
+    this.getCentrosVotacion()
     this.form = this.formBuilder.group({
       codigo: ['', [Validators.required]],
+      
     });
   }
 
@@ -65,11 +65,28 @@ export class ViewJrvComponent implements OnInit {
         for (let jrv of data){
           this.jrvs.push(jrv)
         }
+        this.dataLoadedJrv = true;
       })
   }
 
+  public getCentrosVotacion(){
+    this.CentroVotacionSrv.getCentrosVotaciones(this.token)
+    .subscribe((cv: any) => {
+      for(let centro of cv){
+        this.centro_votacion.push(centro)
+        this.originalCentroVotaciones.push(centro)
+      }
+      console.log(this.centro_votacion)
+    })
+  }
+
+
+  
+
   editJrvModal(content: any, id: any) {
-      this.jrvSrv.getJrvById(id)
+    let codJRV = this.generarCodigoUnicoJRV()
+    this.form.get('codigo')!.setValue(codJRV)
+      this.jrvSrv.getJrvById(id, this.token)
         .subscribe((next: any) => {
           this.form = this.formBuilder.group({
             codigo: [next['codigo']],
@@ -81,7 +98,7 @@ export class ViewJrvComponent implements OnInit {
       } else if (id == 0) {
         this.title = "Crear Jrv"
       }
-      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: "xl" }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
   
         if (result === 'yes') {
@@ -89,7 +106,7 @@ export class ViewJrvComponent implements OnInit {
             this.title = "Editar Jrv"
   
             const formJrv: any = {
-              codigo: this.form.value.codigo,
+              codigo: codJRV,
               id_centro_votacion: Number(this.id_centro_votacion),
             }
             this.spinner.show();
@@ -117,12 +134,13 @@ export class ViewJrvComponent implements OnInit {
             //const formValue = this.form.value;
             const formJrv: any = {
               codigo: this.form.value.codigo,
-              id_centro_votacion: Number(this.id_centro_votacion),
+              id_centro_votacion: this.cv_asignado[0].id,
             }
             this.spinner.show();
-  
+            console.log(formJrv);
+            
             setTimeout(() => {
-              this.jrvSrv.createJrv(formJrv)
+              this.jrvSrv.createJrv(formJrv, this.token)
                 .subscribe((res: any) => {
                   if (res) {
                     this.spinner.hide();
@@ -146,13 +164,72 @@ export class ViewJrvComponent implements OnInit {
 
   }
 
+  public searchReactiveCV(event: any, valor: any){
+    console.log('event', event.target.value);
+        // Valor ingresado en el filtro
+        const filterValue = event.target.value.toLowerCase();
+ 
+        if (filterValue === '') {
+          // Si el filtro está vacío, mostrar toda la data original
+          this.centro_votacion = this.originalCentroVotaciones;
+        } else {
+          // Aplicar el filtro en ambos campos
+          this.centro_votacion = this.originalCentroVotaciones.filter((cv: any) => {
+            const fullName = `${cv.nombre}`.toLowerCase();
+            const state = `${cv.estado}`.toLowerCase();
+            const municipio = `${cv.municipios.nombre}`.toLowerCase();
+            const depto = `${cv.municipios.departamentos.nombre}`.toLowerCase();
+
+            return fullName.includes(filterValue) || state.includes(filterValue) || municipio.includes(filterValue) || depto.includes(filterValue);
+          });
+        }
+  }
+
+  public asignarCV(id: any, nombre: any, totalJrv: any){
+    if(totalJrv >= 5){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Has llegado al Limite de Jrv por Centro de Votacion!'
+      })
+      return
+    }
+
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Deseas agregar esta JRV a este Centro de Votacion!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const data = {
+          "id": id,
+          "nombre": nombre
+        }
+        this.cv_asignado = []
+        this.cv_asignado.push(data)
+        console.log(this.cv_asignado);
+        
+        Swal.fire(
+          'Agregada!',
+          'Su Jrv ha sido agregada con exito!',
+          'success'
+        )
+      }
+    })
+
+  }
+
   public getCentroVotacion($event: any){
     this.id_centro_votacion = $event
     console.log($event)
   }
 
   public Jrv(id: any) {
-    this.jrvSrv.getJrvById(id)
+    this.jrvSrv.getJrvById(id, this.token)
       .subscribe((res: any) => {
         if (res) {
           setTimeout(() => {
@@ -164,6 +241,8 @@ export class ViewJrvComponent implements OnInit {
         }
       })
   }
+
+
 
   viewJrvModal(content: any, viewProduct: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -222,6 +301,16 @@ export class ViewJrvComponent implements OnInit {
       this.submitted = true;
       if (this.submitted && this.position['codigo']?.errors) {
       }
+    }
+
+    public generarCodigoUnicoJRV(): string {
+      const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let codigo = '';
+      for (let i = 0; i < 6; i++) {
+        const caracterAleatorio = caracteres[Math.floor(Math.random() * caracteres.length)];
+        codigo += caracterAleatorio;
+      }
+      return 'JRV'+codigo;
     }
   
     public isValid() {

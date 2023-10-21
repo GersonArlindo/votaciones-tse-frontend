@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef, Inject, Renderer2 } from '@an
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/core/services/auth.service';
-import { UsersService } from '@app/core/services/users.service';
 import { users } from '@app/core/models/auth.interface';
 import { environment } from '@encoding/environment';
 
@@ -24,25 +23,13 @@ export class NavbarComponent implements OnInit {
     private renderer: Renderer2,
     private router: Router,
     private authSvc: AuthService, 
-    private UsersSrv: UsersService,
 
   ) { }
 
   ngOnInit(): void {
-    this.getUsersById();
   }
 
-  public getUsersById(){
-    this.UsersSrv.getUserById(this.uid)
-    .subscribe((next: any) => {
-      console.log(next)
-      this.imageData = `${environment.API_URL_AUTH}images/${next['user_images']}`;
-      this.name = next['first_name'];
-      this.lastName = next['last_name'];
-      this.email = next['email'];
-      this.users = next;
-    })
-  }
+
 
   /**
    * Sidebar toggle on hamburger button click
