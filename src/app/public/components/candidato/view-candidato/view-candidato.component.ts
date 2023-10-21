@@ -15,9 +15,9 @@ import { Table } from 'primeng/table';
 export class ViewCandidatoComponent implements OnInit {
   public candidato: any[] = [];
   @ViewChild('dt') table!: Table;
-  closeResult:any = "";
-  url:any;
-  data:any;
+  closeResult: any = "";
+  url: any;
+  data: any;
   update: any;
   deleted: any;
   create: any;
@@ -27,6 +27,7 @@ export class ViewCandidatoComponent implements OnInit {
   submitting = false;
   submitted = false;
   title!: string;
+  public token:any;
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -41,9 +42,9 @@ export class ViewCandidatoComponent implements OnInit {
     this.getCandidatos();
   }
 
-  public getCandidatos(){
-    this.candidatoSrv.getCandidato()
-    .subscribe((data: any) => {
+  public getCandidatos() {
+
+    this.candidatoSrv.getCandidato(this.token).subscribe((data: any) => {
       this.candidato = (data);
     })
   }
@@ -67,7 +68,7 @@ export class ViewCandidatoComponent implements OnInit {
     this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  public convertDateTime(date: any){
+  public convertDateTime(date: any) {
     const date_locale = new Date(`${date}`).toLocaleDateString('es', {
       day: 'numeric',
       month: 'short',
@@ -85,15 +86,15 @@ export class ViewCandidatoComponent implements OnInit {
 
   public to12HourTime(time: any) {
     var b = time.split(/\D/);
-    return (b[0]%12 || 12) + ':' + b[1] +
-           (b[0]<=11? ' am' : ' pm');
+    return (b[0] % 12 || 12) + ':' + b[1] +
+      (b[0] <= 11 ? ' am' : ' pm');
   }
 
   editCandidatoModal(content: any, id: any) {
-    this.candidatoSrv.getCandidatoById(id)
+    this.candidatoSrv.getCandidatoById(this.token,id)
       .subscribe((next: any) => {
         this.form = this.formBuilder.group({
-          language_name: [next['language_name'], [Validators.required]],
+          candidato_nombre: [next['candidato_nombre']],
         });
       })
     if (id >= 1) {
@@ -123,7 +124,7 @@ export class ViewCandidatoComponent implements OnInit {
                       this.router.onSameUrlNavigation = 'reload';
                       this.router.navigate([currentUrl]);
                     })
-                  } else {
+                } else {
                 }
               })
           }, 1200);
@@ -134,7 +135,7 @@ export class ViewCandidatoComponent implements OnInit {
           this.spinner.show();
 
           setTimeout(() => {
-            this.candidatoSrv.createCandidato(formValue)
+            this.candidatoSrv.createCandidato(this.token, formValue)
               .subscribe((res: any) => {
                 if (res) {
                   this.spinner.hide();
@@ -159,7 +160,7 @@ export class ViewCandidatoComponent implements OnInit {
 
 
 
-  
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -171,6 +172,7 @@ export class ViewCandidatoComponent implements OnInit {
   }
   getUserInfo(inf: any) {
     const token = this.getTokens();
+    this.token = token
     let payload;
     if (token) {
       payload = token.split(".")[1];
@@ -185,8 +187,6 @@ export class ViewCandidatoComponent implements OnInit {
     return localStorage.getItem("login-token");
   }
 
-  rol_id: any = this.getUserInfo('rol_id');
-
-
+  rol_id: any = this.getUserInfo('rol'); 
 
 }

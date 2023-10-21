@@ -4,7 +4,7 @@
       <li class="breadcrumb-item active" aria-current="page">Candidatos</li>
     </ol>
   </nav>
-  
+
   <div class="row">
     <div class="col-md-12 stretch-card">
       <div class="card">
@@ -15,15 +15,15 @@
               class="dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0"
               type="button">
               <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i> Agregar Candidato</span>
-            </button> 
+            </button>
           </div>
         </div>
         <div class="card-body">
-          <div class="table-responsive table table-hover mb-0">
+          <div class="table-responsive table table-hover  mb-0">
             <p-table #dt class="data-config-header" [value]="candidato" dataKey="id" [rowHover]="true" [rows]="100"
               [showCurrentPageReport]="true" [paginator]="true"
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-              [globalFilterFields]="['id_candidato','date_created','date_modify']">
+              [globalFilterFields]="['id_candidato','informacion_personal.nombres','informacion_personal.apellidos']">
               <ng-template pTemplate="caption">
                 <div class="table-header">
                   Buscar Candidato
@@ -68,20 +68,20 @@
                   </th>
                 </tr>
               </ng-template>
-            
+
               <ng-template pTemplate="body" let-candidato>
                 <tr class="p-selectable-row">
                   <td>
                     <span class="rounded-pill">&nbsp; {{candidato.id_candidato}} &nbsp;</span>
                   </td>
                   <td>
-                    <span class="rounded-pill">&nbsp;{{candidato.informacion_personal.nombres}}&nbsp;</span>
+                    <span >&nbsp;{{candidato.informacion_personal.nombres}}&nbsp;</span>
                   </td>
                   <td>
-                    <span class="rounded-pill">&nbsp;{{candidato.informacion_personal.apellidos}}&nbsp;</span>
+                    <span >&nbsp;{{candidato.informacion_personal.apellidos}}&nbsp;</span>
                   </td>
                   <td>
-                    <span class="rounded-pill">&nbsp;{{candidato.partido_politico.nombre}}&nbsp;</span>
+                    <span >&nbsp;{{candidato.partido_politico.nombre}}&nbsp;</span>
                   </td>
                   <!-- <td style="text-align: left; margin-left: -5px;" *ngIf="deleted == 1 || update == 1">
                     <a *ngIf="deleted == 1" (click)="deleteLanguageModal(contentDelete, lenguage.language_id)"
@@ -89,13 +89,13 @@
                         class="mdi mdi-trash-can-outline"></i></a>&nbsp;
                     <a *ngIf="update == 1" (click)="editLanguageModal(contentUpdate, lenguage.language_id)"
                       class="p-button p-button-rounded p-button-success"><i class="mdi mdi-pencil"></i></a>&nbsp;
-                      <a (click)="viewLanguageModal(contentView, lenguage.language_id)" 
+                      <a (click)="viewLanguageModal(contentView, lenguage.language_id)"
                       class="p-button p-button-rounded p-button-view"><i class="mdi mdi-eye"></i></a>
                   </td> -->
                 </tr>
                 <ng-template #contentView let-d="dismiss" class="animate__animated animate__zoomInDown">
                   <div class="modal-header modaltitle">
-                    <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-earth"></i> Idioma</h4>
+                    <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-earth"></i> Candidato</h4>
                   </div>
                   <div class="modal-body">
                     <div class="card">
@@ -116,7 +116,7 @@
               </ng-template>
               <ng-template pTemplate="emptymessage">
                 <tr>
-                  <td colspan="8">Idioma no encontrado.</td>
+                  <td colspan="8">candidato no encontrado.</td>
                 </tr>
               </ng-template>
             </p-table>
@@ -125,53 +125,42 @@
                 <h4 class="modal-title" id="modal-basic-title">Confirmacion</h4>
               </div>
               <div class="modal-body">
-                <p>Seguro que quieres eliminar este idioma</p>
+                <p>Seguro que quieres eliminar este candidato</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancelar</button>
                 <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Eliminar</button>
               </div>
             </ng-template>
-  
+
             <ng-template #contentUpdate let-c="close" let-d="dismiss">
               <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-title">Informacion de Idioma</h4>
+                <h4 class="modal-title" id="modal-basic-title">Informacion del candidato</h4>
               </div>
               <div class="modal-body">
                 <div class="row">
                   <div class="col-md-12 stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <!--  <div class="card-header">
-                        <h6 class="card-title">Information of the language</h6></div> -->
-                       <!--  <form [formGroup]="form">
+
+                       <form [formGroup]="form">
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="mb-3">
                                 <label class="form-label">Idioma</label>
-                                <input type="text"
-                                  [ngClass]="{ 'is-invalid': submitted && position['language_name'].errors }"
-                                  formControlName="language_name" name="language_name" id="language_name"
-                                  onkeydown="/[a-ñA-ZÑ, ]/i.test(event.key)" class="form-control"
-                                  placeholder="Enter name">
-                                <div *ngIf="submitted && position['language_name']?.errors" class="invalid-feedback">
-                                  <mat-error *ngIf="position['language_name']?.hasError('required')">Name is
-                                    required</mat-error>
-                                </div>
+                               </div>
                               </div>
                             </div>
-                          </div>
-                          <button [swal]="{ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true, title: 'successfully', icon: 'success'}" [disabled]="!form.valid" (click)="c('yes')" type="submit" class="btn btn-primary submit">{{this.title}} <i
-                              class="mdi mdi-file-document-edit"></i></button>&nbsp; 
+
                             <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
-                        </form> -->
+                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </ng-template>
-  
+
           </div>
         </div>
       </div>

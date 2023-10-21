@@ -18,6 +18,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
   @ViewChild('dt') table!: Table;
   closeResult:any = "";
 
+  public token: any
   update: any;
   deleted: any;
   create: any;
@@ -53,7 +54,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
   }
 
   public getPartidosPoliticos(){
-    this.PartidosPoliticosSrv.getPartidosPoliticos()
+    this.PartidosPoliticosSrv.getPartidosPoliticos(this.token)
     .subscribe((data: any) => {
       this.partidos_politicos = data;
       this.url = `${environment.API_URL}images/${data[0].imagen}`;
@@ -149,6 +150,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
 
   getUserInfo(inf: any) {
     const token = this.getTokens();
+    this.token = token
     let payload;
     if (token) {
       payload = token.split(".")[1];
@@ -163,6 +165,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     return localStorage.getItem("login-token");
   }
 
-  rol_id: any = this.getUserInfo('rol_id');
+  rol_id: any = this.getUserInfo('rol');
+
 
 }
