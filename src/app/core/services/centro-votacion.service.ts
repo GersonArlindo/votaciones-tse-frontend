@@ -29,15 +29,21 @@ export class CentroVotacionService {
     )
   }
 
-  getCentroVotacionById(id:any): Observable<any[]>{
-    return this.http.get<any>(`${environment.API_URL}centro-votacion/${id}`)
+  getCentroVotacionById(id:any, token: any): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}centro-votacion/${id}`, {headers})
     .pipe(
       map((response:any) => response)
     )
   }
 
-  createCentroVotacion(data:any) : Observable<any | void>{
-    return this.http.post<any>(`${environment.API_URL}centro-votacion`, data)
+  createCentroVotacion(data:any, token: any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post<any>(`${environment.API_URL}centro-votacion`, data, {headers})
     .pipe(
       map((res:any)=> {
         return res;

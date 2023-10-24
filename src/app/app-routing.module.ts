@@ -49,6 +49,10 @@ const routes: Routes = [
         loadChildren: () => import('./public/components/jrv/jrv.module').then(m => m.JrvModule)
       },
       {
+        path: 'centro-votacion',
+        loadChildren: () => import('./public/components/centro-votacion/centro-votacion.module').then(m => m.CentroVotacionModule)
+      },
+      {
         path: 'generar-qr',
         loadChildren: () => import('./public/components/generar-qr/generar-qr.module').then(m => m.GenerarQrModule)
       },

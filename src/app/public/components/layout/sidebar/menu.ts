@@ -30,6 +30,11 @@ export const MENU: MenuItem[] = [
     link: '/candidatos/view',
   },
   {
+    label: 'Centro Votacion',
+    icon: 'archive',
+    link: '/centro-votacion/view',
+  },
+  {
     label: 'JRV',
     icon: 'package',
     link: '/jrv/view',
