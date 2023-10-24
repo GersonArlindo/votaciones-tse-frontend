@@ -48,6 +48,10 @@ const routes: Routes = [
         path: 'jrv',
         loadChildren: () => import('./public/components/jrv/jrv.module').then(m => m.JrvModule)
       },
+      {
+        path: 'generar-qr',
+        loadChildren: () => import('./public/components/generar-qr/generar-qr.module').then(m => m.GenerarQrModule)
+      },
       
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
