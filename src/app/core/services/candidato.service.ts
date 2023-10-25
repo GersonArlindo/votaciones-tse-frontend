@@ -36,7 +36,7 @@ export class CandidatoService {
     });
     return this.http.get<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`, {headers})
     .pipe(
-      map((response:any) => response.lenguage)
+      map((response:any) => response)
     )
   }
 

@@ -135,24 +135,79 @@
 
             <ng-template #contentUpdate let-c="close" let-d="dismiss">
               <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-title">Informacion del candidato</h4>
+                <h4 class="modal-title" id="modal-basic-title">Informacion del Candidato</h4>
               </div>
               <div class="modal-body">
                 <div class="row">
                   <div class="col-md-12 stretch-card">
                     <div class="card">
                       <div class="card-body">
-
-                       <form [formGroup]="form">
+                        <!--  <div class="card-header">
+                        <h6 class="card-title">Information of the language</h6></div> -->
+                        <form [formGroup]="formCandidato" (ngSubmit)="guardarDatosCandidatos()">
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="mb-3">
-                                <label class="form-label">Idioma</label>
-                               </div>
+                                <label class="form-label">Nombre del Candidato</label>
+                                <input type="text" formControlName="nombre" name="nombre" id="nombre"
+                                  class="form-control"
+                                  placeholder="Ingrese el nombre del candidato">
                               </div>
                             </div>
-
-                            <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
+                          </div>
+                          <div class="col-md-6 mt-4 fv-plugins-icon-container">
+                            <label for="formValidationFile" class="form-label">imagen del candidato</label>
+                            <div class="installer text-center" id="col-img">
+                              <div class="profile">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <img [src]="url">
+                                  </div>
+                                  <div class="col-md-9">
+                                    <div class="form-group">
+                                      <div class="custom-file" class="btn btn-default button-rounded-36 float-bottom-right img-data">
+                                        <input (change)="onFileSelect($event)" class="form-control custom-file-input cursor-pointer" id="attachment" name="attachment" type="file" id="formFile">
+                                      </div>
+                                  </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <label class="form-label">Estado</label>
+                              <select
+                                id="estado"
+                                name="estado"
+                                (ngModelChange)="getStatus($event)"
+                                [ngModelOptions]="{ standalone: true }"
+                                [(ngModel)]="selectedStatus"
+                                [ngClass]="{
+                                  'is-invalid': submitted && position['estado'].errors
+                                }"
+                                class="form-control"
+                              >
+                                <option
+                                  *ngFor="let status of this.status"
+                                  [value]="status.id"
+                                >
+                                  {{ status.name }}
+                                </option>
+                              </select>
+                              <div
+                                *ngIf="submitted && position['estado']?.errors"
+                                class="invalid-feedback"
+                              >
+                                <mat-error *ngIf="position['estado']?.hasError('required')"
+                                  >Estado es requerido</mat-error
+                                >
+                              </div>
+                            </div>
+                          </div>
+                            <button  [disabled]="!formCandidato.valid" (click)="onSubmit()" type="submit" class="btn btn-primary submit">
+                              Guardar <i class="mdi mdi-file-document-edit"></i> </button>
+                            <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancelar</button>
                         </form>
                       </div>
                     </div>
