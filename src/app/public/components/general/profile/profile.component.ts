@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { users } from '@app/core/models/auth.interface';
-import { UsersService } from '@app/core/services/users.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,22 +15,10 @@ export class ProfileComponent implements OnInit {
   public email: any;
 
   constructor(
-    private UsersSrv: UsersService,
+    
   ) { }
   
   ngOnInit(): void {
-    this.getUsersById();
-  }
-
-  public getUsersById(){
-    this.UsersSrv.getUserById(this.uid)
-    .subscribe((next: any) => {
-      this.imageData = next['user_images'];
-      this.name = next['first_name'];
-      this.lastName = next['last_name'];
-      this.email = next['email'];
-      this.users = next;
-    })
   }
 
   getUserInfo() {

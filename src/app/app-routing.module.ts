@@ -30,33 +30,6 @@ const routes: Routes = [
         loadChildren: () => import('./public/components/general/general.module').then(m => m.GeneralModule)
       },
       {
-        path: 'language',
-        loadChildren: () => import('./public/components/language/language.module').then(m => m.LanguageModule)
-      },
-      {
-        path: 'modulos',
-        loadChildren: () => import('./public/components/modulos/modulos.module').then(m => m.ModulosModule)
-      },
-      {
-        path: 'rol-permiso',
-        loadChildren: () => import('./public/components/rol-permiso/rol-permiso.module').then(m => m.RolPermisoModule)
-      },
-      {
-        path: 'modulos',
-        loadChildren: () => import('./public/components/modulos/modulos.module').then(m => m.ModulosModule)
-
-      },
-      {
-        path: 'permisos',
-        loadChildren: () => import('./public/components/permisos/permisos.module').then(m => m.PermisosModule)
-
-      },
-      {
-        path: 'roles',
-        loadChildren: () => import('./public/components/roles/roles.module').then(m => m.RolesModule)
-
-      },
-      {
 
         path: 'partidos-politicos',
         loadChildren: () => import('./public/components/partidos-politicos/partidos-politicos.module').then(m => m.PartidosPoliticosModule)
@@ -76,9 +49,14 @@ const routes: Routes = [
         loadChildren: () => import('./public/components/jrv/jrv.module').then(m => m.JrvModule)
       },
       {
-        path: 'users',
-        loadChildren: () => import('./public/components/users/users.module').then(m => m.UsersModule)
+        path: 'centro-votacion',
+        loadChildren: () => import('./public/components/centro-votacion/centro-votacion.module').then(m => m.CentroVotacionModule)
       },
+      {
+        path: 'generar-qr',
+        loadChildren: () => import('./public/components/generar-qr/generar-qr.module').then(m => m.GenerarQrModule)
+      },
+      
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },

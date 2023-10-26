@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { partidosPoliticosGlobalMsg } from '@app/core/models/partidos_politicos.interface';
 import { PartidosPoliticosService } from '@app/core/services/partido-politico.service';
-import { PermissionService } from '@app/core/services/permission.service';
 import { environment } from '@encoding/environment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrimeNGConfig } from 'primeng/api';
@@ -30,7 +29,6 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     private PartidosPoliticosSrv: PartidosPoliticosService,
     private primengConfig: PrimeNGConfig,
     private router: Router,
-    private PermissionSrv: PermissionService
   ) { }
 
   ngOnInit(): void {

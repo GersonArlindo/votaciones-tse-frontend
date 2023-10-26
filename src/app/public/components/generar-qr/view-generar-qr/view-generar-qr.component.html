@@ -1,0 +1,32 @@
+<div class="container" id="container" *ngIf="!CodeGenerado">
+    <div class="form-container sign-in">
+        <form [formGroup]="formVerificarDui" (ngSubmit)="verificarDui()">
+            <h1>Consulta Aqui tu DUI</h1>
+            <span>Por favor, ingrese su número de DUI para verificar su elegibilidad para votar en las próximas elecciones. Su número de DUI es un requisito importante para garantizar que cumpla con los requisitos de votación en su jurisdicción. Asegúrese de ingresar el número de DUI correcto para acceder a la información de votación correspondiente. Si tiene alguna pregunta o necesita asistencia, no dude en ponerse en contacto con nuestras autoridades electorales locales.</span>
+            <input formControlName="dui" type="text" #duiInput class="input" placeholder="00000000-0" (input)="onInputChange($event)">
+            <button [disabled]="!formVerificarDui.valid" type="submit">Verificar</button>
+        </form>
+    </div>
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-right" *ngIf="CodeGenerado">
+                <h1>Gerson Arlindo Gonzalez</h1>
+                <p>Apto para votar</p>
+                <!-- <button class="hidden" id="register">Sign Up</button> -->
+            </div>
+            <div class="toggle-panel toggle-right" *ngIf="!CodeGenerado">
+                <img src="./../../../../../assets/images/votaciones_verificacion.PNG" width="85%" height="75%">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="CodeGenerado" class="centered-div">
+    <h1>Código QR</h1>
+    <qrcode elementType="canvas" (qrCodeURL)="onCodeChange($event)" [width]="400" qrdata="Arlindo 123456789"
+      [errorCorrectionLevel]="'H'" [imageSrc]="'https://upload.wikimedia.org/wikipedia/commons/9/94/Tse_logo.png'"
+      [imageHeight]="90" [imageWidth]="120">
+    </qrcode>
+    <a [href]="url" download="qr-votaciones-2024">Download QR code</a>
+  </div>
+<!-- <button (click)="printQRCode()">Print QR code</button> -->

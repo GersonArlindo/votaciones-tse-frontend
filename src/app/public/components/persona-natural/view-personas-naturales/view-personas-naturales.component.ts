@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { personaNatural } from '@app/core/models/personas_naturales.interface';
-import { PermissionService } from '@app/core/services/permission.service';
 import { PersonaNaturalService } from '@app/core/services/persona-natural.service';
 import { environment } from '@encoding/environment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -33,7 +32,6 @@ export class ViewPersonasNaturalesComponent implements OnInit {
     private PersonaNaturalSrv: PersonaNaturalService,
     private primengConfig: PrimeNGConfig,
     private router: Router,
-    private PermissionSrv: PermissionService,
     private spinner: NgxSpinnerService
   ) { }
 
@@ -49,18 +47,6 @@ export class ViewPersonasNaturalesComponent implements OnInit {
     })
   }
 
-  public getPermissionRole(id: any){
-    this.PermissionSrv.getPermissionsByRole(id)
-      .subscribe((permission: any) => {
-        for(let permiss of permission){
-          if(permiss.mod_id == 22){
-            this.update = permiss['update'];
-            this.deleted = permiss['deleted'];
-            this.create = permiss['create'];
-          }
-        }
-      })
-  }
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);

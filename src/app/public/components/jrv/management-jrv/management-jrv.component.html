@@ -1,0 +1,174 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="button-container">
+        <button class="button" (click)="cambiarTab('cero')" data-toggle="tooltip" data-placement="top"
+          title="Miembros de la JRV">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-users">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        </button>
+        <button class="button" (click)="cambiarTab('uno')" data-toggle="tooltip" data-placement="top"
+          title="Agregar Miembros de la JRV">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-user-plus">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="8.5" cy="7" r="4" />
+            <line x1="20" y1="8" x2="20" y2="14" />
+            <line x1="23" y1="11" x2="17" y2="11" />
+          </svg>
+        </button>
+        <button class="button" (click)="cambiarTab('dos')" data-toggle="tooltip" data-placement="top"
+          title="Mas informacion">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-info">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+        </button>
+      </div>
+
+      <br>
+      <br>
+      <div class="my-card" *ngFor="let jrv of this.jrvs">
+        <div class="my-card-content">
+          <div class="my-title">{{jrv.estado}}</div>
+          <div class="my-price">{{jrv.codigo}}</div>
+          <hr style="color: white;">
+          <div class="my-description">CENTRO DE VOTACION</div>
+          <div class="my-description">{{jrv.centro_votacion.nombre}} <span
+              style="color: red;">{{jrv.centro_votacion.estado}}</span></div>
+          <div class="my-description">{{jrv.centro_votacion.municipios.nombre}} -
+            {{jrv.centro_votacion.municipios.departamentos.nombre}}</div>
+          <div class="my-description">Direccion: {{jrv.centro_votacion.direccion}}</div>
+        </div>
+        <!-- <button class="my-button">
+              Buy now
+            </button> -->
+      </div>
+
+    </div>
+    <div class="col-md-9">
+      <div *ngIf="this.valorTemplate=='cero'">
+        <h1>Miembros de la JRV</h1>
+        <br>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let miembro of this.miembrosJRV; let i = index">
+              <th scope="row">{{i + 1}}</th>
+              <td>{{miembro.usuario.nombres}}</td>
+              <td>{{miembro.usuario.apellidos}}</td>
+              <td>{{miembro.estado}}</td>
+              <td><a (click)="eliminarUsuarioDeJrv(miembro.id_jrv_miembro)"
+                class="p-button p-button-rounded p-button-danger" style="margin-left: -8px;"><span class="mdi mdi-delete-outline"></span></a>&nbsp;</td>
+            </tr>
+            <tr>
+              <td *ngIf="this.miembrosJRV.length <= 0" colspan="4">
+                Aun NO se han agregado miembros a esta JRV.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="this.valorTemplate=='uno'">
+        <h1>Agregar Miembros</h1>
+        <br>
+        <p-table *ngIf="dataLoadedUsers" [value]="users" dataKey="id_usuario" [rows]="25" [showCurrentPageReport]="true" [paginator]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+          [globalFilterFields]="['id_usuario']">
+          <ng-template pTemplate="caption">
+            <div class="table-header">
+              Buscar Usuario
+              <span class="p-input-icon-left">
+                <div class="btn-text-right">
+                  <input pInputText type="text" class="form-control" id="_bck-color"
+                    (input)="buscarUsuario($event, 'contains')" />
+                </div>
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="id_usuario" style="min-width: 5rem">
+                <div class="flex justify-content-between align-items-center">
+                  Id
+                  <p-sortIcon field="id_usuario"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="nombre" style="min-width: 17rem">
+                <div class="flex justify-content-between align-items-center">
+                  Nombre
+                  <p-sortIcon field="nombre"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="dui" style="min-width: 10rem">
+                <div class="flex justify-content-between align-items-center">
+                 Dui
+                  <p-sortIcon field="dui"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="estado" style="min-width: 10rem">
+                <div class="flex justify-content-between align-items-center">
+                  Estado
+                  <p-sortIcon field="estado"></p-sortIcon>
+                </div>
+              </th>
+              <th style="min-width: 09rem">
+                <div class="flex justify-content-between align-items-center">
+                  Acciones
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-users>
+            <tr class="p-selectable-row">
+              <td>
+                <span class="rounded-pill">&nbsp; {{users.id_usuario}} &nbsp;</span>
+              </td>
+              <td>
+                <i class="mdi mdi-user"></i>
+                {{users.nombres}} &nbsp; {{users.apellidos}}
+              </td>
+              <td>
+                {{users.dui}}
+              </td>
+              <td>
+                {{this.getEstado(users.estado)}}
+              </td>
+              <td style="text-align: left; margin-left: -5px;">
+                <a (click)="agregarUseraJrv(users.id_usuario)"
+                  class="p-button p-button-rounded p-button-warning" style="margin-left: -8px;"><span class="mdi mdi-account-plus-outline"></span></a>&nbsp;
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">Usuarios no encontrados.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div *ngIf="this.valorTemplate=='dos'">
+        <h1>Template 3</h1>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,15 +29,60 @@ export class JrvService {
     )
   }
 
-  getJrvById(id:any): Observable<any[]>{
-    return this.http.get<any>(`${environment.API_URL}junta-receptora-votos/${id}`)
+  getMiembrosByIdJrv(id: any, token: any): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}junta-receptora-votos/${id}/miembros`, { headers })
+    .pipe(
+      map(
+        response => response
+      ),
+      catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
+    )
+  }
+
+  getAllMiembrosByIdJrvs(token: any): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}junta-receptora-votos/miembros/todos`, { headers })
+    .pipe(
+      map(
+        response => response
+      ),
+      catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
+    )
+  }
+
+  getJrvById(id:any, token: any): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}junta-receptora-votos/${id}`, {headers})
     .pipe(
       map((response:any) => response)
     )
   }
 
-  createJrv(data:any) : Observable<any | void>{
-    return this.http.post<any>(`${environment.API_URL}junta-receptora-votos`, data)
+  createJrv(data:any, token: any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post<any>(`${environment.API_URL}junta-receptora-votos`, data, {headers})
+    .pipe(
+      map((res:any)=> {
+        return res;
+      }),
+      catchError((err) => this.HandlerErrorSrv.handlerError(err))
+    );
+  }
+
+  createMiembroOfJRV(data:any, token: any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post<any>(`${environment.API_URL}junta-receptora-votos/miembro`, data, {headers})
     .pipe(
       map((res:any)=> {
         return res;
@@ -58,6 +103,19 @@ export class JrvService {
 
   deleteJrv(id:any) : Observable<any>{
     return this.http.delete<any>(`${environment.API_URL}junta-receptora-votos/${id}`)
+    .pipe(
+      map((res:any) => {
+        return res;
+      }),
+      catchError((err) => this.HandlerErrorSrv.handlerError(err))
+    )
+  }
+
+  deleteMiembroOfJrv(id:any, token: any) : Observable<any>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${environment.API_URL}junta-receptora-votos/miembro/${id}`, {headers})
     .pipe(
       map((res:any) => {
         return res;
