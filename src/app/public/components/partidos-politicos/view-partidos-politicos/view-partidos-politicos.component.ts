@@ -70,20 +70,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
            (b[0]<=11? ' am' : ' pm');
   }
 
- /*  public partidosPoliticosLanguage(id: any){
-    this.PartidosPoliticosSrv.getPartidosPoliticosById(id)
-    .subscribe((res: any) =>{
-      if(res){
-        setTimeout(() =>{
-          let currentUrl = this.router.url;
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate([currentUrl]);
-        }, 100);
-      }
-    })
-  }
- */
+
   ViewPartidosPoliticosModal(content: any, viewProduct:any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
