@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@encoding/environment';
 import { catchError, map, Observable } from 'rxjs';
-import { partidosPoliticos, partidosPoliticosGlobalMsg, partidosPoliticosMsg  } from '../models/partidopolitico.interface';
 import { HandlerErrorService } from './handler-error.service';
 
 @Injectable({
@@ -35,7 +34,7 @@ export class PartidosPoliticosService {
 
     return this.http.get<any>(`${environment.API_URL}partido-politico/${id}`, { headers })
       .pipe(
-        map((response: any) => response.partidosPoliticos),
+        map((response: any) => response),
         catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
       );
   }

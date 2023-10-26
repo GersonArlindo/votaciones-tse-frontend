@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { partidosPoliticosGlobalMsg } from '@app/core/models/partidos_politicos.interface';
 import { PartidosPoliticosService } from '@app/core/services/partido-politico.service';
 import { environment } from '@encoding/environment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +13,7 @@ import { Table } from 'primeng/table';
 })
 export class ViewPartidosPoliticosComponent implements OnInit {
 
-  public partidos_politicos: partidosPoliticosGlobalMsg[] = [];
+  public partidos_politicos: any[] = [];
   @ViewChild('dt') table!: Table;
   closeResult:any = "";
 
@@ -33,21 +32,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPartidosPoliticos();
-    /* this.getPermissionRole(this.rol_id); */
   }
-
- /*  public getPermissionRole(id: any){
-    this.PermissionSrv.getPermissionsByRole(id)
-      .subscribe((permission: any) => {
-        for(let permiss of permission){
-          if(permiss.mod_id == 21){
-            this.update = permiss['update'];
-            this.deleted = permiss['deleted'];
-            this.create = permiss['create'];
-          }
-        }
-      })
-  } */
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -57,6 +42,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     this.PartidosPoliticosSrv.getPartidosPoliticos(this.token)
     .subscribe((data: any) => {
       this.partidos_politicos = data;
+      console.log(this.partidos_politicos);
       this.url = `${environment.API_URL}images/${data[0].imagen}`;
       console.log(this.url)
     })

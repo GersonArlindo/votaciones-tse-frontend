@@ -21,6 +21,7 @@ import { DropzoneConfigInterface, DropzoneModule, DROPZONE_CONFIG } from 'ngx-dr
 import { PartidosPoliticosComponent } from './partidos-politicos.component';
 import { ViewPartidosPoliticosComponent } from './view-partidos-politicos/view-partidos-politicos.component';
 import { AddEditPartidosPoliticosComponent } from './add-edit-partidos-politicos/add-edit-partidos-politicos.component';
+import { ManagementPartidosPoliticosComponent } from './management-partidos-politicos/management-partidos-politicos.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -57,6 +58,10 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: AddEditPartidosPoliticosComponent,
+      },
+      {
+        path: 'management/:id',
+        component: ManagementPartidosPoliticosComponent,
       }
     ]
   },
@@ -68,7 +73,8 @@ const routes: Routes = [
   declarations: [
     PartidosPoliticosComponent,
     ViewPartidosPoliticosComponent,
-    AddEditPartidosPoliticosComponent
+    AddEditPartidosPoliticosComponent,
+    ManagementPartidosPoliticosComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
