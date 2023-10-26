@@ -52,8 +52,11 @@ export class CentroVotacionService {
     );
   }
 
-  updateCentroVotacion(data:any, id: any) : Observable<any | void>{
-    return this.http.put<any>(`${environment.API_URL}centro-votacion/${id}`, data)
+  updateCentroVotacion(data:any, id: any, token: any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.put<any>(`${environment.API_URL}centro-votacion/${id}`, data, {headers})
     .pipe(
       map((res:any)=> {
         return res;
@@ -62,9 +65,12 @@ export class CentroVotacionService {
     );
   }
 
-  updatePartialCentroVotacion(id: any): Observable<any | void> {
+  updatePartialCentroVotacion(id: any, token: any): Observable<any | void> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
     return this.http
-      .patch<any>(`${environment.API_URL}centro-votacion/${id}/cambiar-estado`, {}) // Reemplaza 'tu-endpoint' por la URL de tu recurso.
+      .patch<any>(`${environment.API_URL}centro-votacion/${id}/cambiar-estado`, {}, {headers}) // Reemplaza 'tu-endpoint' por la URL de tu recurso.
       .pipe(
         map((res: any) => {
           return res;

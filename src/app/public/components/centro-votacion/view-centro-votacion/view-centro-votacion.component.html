@@ -43,20 +43,20 @@
                                         <p-sortIcon field="id_centro_votacion"></p-sortIcon>
                                     </div>
                                 </th>
-                                <th pSortableColumn="nombre" style="min-width: 14rem">
+                                <th pSortableColumn="nombre" style="min-width: 10rem">
                                     <div class="flex justify-content-between align-items-center">
                                         Nombre
                                         <p-sortIcon field="nombre"></p-sortIcon>
                                     </div>
                                 </th>
-                                <th pSortableColumn="direccion" style="min-width: 10rem">
+                                <th pSortableColumn="direccion" style="min-width: 18rem">
                                     <div class="flex justify-content-between align-items-center">
                                         Direccion
                                         <p-sortIcon field="direccion"></p-sortIcon>
                                     </div>
                                 </th>
 
-                                <th pSortableColumn="estado" style="min-width: 14rem">
+                                <th pSortableColumn="estado" style="min-width: 10rem">
                                     <div class="flex justify-content-between align-items-center">
                                         Estado
                                         <p-sortIcon field="estado"></p-sortIcon>
@@ -94,49 +94,81 @@
                                         class="p-button p-button-rounded p-button-success"><i
                                             class="mdi mdi-pencil"></i></a>&nbsp; -->
 
-                                    <a 
-                                        class="p-button p-button-rounded p-button-view"><i class="mdi mdi-eye"></i></a>
+                                    <a (click)="viewCentroVotacionModal(contentView, Centros_Votacion.id_centro_votacion)" class="p-button p-button-rounded p-button-view"><i class="mdi mdi-eye"></i></a>&nbsp;
+                                    <a (click)="editCentroVotacionModal(contentUpdate, Centros_Votacion.id_centro_votacion)" class="p-button p-button-rounded p-button-success"><i class="mdi mdi-pencil"></i></a>&nbsp;
 
                                 </td>
                             </tr>
-                            <!-- <ng-template #contentView let-d="dismiss" class="animate__animated animate__zoomInDown">
+                            <ng-template #contentView let-d="dismiss" class="animate__animated animate__zoomInDown">
                                 <div class="modal-header modaltitle">
-                                    <h4 class="modal-title " id="modal-basic-title"> Jrv</h4>
+                                    <h4 class="modal-title " id="modal-basic-title"> Centro de Votacion {{Centros_Votacion.id_centro_votacion}}</h4> &nbsp; 
+                                <button *ngIf="Centros_Votacion.estado == 'CERRADA'" status="success" id="_btn-success" (click)="cambiarEstado(Centros_Votacion.id_centro_votacion, 'ABRIR')"
+                                    class="dt-button create-new btn btn-primary ml-2" tabindex="0"
+                                    aria-controls="DataTables_Table_0" type="button">
+                                    <span class="d-none d-sm-inline-block"> <i class="mdi mdi-key-change"></i> ABRIR</span>
+                                </button>
+                                <button *ngIf="Centros_Votacion.estado == 'ABIERTA'" status="success" id="_btn-success" (click)="cambiarEstado(Centros_Votacion.id_centro_votacion, 'CERRAR')"
+                                    class="dt-button create-new btn btn-primary ml-2" tabindex="0"
+                                    aria-controls="DataTables_Table_0" type="button">
+                                    <span class="d-none d-sm-inline-block"> <i class="mdi mdi-block-helper"></i> CERRAR</span>
+                                </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="card">
-                                        <div class="card-body cardview">
-                                            <div class="img animate__animated animate__zoomInDown"><img
-                                                    src="assets/images/jrv.png" alt=""></div>
-                                            <label class="labelDetails text-center"> id jrv</label>
-                                            <p class="pDetails">{{jrvs.id_jrv}}</p>
-                                            <label class="labelDetails text-center"> Código</label>
-                                            <p class="pDetails">{{jrvs.codigo}}</p>
-                                            <label class="labelDetails text-center"> Estado</label>
-                                            <p class="pDetails">{{jrvs.estado}}</p>
-                                            <label class="labelDetails text-center"> Centro de Votación</label>
-                                            <p class="pDetails">Id: {{jrvs.centro_votacion.id_centro_votacion}}</p>
-                                            <p class="pDetails">Nombre: {{jrvs.centro_votacion.nombre}}</p>
-                                            <p class="pDetails">Municipio: {{jrvs.centro_votacion.municipios.nombre}}
-                                            </p>
-                                            <p class="pDetails">Direccion: {{jrvs.centro_votacion.direccion}}</p>
-                                            <p class="pDetails">Estado: {{jrvs.centro_votacion.estado}}</p>
-                                            <p class="pDetails">Fecha de Creación:
-                                                {{this.convertDateTime(jrvs.centro_votacion.creado_en)}}</p>
-                                            <p class="pDetails">Fecha de Modificación:
-                                                {{this.convertDateTime(jrvs.centro_votacion.modificado_en)}}</p>
-                                            <label class="labelDetails text-center"> Fecha de Creación</label>
-                                            <p class="pDetails">{{this.convertDateTime(jrvs.creado_en)}}</p>
-                                            <label class="labelDetails text-center"> Fecha de Modificación</label>
-                                            <p class="pDetails">{{this.convertDateTime(jrvs.modificado_en)}}</p>
+
+                                    <div class="container">
+                                        <div class="row">
+                                          <div class="col">
+                                            <div class="card">
+                                                <div class="card-header">Informacion del Centro de Votacion</div>
+                                                <div class="card-body cardview">
+                                                    <label class="labelDetails text-center"> Nombre</label>
+                                                    <p class="pDetails">{{Centros_Votacion.nombre}}</p>
+                                                    <label class="labelDetails text-center"> Departamento</label>
+                                                    <p class="pDetails">{{Centros_Votacion.municipios.departamentos.nombre}}</p>
+                                                    <label class="labelDetails text-center"> Municipio</label>
+                                                    <p class="pDetails">{{Centros_Votacion.municipios.nombre}}</p>
+                                                    <label class="labelDetails text-center"> Direccion</label>
+                                                    <p class="pDetails">{{Centros_Votacion.direccion}}</p>
+                                                    <label class="labelDetails text-center"> Estado</label>
+                                                    <p class="pDetails">{{Centros_Votacion.estado}}</p>
+        
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="col">
+                                            <div class="card">
+                                                <div class="card-header">Jrv's Pertenecientes a este Centro de Votacion</div>
+                                                <div class="card-body cardview">
+                                                    <table class="table">
+                                                        <thead *ngIf="Centros_Votacion.junta_receptora_votos.length >= 1">
+                                                          <tr>
+                                                            <th scope="col">id</th>
+                                                            <th scope="col">codigo</th>
+                                                            <th scope="col">estado</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr *ngFor="let cv of Centros_Votacion.junta_receptora_votos; let i = index">
+                                                            <th scope="row">{{i + 1}}</th>
+                                                            <td>{{cv.codigo}}</td>
+                                                            <td>{{cv.estado}}</td>
+                                                          </tr>
+                                                          <tr *ngIf="Centros_Votacion.junta_receptora_votos.length <= 0">
+                                                            <td colspan="3">Aun no se han asignado JRV a este centro de votacion!</td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                </div>
+                                            </div>
+                                          </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="_btn-back" routerLink="/jrv/view" type="submit" name="submitButton"
+                                    <button id="_btn-back" routerLink="/centro-votacion/view" type="submit" name="submitButton"
                                         class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
                                 </div>
-                            </ng-template> -->
+                            </ng-template> 
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
@@ -191,14 +223,16 @@
                                       <div class="col-sm-12">
                                         <div class="mb-3">
                                           <label for="company">Municipio</label>
-                                          <ng-select [multiple]="false" (change)="municipioCapturado($event)" [(ngModel)]="selectedSearchMunicipio" [closeOnSelect]="false" class="data-ng-select" [ngModelOptions]="{ standalone: true }"  >
+                                          <ng-select [multiple]="false" (change)="municipioCapturado($event)" [(ngModel)]="opcionSeleccionadaMunicipio" [closeOnSelect]="false" class="data-ng-select" [ngModelOptions]="{ standalone: true }"  >
                                             <ng-option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">{{municipio.nombre}}</ng-option>
                                           </ng-select>
                                         </div>
                                       </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary submit" [disabled]="!formCentroVotacion.valid">Guardar <i
-                                        class="mdi mdi-file-document-edit"></i></button>&nbsp; 
+                                    <button *ngIf="!opcionSeleccionadaMunicipio" type="submit" class="btn btn-primary submit" [disabled]="!formCentroVotacion.valid">Guardar <i
+                                        class="mdi mdi-file-document-edit"></i></button>&nbsp;
+                                        <button type="button" class="btn btn-success" *ngIf="opcionSeleccionadaMunicipio" (click)="editarCentroVotacion()">Editar</button>&nbsp;
+ 
                                       <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancelar</button>
                                   </form>
                                 </div>

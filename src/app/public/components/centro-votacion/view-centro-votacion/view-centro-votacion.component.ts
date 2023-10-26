@@ -31,6 +31,10 @@ export class ViewCentroVotacionComponent implements OnInit {
   public Centros_Votacion: any = []
   public Centros_Votacion_Original: any = []
 
+  public opcionSeleccionadaMunicipio: any
+  public opcionSeleccionadaEstado: any
+  public idParaEditarCentroVotacion: any
+
   constructor(
     private CentroVotacionSrv: CentroVotacionService,
     private modalService: NgbModal,
@@ -263,73 +267,24 @@ export class ViewCentroVotacionComponent implements OnInit {
   }
 
   public editCentroVotacionModal(content: any, id: any){
+    this.idParaEditarCentroVotacion = id
+    
       this.CentroVotacionSrv.getCentroVotacionById(id, this.token)
         .subscribe((next: any) => {
           this.formCentroVotacion = this.formBuilder.group({
             nombre: [next['nombre']],
             direccion: [next['direccion']],
           });
+          this.opcionSeleccionadaMunicipio = next.id_municipio
+          this.opcionSeleccionadaEstado = next.estado
+          console.log(next);
+          
           //this.opcionSeleccionadaCentroVotacion = next['id_centro_votacion']
         })
       this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
   
         if (result === 'yes') {
-          if (id >= 1) {
-            // this.title = "Editar Centro Votacion"
-  
-            // const formJrv: any = {
-            //   codigo: codJRV,
-            //   id_centro_votacion: Number(this.id_centro_votacion),
-            // }
-            // this.spinner.show();
-  
-            // setTimeout(() => {
-            //   this.jrvSrv.updateJrv(formJrv, id)
-            //     .subscribe((res: any) => {
-            //       if (res) {
-            //         this.spinner.hide();
-            //         this.router.navigate(['/jrv/view'])
-            //           .then(() => {
-            //             let currentUrl = this.router.url;
-            //             this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-            //             this.router.onSameUrlNavigation = 'reload';
-            //             this.router.navigate([currentUrl]);
-            //           })
-            //         } else {
-            //       }
-            //     })
-            // }, 1200);
-  
-          } else if (id == 0) {
-            this.title = "Crear Centro de Votacion"
-
-            //const formValue = this.form.value;
-            /* const formCv: any = {
-              nom: this.formCentroVotacion.value.codigo,
-              id_centro_votacion: this.cv_asignado[0].id,
-            }
-            this.spinner.show();
-            console.log(formJrv);
-            
-            setTimeout(() => {
-              this.jrvSrv.createJrv(formJrv, this.token)
-                .subscribe((res: any) => {
-                  if (res) {
-                    this.spinner.hide();
-                    this.router.navigate(['/jrv/view'])
-                      .then(() => {
-                        let currentUrl = this.router.url;
-                        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-                        this.router.onSameUrlNavigation = 'reload';
-                        this.router.navigate([currentUrl]);
-                      })
-                  } else {
-                  }
-                })
-            }, 1500); */
-  
-          }
         }
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -337,9 +292,45 @@ export class ViewCentroVotacionComponent implements OnInit {
 
   }
 
+  public editarCentroVotacion(){
+
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Realmente quieres editar este registro?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const dataEdicionCentroVotacion: any = {
+          id_municipio: this.id_municipio ?? this.opcionSeleccionadaMunicipio,
+          nombre: this.formCentroVotacion.value.nombre,
+          direccion: this.formCentroVotacion.value.direccion,
+          estado: this.opcionSeleccionadaEstado
+        }
+    
+        this.CentroVotacionSrv.updateCentroVotacion(dataEdicionCentroVotacion, this.idParaEditarCentroVotacion, this.token)
+          .subscribe((res: any) => {
+            if(res){
+              Swal.fire(
+                'Buen Trabajo!',
+                'Su Centro de Votacion ha sido ediado exitosamente!',
+                'success'
+              )
+              setTimeout(() => {
+                window.location.reload();
+              }, 1500);
+            }
+            console.log(res)
+          })
+      }
+    })
+
+  }
+
   public guardarDatosCentroVotacion(){
-
-
     Swal.fire({
       title: 'Estas seguro?',
       text: "Realmente quieres guardar este registro!",
@@ -347,7 +338,7 @@ export class ViewCentroVotacionComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Confirmar!'
     }).then((result) => {
       if (result.isConfirmed) {
         const dataCentroVotacion: any = {
@@ -414,6 +405,90 @@ export class ViewCentroVotacionComponent implements OnInit {
         }
 
   }
+
+  viewCentroVotacionModal(content: any, viewProduct: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: "xl"  }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      if (result === 'yes') {
+        this.CentroVotacionById(viewProduct);
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  public CentroVotacionById(id: any) {
+    this.CentroVotacionSrv.getCentroVotacionById(id, this.token)
+      .subscribe((res: any) => {
+        if (res) {
+        }
+      })
+  }
+
+  public cambiarEstado(id: any, type: any) {
+    try {
+      if (type === "ABRIR") {
+        Swal.fire({
+          title: 'Estas seguro?',
+          text: "Deseas realmente ABRIR este Centro de Votación!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Confirmar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.CentroVotacionSrv.updatePartialCentroVotacion(id, this.token)
+              .subscribe((res: any) => {
+                if (res) {
+                  Swal.fire(
+                    'Estado Cambiado!',
+                    'Centro de Votación APERTURADO satisfactoriamente!',
+                    'success'
+                  );
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1500);
+                }
+              });
+            }
+          });
+        } else {
+          Swal.fire({
+            title: 'Estas seguro?',
+            text: "Deseas realmente CERRAR este Centro de Votación!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.CentroVotacionSrv.updatePartialCentroVotacion(id, this.token)
+                .subscribe((res: any) => {
+                  if (res) {
+                    Swal.fire(
+                      'Estado Cambiado!',
+                      'Centro de Votación CERRADO satisfactoriamente!',
+                      'success'
+                    );
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 1500);
+                  }
+                });
+            }
+          });
+        }
+    } catch (error) {
+      Swal.fire(
+        'Error',
+        'No tienes permisos para realizar esta acción.',
+        'error'
+      );
+    }
+  }
+  
+
 
 
   getUserInfo(inf: any) {
