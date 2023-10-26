@@ -6,7 +6,7 @@ export interface partidosPoliticos{
     estado: string,
     creado_en: string,
     modificado_en: string,
-    candidatos: [
+   /*  candidatos: [
       {
         id_candidato: number,
         informacion_personal: {
@@ -16,7 +16,7 @@ export interface partidosPoliticos{
           dui: string,
           genero: string
         }
-      }]
+      }] */
 }
 
 export interface partidosPoliticosMsg{

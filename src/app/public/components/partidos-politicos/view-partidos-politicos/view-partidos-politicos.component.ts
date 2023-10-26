@@ -118,14 +118,11 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     return
   }
 
-  public getClassBasedOnStatus(id: any) {
-    if(id == 1){
-      return "user-badge status-active";
-    }if(id == 0){
-      return "user-badge status-inactive"
-    }
-    return
+  public getClassForEstado(id: any) {
+    const className = id == 1 ? "activo-class" : id == 0 ? "inactivo-class" : "";
+    return className;
   }
+
 
   deletePartidosPoliticosModal(content: any, viewProduct:any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {

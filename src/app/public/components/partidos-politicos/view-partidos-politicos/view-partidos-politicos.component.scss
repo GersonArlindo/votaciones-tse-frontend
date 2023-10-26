@@ -125,13 +125,13 @@ body {
 	margin-bottom: 24px;
  }
 
- .user-badge.status-active {
-    background: #C8E6C9;
+ .activo-class {
+    background-color: #C8E6C9;
     color: #256029;
 	  font-weight: bold;
 }
-  .user-badge.status-inactive{
-		background: #FFCDD2;
+  .inactivo-class{
+		background-color: #FFCDD2;
 		color: #c63737;
 		font-weight: bold;
 	}

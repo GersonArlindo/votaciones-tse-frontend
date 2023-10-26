@@ -88,11 +88,9 @@
                     {{partidos_politicos.siglas}}
                   </td>
                   <td>
-                    <span
-                      class="badge {{
-                        getClassBasedOnStatus(partidos_politicos.estado)
-                      }}"
-                    >{{partidos_politicos.estado}}</span>
+                    <span class="badge {{getClassForEstado(partidos_politicos.estado)}}">
+                      {{partidos_politicos.estado }}
+                    </span>
                   </td>
                   <td style="text-align: left; margin-left: -5px;" >
                     <a  (click)="deletePartidosPoliticosModal(contentDelete, partidos_politicos.id_partido_politico)"
