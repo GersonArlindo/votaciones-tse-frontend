@@ -1,0 +1,560 @@
+[
+  { "id_municipio": "1", "id_departamento": "1", "nombre": "Ahuachapán" },
+  { "id_municipio": "2", "id_departamento": "1", "nombre": "Jujutla" },
+  { "id_municipio": "3", "id_departamento": "1", "nombre": "Atiquizaya" },
+  {
+    "id_municipio": "4",
+    "id_departamento": "1",
+    "nombre": "Concepción de Ataco"
+  },
+  { "id_municipio": "5", "id_departamento": "1", "nombre": "El Refugio" },
+  { "id_municipio": "6", "id_departamento": "1", "nombre": "Guaymango" },
+  { "id_municipio": "7", "id_departamento": "1", "nombre": "Apaneca" },
+  {
+    "id_municipio": "8",
+    "id_departamento": "1",
+    "nombre": "San Francisco Menéndez"
+  },
+  { "id_municipio": "9", "id_departamento": "1", "nombre": "San Lorenzo" },
+  {
+    "id_municipio": "10",
+    "id_departamento": "1",
+    "nombre": "San Pedro Puxtla"
+  },
+  { "id_municipio": "11", "id_departamento": "1", "nombre": "Tacuba" },
+  { "id_municipio": "12", "id_departamento": "1", "nombre": "Turín" },
+  {
+    "id_municipio": "13",
+    "id_departamento": "2",
+    "nombre": "Candelaria de la Frontera"
+  },
+  { "id_municipio": "14", "id_departamento": "2", "nombre": "Chalchuapa" },
+  { "id_municipio": "15", "id_departamento": "2", "nombre": "Coatepeque" },
+  { "id_municipio": "16", "id_departamento": "2", "nombre": "El Congo" },
+  { "id_municipio": "17", "id_departamento": "2", "nombre": "El Porvenir" },
+  { "id_municipio": "18", "id_departamento": "2", "nombre": "Masahuat" },
+  { "id_municipio": "19", "id_departamento": "2", "nombre": "Metapán" },
+  {
+    "id_municipio": "20",
+    "id_departamento": "2",
+    "nombre": "San Antonio Pajonal"
+  },
+  {
+    "id_municipio": "21",
+    "id_departamento": "2",
+    "nombre": "San Sebastián Salitrillo"
+  },
+  { "id_municipio": "22", "id_departamento": "2", "nombre": "Santa Ana" },
+  {
+    "id_municipio": "23",
+    "id_departamento": "2",
+    "nombre": "Santa Rosa Guachipilín"
+  },
+  {
+    "id_municipio": "24",
+    "id_departamento": "2",
+    "nombre": "Santiago de la Frontera"
+  },
+  { "id_municipio": "25", "id_departamento": "2", "nombre": "Texistepeque" },
+  { "id_municipio": "26", "id_departamento": "3", "nombre": "Acajutla" },
+  { "id_municipio": "27", "id_departamento": "3", "nombre": "Armenia" },
+  { "id_municipio": "28", "id_departamento": "3", "nombre": "Caluco" },
+  { "id_municipio": "29", "id_departamento": "3", "nombre": "Cuisnahuat" },
+  { "id_municipio": "30", "id_departamento": "3", "nombre": "Izalco" },
+  { "id_municipio": "31", "id_departamento": "3", "nombre": "Juayúa" },
+  { "id_municipio": "32", "id_departamento": "3", "nombre": "Nahuizalco" },
+  { "id_municipio": "33", "id_departamento": "3", "nombre": "Nahulingo" },
+  { "id_municipio": "34", "id_departamento": "3", "nombre": "Salcoatitán" },
+  {
+    "id_municipio": "35",
+    "id_departamento": "3",
+    "nombre": "San Antonio del Monte"
+  },
+  { "id_municipio": "36", "id_departamento": "3", "nombre": "San Julián" },
+  {
+    "id_municipio": "37",
+    "id_departamento": "3",
+    "nombre": "Santa Catarina Masahuat"
+  },
+  {
+    "id_municipio": "38",
+    "id_departamento": "3",
+    "nombre": "Santa Isabel Ishuatán"
+  },
+  {
+    "id_municipio": "39",
+    "id_departamento": "3",
+    "nombre": "Santo Domingo de Guzmán"
+  },
+  { "id_municipio": "40", "id_departamento": "3", "nombre": "Sonsonate" },
+  { "id_municipio": "41", "id_departamento": "3", "nombre": "Sonzacate" },
+  { "id_municipio": "42", "id_departamento": "11", "nombre": "Alegría" },
+  { "id_municipio": "43", "id_departamento": "11", "nombre": "Berlín" },
+  { "id_municipio": "44", "id_departamento": "11", "nombre": "California" },
+  {
+    "id_municipio": "45",
+    "id_departamento": "11",
+    "nombre": "Concepción Batres"
+  },
+  { "id_municipio": "46", "id_departamento": "11", "nombre": "El Triunfo" },
+  { "id_municipio": "47", "id_departamento": "11", "nombre": "Ereguayquín" },
+  { "id_municipio": "48", "id_departamento": "11", "nombre": "Estanzuelas" },
+  { "id_municipio": "49", "id_departamento": "11", "nombre": "Jiquilisco" },
+  { "id_municipio": "50", "id_departamento": "11", "nombre": "Jucuapa" },
+  { "id_municipio": "51", "id_departamento": "11", "nombre": "Jucuarán" },
+  { "id_municipio": "52", "id_departamento": "11", "nombre": "Mercedes Umaña" },
+  { "id_municipio": "53", "id_departamento": "11", "nombre": "Nueva Granada" },
+  { "id_municipio": "54", "id_departamento": "11", "nombre": "Ozatlán" },
+  {
+    "id_municipio": "55",
+    "id_departamento": "11",
+    "nombre": "Puerto El Triunfo"
+  },
+  { "id_municipio": "56", "id_departamento": "11", "nombre": "San Agustín" },
+  {
+    "id_municipio": "57",
+    "id_departamento": "11",
+    "nombre": "San Buenaventura"
+  },
+  { "id_municipio": "58", "id_departamento": "11", "nombre": "San Dionisio" },
+  {
+    "id_municipio": "59",
+    "id_departamento": "11",
+    "nombre": "San Francisco Javier"
+  },
+  { "id_municipio": "60", "id_departamento": "11", "nombre": "Santa Elena" },
+  { "id_municipio": "61", "id_departamento": "11", "nombre": "Santa María" },
+  {
+    "id_municipio": "62",
+    "id_departamento": "11",
+    "nombre": "Santiago de María"
+  },
+  { "id_municipio": "63", "id_departamento": "11", "nombre": "Tecapán" },
+  { "id_municipio": "64", "id_departamento": "11", "nombre": "Usulután" },
+  { "id_municipio": "65", "id_departamento": "12", "nombre": "Carolina" },
+  { "id_municipio": "66", "id_departamento": "12", "nombre": "Chapeltique" },
+  { "id_municipio": "67", "id_departamento": "12", "nombre": "Chinameca" },
+  { "id_municipio": "68", "id_departamento": "12", "nombre": "Chirilagua" },
+  { "id_municipio": "69", "id_departamento": "12", "nombre": "Ciudad Barrios" },
+  { "id_municipio": "70", "id_departamento": "12", "nombre": "Comacarán" },
+  { "id_municipio": "71", "id_departamento": "12", "nombre": "El Tránsito" },
+  { "id_municipio": "72", "id_departamento": "12", "nombre": "Lolotique" },
+  { "id_municipio": "73", "id_departamento": "12", "nombre": "Moncagua" },
+  {
+    "id_municipio": "74",
+    "id_departamento": "12",
+    "nombre": "Nueva Guadalupe"
+  },
+  {
+    "id_municipio": "75",
+    "id_departamento": "12",
+    "nombre": "Nuevo Edén de San Juan"
+  },
+  { "id_municipio": "76", "id_departamento": "12", "nombre": "Quelepa" },
+  {
+    "id_municipio": "77",
+    "id_departamento": "12",
+    "nombre": "San Antonio del Mosco"
+  },
+  { "id_municipio": "78", "id_departamento": "12", "nombre": "San Gerardo" },
+  { "id_municipio": "79", "id_departamento": "12", "nombre": "San Jorge" },
+  {
+    "id_municipio": "80",
+    "id_departamento": "12",
+    "nombre": "San Luis de la Reina"
+  },
+  { "id_municipio": "81", "id_departamento": "12", "nombre": "San Miguel" },
+  {
+    "id_municipio": "82",
+    "id_departamento": "12",
+    "nombre": "San Rafael Oriente"
+  },
+  { "id_municipio": "83", "id_departamento": "12", "nombre": "Sesori" },
+  { "id_municipio": "84", "id_departamento": "12", "nombre": "Uluazapa" },
+  { "id_municipio": "85", "id_departamento": "13", "nombre": "Arambala" },
+  { "id_municipio": "86", "id_departamento": "13", "nombre": "Cacaopera" },
+  { "id_municipio": "87", "id_departamento": "13", "nombre": "Chilanga" },
+  { "id_municipio": "88", "id_departamento": "13", "nombre": "Corinto" },
+  {
+    "id_municipio": "89",
+    "id_departamento": "13",
+    "nombre": "Delicias de Concepción"
+  },
+  { "id_municipio": "90", "id_departamento": "13", "nombre": "El Divisadero" },
+  {
+    "id_municipio": "91",
+    "id_departamento": "13",
+    "nombre": "El Rosario (Morazán)"
+  },
+  { "id_municipio": "92", "id_departamento": "13", "nombre": "Gualococti" },
+  { "id_municipio": "93", "id_departamento": "13", "nombre": "Guatajiagua" },
+  { "id_municipio": "94", "id_departamento": "13", "nombre": "Joateca" },
+  { "id_municipio": "95", "id_departamento": "13", "nombre": "Jocoaitique" },
+  { "id_municipio": "96", "id_departamento": "13", "nombre": "Jocoro" },
+  { "id_municipio": "97", "id_departamento": "13", "nombre": "Lolotiquillo" },
+  { "id_municipio": "98", "id_departamento": "13", "nombre": "Meanguera" },
+  { "id_municipio": "99", "id_departamento": "13", "nombre": "Osicala" },
+  { "id_municipio": "100", "id_departamento": "13", "nombre": "Perquín" },
+  { "id_municipio": "101", "id_departamento": "13", "nombre": "San Carlos" },
+  {
+    "id_municipio": "102",
+    "id_departamento": "13",
+    "nombre": "San Fernando (Morazán)"
+  },
+  {
+    "id_municipio": "103",
+    "id_departamento": "13",
+    "nombre": "San Francisco Gotera"
+  },
+  {
+    "id_municipio": "104",
+    "id_departamento": "13",
+    "nombre": "San Isidro (Morazán)"
+  },
+  { "id_municipio": "105", "id_departamento": "13", "nombre": "San Simón" },
+  { "id_municipio": "106", "id_departamento": "13", "nombre": "Sensembra" },
+  { "id_municipio": "107", "id_departamento": "13", "nombre": "Sociedad" },
+  { "id_municipio": "108", "id_departamento": "13", "nombre": "Torola" },
+  { "id_municipio": "109", "id_departamento": "13", "nombre": "Yamabal" },
+  { "id_municipio": "110", "id_departamento": "13", "nombre": "Yoloaiquín" },
+  { "id_municipio": "111", "id_departamento": "14", "nombre": "La Unión" },
+  { "id_municipio": "112", "id_departamento": "14", "nombre": "San Alejo" },
+  { "id_municipio": "113", "id_departamento": "14", "nombre": "Yucuaiquín" },
+  { "id_municipio": "114", "id_departamento": "14", "nombre": "Conchagua" },
+  { "id_municipio": "115", "id_departamento": "14", "nombre": "Intipucá" },
+  { "id_municipio": "116", "id_departamento": "14", "nombre": "San José" },
+  {
+    "id_municipio": "117",
+    "id_departamento": "14",
+    "nombre": "El Carmen (La Unión)"
+  },
+  { "id_municipio": "118", "id_departamento": "14", "nombre": "Yayantique" },
+  { "id_municipio": "119", "id_departamento": "14", "nombre": "Bolívar" },
+  {
+    "id_municipio": "120",
+    "id_departamento": "14",
+    "nombre": "Meanguera del Golfo"
+  },
+  {
+    "id_municipio": "121",
+    "id_departamento": "14",
+    "nombre": "Santa Rosa de Lima"
+  },
+  { "id_municipio": "122", "id_departamento": "14", "nombre": "Pasaquina" },
+  { "id_municipio": "123", "id_departamento": "14", "nombre": "Anamoros" },
+  { "id_municipio": "124", "id_departamento": "14", "nombre": "Nueva Esparta" },
+  { "id_municipio": "125", "id_departamento": "14", "nombre": "El Sauce" },
+  {
+    "id_municipio": "126",
+    "id_departamento": "14",
+    "nombre": "Concepción de Oriente"
+  },
+  { "id_municipio": "127", "id_departamento": "14", "nombre": "Polorós" },
+  { "id_municipio": "128", "id_departamento": "14", "nombre": "Lislique" },
+  {
+    "id_municipio": "129",
+    "id_departamento": "5",
+    "nombre": "Antiguo Cuscatlán"
+  },
+  { "id_municipio": "130", "id_departamento": "5", "nombre": "Chiltiupán" },
+  { "id_municipio": "131", "id_departamento": "5", "nombre": "Ciudad Arce" },
+  { "id_municipio": "132", "id_departamento": "5", "nombre": "Colón" },
+  { "id_municipio": "133", "id_departamento": "5", "nombre": "Comasagua" },
+  { "id_municipio": "134", "id_departamento": "5", "nombre": "Huizúcar" },
+  { "id_municipio": "135", "id_departamento": "5", "nombre": "Jayaque" },
+  { "id_municipio": "136", "id_departamento": "5", "nombre": "Jicalapa" },
+  { "id_municipio": "137", "id_departamento": "5", "nombre": "La Libertad" },
+  { "id_municipio": "138", "id_departamento": "5", "nombre": "Santa Tecla" },
+  {
+    "id_municipio": "139",
+    "id_departamento": "5",
+    "nombre": "Nuevo Cuscatlán"
+  },
+  { "id_municipio": "140", "id_departamento": "5", "nombre": "San Juan Opico" },
+  { "id_municipio": "141", "id_departamento": "5", "nombre": "Quezaltepeque" },
+  { "id_municipio": "142", "id_departamento": "5", "nombre": "Sacacoyo" },
+  {
+    "id_municipio": "143",
+    "id_departamento": "5",
+    "nombre": "San José Villanueva"
+  },
+  { "id_municipio": "144", "id_departamento": "5", "nombre": "San Matías" },
+  {
+    "id_municipio": "145",
+    "id_departamento": "5",
+    "nombre": "San Pablo Tacachico"
+  },
+  { "id_municipio": "146", "id_departamento": "5", "nombre": "Talnique" },
+  { "id_municipio": "147", "id_departamento": "5", "nombre": "Tamanique" },
+  { "id_municipio": "148", "id_departamento": "5", "nombre": "Teotepeque" },
+  { "id_municipio": "149", "id_departamento": "5", "nombre": "Tepecoyo" },
+  { "id_municipio": "150", "id_departamento": "5", "nombre": "Zaragoza" },
+  { "id_municipio": "151", "id_departamento": "4", "nombre": "Agua Caliente" },
+  { "id_municipio": "152", "id_departamento": "4", "nombre": "Arcatao" },
+  { "id_municipio": "153", "id_departamento": "4", "nombre": "Azacualpa" },
+  { "id_municipio": "154", "id_departamento": "4", "nombre": "Cancasque" },
+  { "id_municipio": "155", "id_departamento": "4", "nombre": "Chalatenango" },
+  { "id_municipio": "156", "id_departamento": "4", "nombre": "Citalá" },
+  { "id_municipio": "157", "id_departamento": "4", "nombre": "Comapala" },
+  {
+    "id_municipio": "158",
+    "id_departamento": "4",
+    "nombre": "Concepción Quezaltepeque"
+  },
+  {
+    "id_municipio": "159",
+    "id_departamento": "4",
+    "nombre": "Dulce Nombre de María"
+  },
+  { "id_municipio": "160", "id_departamento": "4", "nombre": "El Carrizal" },
+  { "id_municipio": "161", "id_departamento": "4", "nombre": "El Paraíso" },
+  { "id_municipio": "162", "id_departamento": "4", "nombre": "La Laguna" },
+  { "id_municipio": "163", "id_departamento": "4", "nombre": "La Palma" },
+  { "id_municipio": "164", "id_departamento": "4", "nombre": "La Reina" },
+  { "id_municipio": "165", "id_departamento": "4", "nombre": "Las Vueltas" },
+  {
+    "id_municipio": "166",
+    "id_departamento": "4",
+    "nombre": "Nueva Concepción"
+  },
+  { "id_municipio": "167", "id_departamento": "4", "nombre": "Nueva Trinidad" },
+  {
+    "id_municipio": "168",
+    "id_departamento": "4",
+    "nombre": "Nombre de Jesús"
+  },
+  { "id_municipio": "169", "id_departamento": "4", "nombre": "Ojos de Agua" },
+  { "id_municipio": "170", "id_departamento": "4", "nombre": "Potonico" },
+  {
+    "id_municipio": "171",
+    "id_departamento": "4",
+    "nombre": "San Antonio de la Cruz"
+  },
+  {
+    "id_municipio": "172",
+    "id_departamento": "4",
+    "nombre": "San Antonio Los Ranchos"
+  },
+  { "id_municipio": "173", "id_departamento": "4", "nombre": "San Fernando" },
+  {
+    "id_municipio": "174",
+    "id_departamento": "4",
+    "nombre": "San Francisco Lempa"
+  },
+  {
+    "id_municipio": "175",
+    "id_departamento": "4",
+    "nombre": "San Francisco Morazán"
+  },
+  { "id_municipio": "176", "id_departamento": "4", "nombre": "San Ignacio" },
+  {
+    "id_municipio": "177",
+    "id_departamento": "4",
+    "nombre": "San Isidro Labrador"
+  },
+  { "id_municipio": "178", "id_departamento": "4", "nombre": "Las Flores" },
+  {
+    "id_municipio": "179",
+    "id_departamento": "4",
+    "nombre": "San Luis del Carmen"
+  },
+  {
+    "id_municipio": "180",
+    "id_departamento": "4",
+    "nombre": "San Miguel de Mercedes"
+  },
+  { "id_municipio": "181", "id_departamento": "4", "nombre": "San Rafael" },
+  { "id_municipio": "182", "id_departamento": "4", "nombre": "Santa Rita" },
+  { "id_municipio": "183", "id_departamento": "4", "nombre": "Tejutla" },
+  { "id_municipio": "184", "id_departamento": "7", "nombre": "Cojutepeque" },
+  { "id_municipio": "185", "id_departamento": "7", "nombre": "Candelaria" },
+  {
+    "id_municipio": "186",
+    "id_departamento": "7",
+    "nombre": "El Carmen (Cuscatlán)"
+  },
+  {
+    "id_municipio": "187",
+    "id_departamento": "7",
+    "nombre": "El Rosario (Cuscatlán)"
+  },
+  { "id_municipio": "188", "id_departamento": "7", "nombre": "Monte San Juan" },
+  {
+    "id_municipio": "189",
+    "id_departamento": "7",
+    "nombre": "Oratorio de Concepción"
+  },
+  {
+    "id_municipio": "190",
+    "id_departamento": "7",
+    "nombre": "San Bartolomé Perulapía"
+  },
+  { "id_municipio": "191", "id_departamento": "7", "nombre": "San Cristóbal" },
+  {
+    "id_municipio": "192",
+    "id_departamento": "7",
+    "nombre": "San José Guayabal"
+  },
+  {
+    "id_municipio": "193",
+    "id_departamento": "7",
+    "nombre": "San Pedro Perulapán"
+  },
+  {
+    "id_municipio": "194",
+    "id_departamento": "7",
+    "nombre": "San Rafael Cedros"
+  },
+  { "id_municipio": "195", "id_departamento": "7", "nombre": "San Ramón" },
+  {
+    "id_municipio": "196",
+    "id_departamento": "7",
+    "nombre": "Santa Cruz Analquito"
+  },
+  {
+    "id_municipio": "197",
+    "id_departamento": "7",
+    "nombre": "Santa Cruz Michapa"
+  },
+  { "id_municipio": "198", "id_departamento": "7", "nombre": "Suchitoto" },
+  { "id_municipio": "199", "id_departamento": "7", "nombre": "Tenancingo" },
+  { "id_municipio": "200", "id_departamento": "6", "nombre": "Aguilares" },
+  { "id_municipio": "201", "id_departamento": "6", "nombre": "Apopa" },
+  { "id_municipio": "202", "id_departamento": "6", "nombre": "Ayutuxtepeque" },
+  { "id_municipio": "203", "id_departamento": "6", "nombre": "Cuscatancingo" },
+  { "id_municipio": "204", "id_departamento": "6", "nombre": "Ciudad Delgado" },
+  { "id_municipio": "205", "id_departamento": "6", "nombre": "El Paisnal" },
+  { "id_municipio": "206", "id_departamento": "6", "nombre": "Guazapa" },
+  { "id_municipio": "207", "id_departamento": "6", "nombre": "Ilopango" },
+  { "id_municipio": "208", "id_departamento": "6", "nombre": "Mejicanos" },
+  { "id_municipio": "209", "id_departamento": "6", "nombre": "Nejapa" },
+  { "id_municipio": "210", "id_departamento": "6", "nombre": "Panchimalco" },
+  {
+    "id_municipio": "211",
+    "id_departamento": "6",
+    "nombre": "Rosario de Mora"
+  },
+  { "id_municipio": "212", "id_departamento": "6", "nombre": "San Marcos" },
+  { "id_municipio": "213", "id_departamento": "6", "nombre": "San Martín" },
+  { "id_municipio": "214", "id_departamento": "6", "nombre": "San Salvador" },
+  {
+    "id_municipio": "215",
+    "id_departamento": "6",
+    "nombre": "Santiago Texacuangos"
+  },
+  { "id_municipio": "216", "id_departamento": "6", "nombre": "Santo Tomás" },
+  { "id_municipio": "217", "id_departamento": "6", "nombre": "Soyapango" },
+  { "id_municipio": "218", "id_departamento": "6", "nombre": "Tonacatepeque" },
+  { "id_municipio": "219", "id_departamento": "8", "nombre": "Zacatecoluca" },
+  { "id_municipio": "220", "id_departamento": "8", "nombre": "Cuyultitán" },
+  {
+    "id_municipio": "221",
+    "id_departamento": "8",
+    "nombre": "El Rosario (La Paz)"
+  },
+  { "id_municipio": "222", "id_departamento": "8", "nombre": "Jerusalén" },
+  {
+    "id_municipio": "223",
+    "id_departamento": "8",
+    "nombre": "Mercedes La Ceiba"
+  },
+  { "id_municipio": "224", "id_departamento": "8", "nombre": "Olocuilta" },
+  {
+    "id_municipio": "225",
+    "id_departamento": "8",
+    "nombre": "Paraíso de Osorio"
+  },
+  {
+    "id_municipio": "226",
+    "id_departamento": "8",
+    "nombre": "San Antonio Masahuat"
+  },
+  { "id_municipio": "227", "id_departamento": "8", "nombre": "San Emigdio" },
+  {
+    "id_municipio": "228",
+    "id_departamento": "8",
+    "nombre": "San Francisco Chinameca"
+  },
+  {
+    "id_municipio": "229",
+    "id_departamento": "8",
+    "nombre": "San Pedro Masahuat"
+  },
+  {
+    "id_municipio": "230",
+    "id_departamento": "8",
+    "nombre": "San Juan Nonualco"
+  },
+  { "id_municipio": "231", "id_departamento": "8", "nombre": "San Juan Talpa" },
+  {
+    "id_municipio": "232",
+    "id_departamento": "8",
+    "nombre": "San Juan Tepezontes"
+  },
+  {
+    "id_municipio": "233",
+    "id_departamento": "8",
+    "nombre": "San Luis La Herradura"
+  },
+  { "id_municipio": "234", "id_departamento": "8", "nombre": "San Luis Talpa" },
+  {
+    "id_municipio": "235",
+    "id_departamento": "8",
+    "nombre": "San Miguel Tepezontes"
+  },
+  {
+    "id_municipio": "236",
+    "id_departamento": "8",
+    "nombre": "San Pedro Nonualco"
+  },
+  {
+    "id_municipio": "237",
+    "id_departamento": "8",
+    "nombre": "San Rafael Obrajuelo"
+  },
+  {
+    "id_municipio": "238",
+    "id_departamento": "8",
+    "nombre": "Santa María Ostuma"
+  },
+  {
+    "id_municipio": "239",
+    "id_departamento": "8",
+    "nombre": "Santiago Nonualco"
+  },
+  { "id_municipio": "240", "id_departamento": "8", "nombre": "Tapalhuaca" },
+  { "id_municipio": "241", "id_departamento": "9", "nombre": "Cinquera" },
+  { "id_municipio": "242", "id_departamento": "9", "nombre": "Dolores" },
+  { "id_municipio": "243", "id_departamento": "9", "nombre": "Guacotecti" },
+  { "id_municipio": "244", "id_departamento": "9", "nombre": "Ilobasco" },
+  { "id_municipio": "245", "id_departamento": "9", "nombre": "Jutiapa" },
+  {
+    "id_municipio": "246",
+    "id_departamento": "9",
+    "nombre": "San Isidro (Cabañas)"
+  },
+  { "id_municipio": "247", "id_departamento": "9", "nombre": "Sensuntepeque" },
+  { "id_municipio": "248", "id_departamento": "9", "nombre": "Tejutepeque" },
+  { "id_municipio": "249", "id_departamento": "9", "nombre": "Victoria" },
+  { "id_municipio": "250", "id_departamento": "10", "nombre": "Apastepeque" },
+  { "id_municipio": "251", "id_departamento": "10", "nombre": "Guadalupe" },
+  {
+    "id_municipio": "252",
+    "id_departamento": "10",
+    "nombre": "San Cayetano Istepeque"
+  },
+  {
+    "id_municipio": "253",
+    "id_departamento": "10",
+    "nombre": "San Esteban Catarina"
+  },
+  { "id_municipio": "254", "id_departamento": "10", "nombre": "San Ildefonso" },
+  { "id_municipio": "255", "id_departamento": "10", "nombre": "San Lorenzo" },
+  { "id_municipio": "256", "id_departamento": "10", "nombre": "San Sebastián" },
+  { "id_municipio": "257", "id_departamento": "10", "nombre": "San Vicente" },
+  { "id_municipio": "258", "id_departamento": "10", "nombre": "Santa Clara" },
+  { "id_municipio": "259", "id_departamento": "10", "nombre": "Santo Domingo" },
+  { "id_municipio": "260", "id_departamento": "10", "nombre": "Tecoluca" },
+  { "id_municipio": "261", "id_departamento": "10", "nombre": "Tepetitán" },
+  { "id_municipio": "262", "id_departamento": "10", "nombre": "Verapaz" }
+]

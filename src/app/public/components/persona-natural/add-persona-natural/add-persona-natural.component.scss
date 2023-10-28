@@ -1,0 +1,293 @@
+
+.invalid-feedback {
+	display: none;
+	width: 100%;
+	margin-top: 0.25rem;
+	font-size: 80%;
+	color: #dc3545;
+}
+
+.card-title{
+	margin-top: 7px !important;
+}
+.card-body{
+    padding-left: 15px;
+}
+.card-header{
+	background-color: #000432;
+	height: 10%;
+	color: floralwhite;
+	margin-bottom: 10px;
+}
+
+#_btn-back{
+	margin-left: 20px;
+	background-color: #fff;
+	border: solid 1px #6571ff;
+}
+
+::placeholder{
+	color: #646464 !important;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 5px !important;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #eff0f7;
+    background-clip: padding-box;
+    border: 1px solid #eff0f7;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.font-medium{
+	font-weight: 500;
+}
+
+
+.custom-dropzone {
+	height: 250px;
+	background: #eff0f7;
+	color: #136 !important;
+	border: 2px dashed #1363b3 !important;
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+.installer {
+	position: relative;
+}
+#header-in {
+	height: 122px;
+}
+
+.img-data{
+	margin-bottom: 45px !important;
+    width: 327px !important;
+	margin-left: -13px;
+}
+
+.profile {
+	img {
+		height: 135px;
+		width: 135px;
+		margin-top: 2px;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		border-radius: 10px;
+	}
+	position: revert;
+	top: -50px;
+	width: 110px;
+	border-radius: 50%;
+}
+.mt-container {
+	margin-top: 03px;
+	margin-bottom: -12px;
+}
+.text-align-cont {
+	text-align: center;
+}
+.head-div-explorer {
+	margin-top: 2px;
+	margin-left: -15%;
+}
+#menu-slide-form {
+	border-radius: 130px;
+	width: 40px;
+	height: 40px;
+	margin-bottom: -18px;
+	background: linear-gradient(105.21deg, #1263B3 -16.12%, #00BDFF 137.25%, rgba(18, 99, 179, 0) 137.27%);
+}
+.menu-slide-i {
+	text-align: center;
+	margin-left: -8px;
+	margin-right: -10px;
+	margin-top: -5px;
+}
+#subtitle-span-menu {
+	color: white;
+	text-transform: capitalize;
+}
+.mt-menu {
+	margin-top: 2px;
+}
+.category-color {
+	color: #fff;
+}
+#info {
+	margin-left: -08px;
+}
+#rounded-btn {
+	border-radius: 50px;
+    height: 35px;
+    width: 35px;
+    margin-top: -56px;
+    margin-bottom: -16px;
+    margin-right: -65px;
+    background-color: ghostwhite;
+}
+#bell {
+	font-size: 21px;
+	color: white;
+}
+#align-item {
+    margin-top: -2px;
+    margin-left: -12px;
+}
+
+.was-validated {
+	.form-control {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.form-control.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+
+.was-validated {
+	.custom-select {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+	.form-control-file {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.custom-select.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+.form-control-file.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+
+
+.was-validated {
+	.form-check-input {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.form-check-input.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+
+.was-validated {
+	.custom-control-input {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.custom-control-input.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
+
+
+.was-validated {
+	.custom-file-input {
+		&:invalid {
+			~ {
+				.invalid-feedback {
+					display: block;
+				}
+				.invalid-tooltip {
+					display: block;
+				}
+			}
+		}
+	}
+}
+.custom-file-input.is-invalid {
+	~ {
+		.invalid-feedback {
+			display: block;
+		}
+		.invalid-tooltip {
+			display: block;
+		}
+	}
+}
