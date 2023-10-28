@@ -26,6 +26,8 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
 
   public formData: any = new FormData();
 
+  public obtenidoPartidoPolitico: boolean = false
+
   public uploadFiles: any;
   public url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg';
 
@@ -144,6 +146,7 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
       .subscribe((data: any) => {
         this.PartidoPolitico.push(data)
         console.log(this.PartidoPolitico)
+        this.obtenidoPartidoPolitico = true
       })
   }
 

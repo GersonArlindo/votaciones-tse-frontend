@@ -39,15 +39,15 @@ export const MENU: MenuItem[] = [
     icon: 'package',
     link: '/jrv/view',
   },
-  {
-    label: 'VOTACIONES',
-    isTitle: true
-  },
-  {
-    label: '1º R',
-    icon: 'home',
-    link: '/generar-qr/view'
-  },
+  // {
+  //   label: 'VOTACIONES',
+  //   isTitle: true
+  // },
+  // {
+  //   label: '1º R',
+  //   icon: 'home',
+  //   link: '/generar-qr/view'
+  // },
   // {
   //   label: 'Email',
   //   icon: 'mail',

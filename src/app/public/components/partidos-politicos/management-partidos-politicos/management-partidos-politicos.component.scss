@@ -209,6 +209,12 @@ a.hero-image-container {
     display: block;
 }
 
+.hero-image {
+  object-fit: cover; /* o 'contain' u otras opciones según tus necesidades */
+  width: 100%;
+  height: 100%;
+}
+
 .small-image {
     width: 1.2em;
     margin-right: .5em;
@@ -599,7 +605,7 @@ h4 {
 }
 
 .custom-product-card {
-    width: 330px;
+    width: 300px;
     position: relative;
     box-shadow: 0 2px 7px #dfdfdf;
     margin: 20px auto;

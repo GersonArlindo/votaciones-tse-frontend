@@ -101,7 +101,7 @@
                   {{ personaNatural.genero }}
                 </td>
                 <td>
-                  {{ personaNatural.id_municipio }}
+                  {{ personaNatural.municipio.nombre }}
                 </td>
                 <td style="text-align: left; margin-left: -5px;">
                   <!-- <a *ngIf="deleted == 1" (click)="deletePersonaNaturalModal(contentDelete, personaNatural.id_persona)"
@@ -126,7 +126,7 @@
                           <label class="labelDetails text-center"><i class="mdi mdi-text"></i> Nombre</label>
                           <p class="pDetails">{{personaNatural.nombres}} {{personaNatural.apellidos}}</p>
                           <label class="labelDetails"><i class="mdi mdi-map-marker"></i> Municipio</label>
-                          <p class="pDetails">{{personaNatural.id_municipio}}</p>
+                          <p class="pDetails">{{personaNatural.municipio.nombre}}</p>
                           <label class="labelDetails"><i class="mdi mdi-clipboard-text-clock"></i> Date Created</label>
                           <p class="pDetails">{{personaNatural.creado_en}}</p>
 

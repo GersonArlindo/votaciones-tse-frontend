@@ -23,9 +23,9 @@
                 <div class="table-responsive table table-hover mb-0">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-auto">
+                            <div class="col-md-4">
                                 <div class="card-container">
-                                    <img class="hero-image"
+                                    <img *ngIf="obtenidoPartidoPolitico" class="hero-image"
                                         [src]="'https://evotes-app-administracion.s3.us-west-2.amazonaws.com/' + pp.logo"
                                         alt="Spinning glass cube" />
                                     <main class="main-content">
@@ -50,7 +50,7 @@
                                     </main>
                                 </div>
                             </div>
-                            <div class="col-md-auto">
+                            <div class="col-md-4">
                                 <div class="master-container mt-3">
                                     <div class="card coupons">
                                         <label class="title">Buscar Candidato</label>
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-auto">
+                            <div class="col-md-4">
                                 <div class="custom-product-card" *ngIf="pp.candidatos.length >= 1">
                                     <span *ngFor="let candidato of pp.candidatos">
                                         <span *ngFor="let candb of this.candidatos">
@@ -130,7 +130,7 @@
                                         </span>
                                     </span>
                                 </div>
-                                <div *ngIf="pp.candidatos.length <= 0">
+                                <div class="custom-product-card" *ngIf="pp.candidatos.length <= 0">
                                     <h1>No se han asignado candidatos</h1>
                                 </div>
                             </div>
