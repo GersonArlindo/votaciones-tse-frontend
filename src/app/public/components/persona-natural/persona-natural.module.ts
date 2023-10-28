@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PersonaNaturalComponent } from './persona-natural.component';
 import { ViewPersonasNaturalesComponent } from './view-personas-naturales/view-personas-naturales.component';
 import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
@@ -17,16 +16,10 @@ import { SortablejsModule } from 'ngx-sortablejs';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddPersonaNaturalComponent } from './add-persona-natural/add-persona-natural.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
-};
-
-const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
-  // Change this to your upload POST address:
-  url: 'https://httpbin.org/post',
-  maxFilesize: 50,
-  acceptedFiles: 'image/*'
 };
 
 const routes: Routes = [
@@ -43,6 +36,10 @@ const routes: Routes = [
       {
         path: 'view',
         component: ViewPersonasNaturalesComponent,
+      }, 
+      {
+        path: 'add',
+        component: AddPersonaNaturalComponent,
       }
     ]
   },
@@ -51,7 +48,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     PersonaNaturalComponent,
-    ViewPersonasNaturalesComponent
+    ViewPersonasNaturalesComponent,
+    AddPersonaNaturalComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
@@ -79,10 +77,6 @@ const routes: Routes = [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },
-    {
-      provide: DROPZONE_CONFIG,
-      useValue: DEFAULT_DROPZONE_CONFIG
     },
   ]
 })

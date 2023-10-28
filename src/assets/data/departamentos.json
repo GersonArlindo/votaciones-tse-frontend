@@ -1,0 +1,16 @@
+[
+  { "id_departamento": "1", "nombre": "AHUACHAPAN" },
+  { "id_departamento": "2", "nombre": "SANTA ANA" },
+  { "id_departamento": "3", "nombre": "SONSONATE" },
+  { "id_departamento": "4", "nombre": "CHALATENANGO" },
+  { "id_departamento": "5", "nombre": "LA LIBERTAD" },
+  { "id_departamento": "6", "nombre": "SAN SALVADOR" },
+  { "id_departamento": "7", "nombre": "CUSCATLAN" },
+  { "id_departamento": "8", "nombre": "LA PAZ" },
+  { "id_departamento": "9", "nombre": "CABAÑAS" },
+  { "id_departamento": "10", "nombre": "SAN VICENTE" },
+  { "id_departamento": "11", "nombre": "USULUTAN" },
+  { "id_departamento": "12", "nombre": "SAN MIGUEL" },
+  { "id_departamento": "13", "nombre": "MORAZAN" },
+  { "id_departamento": "14", "nombre": "LA UNION" }
+]
