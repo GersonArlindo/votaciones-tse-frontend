@@ -22,6 +22,11 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
   public PartidoPolitico: any = []
   public personaNatural: any[] = [];
   public personaNaturalEncontrada: any[] = [];
+  public candidatos: any[] = []
+
+  public formData: any = new FormData();
+
+  public obtenidoPartidoPolitico: boolean = false
 
   public uploadFiles: any;
   public url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg';
@@ -45,6 +50,7 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.traerPartidoPoliticoById()
     this.getPersonasNaturales()
+    this.getCandidatos()
   }
 
   public getPersonasNaturales(){
@@ -56,6 +62,16 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
       console.log(this.personaNatural)
     })
     
+  }
+
+  public getCandidatos(){
+    this.candidatoSrv.getCandidato(this.token)
+    .subscribe((data: any) => {
+      for(let candidato of data){
+        this.candidatos.push(candidato)
+      }
+      console.log(this.candidatos)
+    })
   }
 
   buscarEnArreglo() {
@@ -75,11 +91,11 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
 
   public vincularCandidato(id_persona_natural: any){
     console.log(id_persona_natural)
-    const data: any = {
-      foto_candidato: this.uploadFiles,
-      id_partido_politico: Number(this.id),
-      id_persona_natural: id_persona_natural
-    }
+
+    this.formData.append("estado", "ACTIVO");
+    this.formData.append("id_partido_politico", Number(this.id));
+    this.formData.append("id_persona_natural", id_persona_natural);
+    this.formData.append("foto_candidato", this.uploadFiles);
 
     Swal.fire({
       title: 'Estas seguro?',
@@ -91,8 +107,7 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
       confirmButtonText: 'Confirmar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(data)
-        this.candidatoSrv.createCandidato(this.token, data)
+        this.candidatoSrv.createCandidato(this.token, this.formData)
         .subscribe((res: any) => {
           console.log(res);
           if(res){
@@ -123,6 +138,7 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.uploadFiles = event.target.files[0];
     }
+    console.log(this.uploadFiles);   
   }
 
   public traerPartidoPoliticoById(){
@@ -130,6 +146,7 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
       .subscribe((data: any) => {
         this.PartidoPolitico.push(data)
         console.log(this.PartidoPolitico)
+        this.obtenidoPartidoPolitico = true
       })
   }
 

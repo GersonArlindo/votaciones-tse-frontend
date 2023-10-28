@@ -1,0 +1,167 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size="medium" color="transparent" [fullScreen]="true">
+  <lottie-player style="margin-top:-30px;" src="https://assets5.lottiefiles.com/private_files/lf30_tcux3hw6.json"
+    background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay></lottie-player>
+</ngx-spinner>
+
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/persona-natural/view">Personas Natural</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{this.title}}</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title">Informacion de la persona</h6>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="savePersonaNatural()">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Nombres</label>
+                <p class="text-secondary mb-1">Debe coincidir con el nombre en su Dui</p>
+                <input type="text" [ngClass]="{ 'is-invalid': submitted && position['nombres'].errors }"
+                  formControlName="nombres" name="nombres" id="nombres" class="form-control"
+                  placeholder="Ingrese el nombre">
+                <div *ngIf="submitted && position['nombres']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['nombres']?.hasError('required')">Nombre es requerido</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Apellidos</label>
+                <p class="text-secondary mb-1">Debe coincidir con el apellido en su Dui</p>
+                <input type="text" [ngClass]="{ 'is-invalid': submitted && position['apellidos'].errors }"
+                  formControlName="apellidos" name="apellidos" id="apellidos" class="form-control"
+                  placeholder="Ingrese el apellidos">
+                <div *ngIf="submitted && position['apellidos']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['apellidos']?.hasError('required')">Apellido es requerido</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Genero</label>
+                <p class="text-secondary mb-1">El género debe coincidir con el dui</p>
+                <select id="genero" name="genero" (ngModelChange)="handleGenero($event)" formControlName="genero"
+                  [(ngModel)]="data.genero" [ngClass]="{
+                          'is-invalid': submitted && position['genero'].errors
+                        }" class="form-select form-control">
+                  <option *ngFor="let genero of this.generos" [value]="genero">
+                    {{ genero }}
+                  </option>
+                </select>
+                <div *ngIf="submitted && position['genero']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['genero']?.hasError('required')">Genero es requerido</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Fecha de nacimiento</label>
+                <p class="text-secondary mb-1">Debe coincidir con la fecha en el Dui</p>
+                <input type="date" [ngClass]="{ 'is-invalid': submitted && position['fecha_nacimiento'].errors }"
+                  formControlName="fecha_nacimiento" name="fecha_nacimiento" max="2005-" id="fecha_nacimiento"
+                  class="form-control" placeholder="Ingrese el dui">
+                <div *ngIf="submitted && position['fecha_nacimiento']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['fecha_nacimiento']?.hasError('required')">La fecha de nacimiento es
+                    incorrecta</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Dui</label>
+                <p class="text-secondary mb-1">Ejemplo: 12345678-9</p>
+                <input type="text" [ngClass]="{ 'is-invalid': submitted && position['dui'].errors }"
+                  formControlName="dui" name="dui" id="dui" class="form-control" placeholder="Ingrese el dui">
+                <div *ngIf="submitted && position['dui']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['dui']?.hasError('required')">El dui no es válido</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Fecha de vencimiento</label>
+                <p class="text-secondary mb-1">Debe coincidir con la fecha en el Dui</p>
+                <input type="date" [ngClass]="{ 'is-invalid': submitted && position['fecha_vencimiento_dui'].errors }"
+                  formControlName="fecha_vencimiento_dui" name="fecha_vencimiento_dui" max="2005-"
+                  id="fecha_vencimiento_dui" class="form-control" placeholder="Ingrese el dui">
+                <div *ngIf="submitted && position['fecha_vencimiento_dui']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['fecha_vencimiento_dui']?.hasError('required')">La fecha es
+                    requerida</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Departamento</label>
+                <p class="text-secondary mb-1">Selecione el departamento de residencia</p>
+                <select id="departamento" name="departamento" (ngModelChange)="handleDepartamento($event)"
+                  [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedDepartamento" [ngClass]="{
+                          'is-invalid': submitted && position['departamento'].errors
+                        }" class="form-select form-control">
+                  <option *ngFor="let departamento of this.departamentos" [value]="departamento.id_departamento">
+                    {{ departamento.nombre }}
+                  </option>
+                </select>
+                <div *ngIf="submitted && position['departamento']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['departamento']?.hasError('required')">Departamento es
+                    requerido</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Municipio</label>
+                <p class="text-secondary mb-1">Debe seleccionar un departamento primero</p>
+                <select id="municipio" name="municipio" [disabled]="!selectedDepartamento" formControlName="municipio"
+                  [(ngModel)]="selectedMunicipio" [ngClass]="{
+                          'is-invalid': submitted && position['municipio'].errors}" class="form-select form-control">
+                  <option *ngFor="let municipio of this.municipios" [value]="municipio.id_municipio">
+                    {{ municipio.nombre }}
+                  </option>
+                </select>
+                <div *ngIf="submitted && position['municipio']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['municipio']?.hasError('required')">Municipio es requerido</mat-error>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label mb-0 font-medium">Dirección</label>
+                <p class="text-secondary mb-1">Detalle lu direccion de vivienda</p>
+                <textarea type="text" [ngClass]="{ 'is-invalid': submitted && position['dui'].errors }"
+                  formControlName="direccion" name="direccion" id="direccion" class="form-control"
+                  placeholder="Colonia/Residencia, calle">
+                </textarea>
+                <div *ngIf="submitted && position['direccion']?.errors" class="invalid-feedback">
+                  <mat-error *ngIf="position['direccion']?.hasError('required')">Direccion es requerida</mat-error>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+          <button [disabled]="!form.valid" (click)="onSubmit()" type="submit" class="btn btn-primary submit">Guardar<i
+              class="mdi mdi-file-document-edit mx-1"></i> </button>
+          <button id="_btn-back" routerLink="/persona-natural/view" type="submit" name="submitButton"
+            class="btn">Regresar <i class="mdi mdi-arrow-left"></i> </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

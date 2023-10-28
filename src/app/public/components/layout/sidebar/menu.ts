@@ -39,7 +39,7 @@ export const MENU: MenuItem[] = [
     icon: 'package',
     link: '/jrv/view',
   },
-  {
+  /* {
     label: 'VOTACIONES',
     isTitle: true
   },
@@ -47,7 +47,7 @@ export const MENU: MenuItem[] = [
     label: '1º R',
     icon: 'home',
     link: '/generar-qr/view'
-  },
+  }, */
   {
     label: 'USUARIOS',
     isTitle: true

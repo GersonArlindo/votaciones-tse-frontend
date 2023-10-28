@@ -142,6 +142,9 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.uploadFiles = event.target.files[0];
     }
+
+    console.log(this.uploadFiles);
+    
   }
 
   get position() { return this.form.controls }
