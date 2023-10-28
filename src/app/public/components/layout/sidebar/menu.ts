@@ -48,6 +48,15 @@ export const MENU: MenuItem[] = [
     icon: 'home',
     link: '/generar-qr/view'
   },
+  {
+    label: 'USUARIOS',
+    isTitle: true
+  },
+  {
+    label: 'Usuarios',
+    icon: 'user',
+    link: '/usuarios/view'
+  },
   // {
   //   label: 'Email',
   //   icon: 'mail',
