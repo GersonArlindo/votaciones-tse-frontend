@@ -1,5 +1,6 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CentroVotacionComponent } from './centro-votacion.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -16,17 +17,15 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatTableModule } from '@angular/material/table';
 import { TableModule } from 'primeng/table';
 import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+// Ng-select
 import { NgSelectModule } from '@ng-select/ng-select';
-import { DropzoneConfigInterface, DropzoneModule, DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
-import { PartidosPoliticosComponent } from './partidos-politicos.component';
-import { ViewPartidosPoliticosComponent } from './view-partidos-politicos/view-partidos-politicos.component';
-import { AddEditPartidosPoliticosComponent } from './add-edit-partidos-politicos/add-edit-partidos-politicos.component';
-import { ManagementPartidosPoliticosComponent } from './management-partidos-politicos/management-partidos-politicos.component';
-
+import { ViewCentroVotacionComponent } from './view-centro-votacion/view-centro-votacion.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
+
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
   url: 'https://httpbin.org/post',
@@ -38,9 +37,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 const routes: Routes = [
   {
     path: '',
-    component: PartidosPoliticosComponent,
+    component: CentroVotacionComponent,
     children: [
-
       {
         path: '',
         redirectTo: 'view',
@@ -49,39 +47,24 @@ const routes: Routes = [
       },
       {
         path: 'view',
-        component: ViewPartidosPoliticosComponent,
-      },
-      {
-        path: 'add',
-        component: AddEditPartidosPoliticosComponent,
-      },
-      {
-        path: 'edit/:id',
-        component: AddEditPartidosPoliticosComponent,
-      },
-      {
-        path: 'management/:id',
-        component: ManagementPartidosPoliticosComponent,
+        component: ViewCentroVotacionComponent,
       }
     ]
   },
 ]
 
 
-
 @NgModule({
   declarations: [
-    PartidosPoliticosComponent,
-    ViewPartidosPoliticosComponent,
-    AddEditPartidosPoliticosComponent,
-    ManagementPartidosPoliticosComponent
+    CentroVotacionComponent,
+    ViewCentroVotacionComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     FormsModule,
     MatTableModule,
-    DropzoneModule,
     NgxSpinnerModule,
     NgxDatatableModule,
     PerfectScrollbarModule,
@@ -89,7 +72,7 @@ const routes: Routes = [
     FeatherIconModule,
     AngularCropperjsModule,
     CarouselModule,
-    NgSelectModule, // Ng-select
+    NgSelectModule,
     SortablejsModule.forRoot({
       animation: 150,
       ghostClass: 'bg-light',
@@ -98,7 +81,6 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    RouterModule.forChild(routes)
   ],
   providers: [
     {
@@ -110,6 +92,5 @@ const routes: Routes = [
       useValue: DEFAULT_DROPZONE_CONFIG
     },
   ]
-
 })
-export class PartidosPoliticosModule { }
+export class CentroVotacionModule { }

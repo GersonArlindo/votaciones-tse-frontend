@@ -5,7 +5,6 @@ import { AuthService } from '@app/core/services/auth.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { UsersService } from '@app/core/services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +27,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private authSvc: AuthService, 
-    private fb: UntypedFormBuilder, 
-    private UsersSrv: UsersService,
+    private fb: UntypedFormBuilder
     ) { }
 
   ngOnInit(): void {

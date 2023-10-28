@@ -22,6 +22,7 @@ import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { LoginGuard } from './core/guards/login.guard';
 import { DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };

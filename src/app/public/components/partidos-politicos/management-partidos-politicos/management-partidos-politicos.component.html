@@ -1,0 +1,143 @@
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/dashboard">Panel</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Partidos Politicos</li>
+    </ol>
+</nav>
+
+<div class="row"  *ngFor="let pp of this.PartidoPolitico">
+    <div class="col-md-12 stretch-card">
+        <div class="card">
+
+            <div class="headercard">
+                <h5 id="_title-header-h5">Detalle de Partido Politico: {{pp.siglas}}</h5>
+                <div class="btn-text-right headercard">
+                    <button status="success" id="_btn-success" routerLink="/partidos-politicos/add"
+                        class="dt-button create-new btn btn-primary ml-2" tabindex="0"
+                        aria-controls="DataTables_Table_0" type="button">
+                        <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i> Agregar Partidos</span>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table table-hover mb-0">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="card-container">
+                                    <img class="hero-image"
+                                        [src]="'https://evotes-app-administracion.s3.us-west-2.amazonaws.com/' + pp.logo"
+                                        alt="Spinning glass cube" />
+                                    <main class="main-content">
+                                        <h1>{{pp.nombre}}</h1>
+                                        <p>{{pp.siglas}}</p>
+                                        <div class="flex-row">
+                                            <div class="coin-base">
+                                                <img *ngIf="pp.estado == 'ACTIVO'"
+                                                    src="https://www.freeiconspng.com/thumbs/check-mark-png/check-mark-icon-green-0.png"
+                                                    alt="Estado" class="small-image" />
+                                                <img *ngIf="pp.estado == 'INACTIVO'"
+                                                    src="https://static.vecteezy.com/system/resources/thumbnails/009/344/493/small/x-transparent-free-png.png"
+                                                    alt="Estado" class="small-image" />
+                                                <h2>{{pp.estado}}</h2>
+                                            </div>
+                                            <div class="time-left">
+                                                <img src="https://www.clipartmax.com/png/middle/79-797734_icon-date-png.png"
+                                                    alt="clock" class="small-image" />
+                                                <p>{{this.transformarFecha(pp.creado_en)}}</p>
+                                            </div>
+                                        </div>
+                                    </main>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="master-container mt-3">
+                                    <div class="card coupons">
+                                        <label class="title">Buscar Candidato</label>
+                                        <form class="form" [formGroup]="formBuscar" (ngSubmit)="buscarEnArreglo()">
+                                            <input type="text" placeholder="Buscar por DUI o nombre"
+                                                formControlName="valor" class="input_field">
+                                            <button type="submit" [disabled]="!formBuscar.valid">Buscar</button>
+                                        </form>
+                                    </div>
+
+                                    <div class="card cart" *ngIf="this.personaNaturalEncontrada.length >= 1">
+                                        <label class="title">Suba su Imagen</label>
+                                        <div class="products">
+                                                <div class="form-group">
+                                                    <div
+                                                      class="custom-file"
+                                                      class="btn btn-default button-rounded-36 float-bottom-right img-data"
+                                                    >
+                                                      <input
+                                                        (change)="onFileSelect($event)"
+                                                        class="form-control custom-file-input cursor-pointer"
+                                                        id="attachment"
+                                                        name="attachment"
+                                                        type="file"
+                                                        id="formFile"
+                                                      />
+                                                    </div>
+                                                  </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card checkout" *ngIf="this.personaNaturalEncontrada.length >= 1">
+                                        <div *ngFor="let info of this.personaNaturalEncontrada">
+                                            <label class="title">Informacion del Candidato</label>
+                                            <div class="details">
+                                                <span>Nombres:</span>
+                                                <span>{{info.nombres}}</span>
+                                                <span>Apellidos:</span>
+                                                <span>{{info.apellidos}}</span>
+                                                <span>Nacimiento:</span>
+                                                <span>{{this.formatearFecha(info.fecha_vencimiento_dui)}}</span>
+                                                <span>Dui:</span>
+                                                <span>{{info.dui}}</span>
+                                                <span>Genero:</span>
+                                                <span>{{info.genero}}</span>
+                                            </div>
+                                            <div class="checkout--footer">
+                                                <label class="price"><sup></sup></label>
+                                                <button class="checkout-btn"
+                                                    (click)="vincularCandidato(info.id_persona_natural)">Vincular</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="custom-product-card" *ngIf="pp.candidatos.length >= 1">
+                                    <span *ngFor="let candidato of pp.candidatos">
+                                        <span *ngFor="let candb of this.candidatos">
+                                            <span *ngIf="candidato.id_candidato == candb.id_candidato">
+                                                <div class="custom-product-tumb">
+                                                    <img [src]="'https://evotes-app-administracion.s3.us-west-2.amazonaws.com/' + candb.foto_candidato" alt="">
+                                                </div>
+                                                <div class="custom-product-details">
+                                                    <span class="custom-product-catagory">DUI: {{candb.informacion_personal.dui}}</span>
+                                                    <h4 style="color: #363636;">{{candb.informacion_personal.nombres}} {{candb.informacion_personal.apellidos}}</h4>
+                                                    <p>Fecha de Nacimiento: {{this.formatearFecha(candb.informacion_personal.fecha_nacimiento)}}</p>
+                                                    <div class="custom-product-bottom-details">
+                                                        <div class="custom-product-price"><small>Genero:</small>{{candb.informacion_personal.genero}}</div>
+                                                        <div class="custom-product-links">
+                                                            <a href=""><i class="fa fa-heart"></i></a>
+                                                            <a href=""><i class="fa fa-shopping-cart"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div *ngIf="pp.candidatos.length <= 0">
+                                    <h1>No se han asignado candidatos</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

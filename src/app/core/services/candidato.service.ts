@@ -34,9 +34,9 @@ export class CandidatoService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.get<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`, {headers})
+    return this.http.get<any>(`${environment.API_URL}candidato-politico/${id}`, {headers})
     .pipe(
-      map((response:any) => response.lenguage)
+      map((response:any) => response)
     )
   }
 
@@ -44,7 +44,7 @@ export class CandidatoService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.post<any>(`${environment.API_URL_AUTH}candidato-politico`, data, {headers})
+    return this.http.post<any>(`${environment.API_URL}candidato-politico`, data, {headers})
     .pipe(
       map((res:any)=> {
         return res;
@@ -55,7 +55,7 @@ export class CandidatoService {
 
   
   updateCandidato(data:any, id: any) : Observable<any | void>{
-    return this.http.put<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`, data)
+    return this.http.put<any>(`${environment.API_URL}candidato-politico/${id}`, data)
     .pipe(
       map((res:any)=> {
         return res;
@@ -65,7 +65,7 @@ export class CandidatoService {
   }
 
   deleteCandidato(id:any) : Observable<any>{
-    return this.http.delete<any>(`${environment.API_URL_AUTH}candidato-politico/${id}`)
+    return this.http.delete<any>(`${environment.API_URL}candidato-politico/${id}`)
     .pipe(
       map((res:any) => {
         return res;

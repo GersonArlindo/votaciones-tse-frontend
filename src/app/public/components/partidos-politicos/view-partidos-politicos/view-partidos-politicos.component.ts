@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { partidosPoliticosGlobalMsg } from '@app/core/models/partidos_politicos.interface';
 import { PartidosPoliticosService } from '@app/core/services/partido-politico.service';
-import { PermissionService } from '@app/core/services/permission.service';
 import { environment } from '@encoding/environment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrimeNGConfig } from 'primeng/api';
@@ -15,7 +13,7 @@ import { Table } from 'primeng/table';
 })
 export class ViewPartidosPoliticosComponent implements OnInit {
 
-  public partidos_politicos: partidosPoliticosGlobalMsg[] = [];
+  public partidos_politicos: any[] = [];
   @ViewChild('dt') table!: Table;
   closeResult:any = "";
 
@@ -30,26 +28,11 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     private PartidosPoliticosSrv: PartidosPoliticosService,
     private primengConfig: PrimeNGConfig,
     private router: Router,
-    private PermissionSrv: PermissionService
   ) { }
 
   ngOnInit(): void {
     this.getPartidosPoliticos();
-    /* this.getPermissionRole(this.rol_id); */
   }
-
- /*  public getPermissionRole(id: any){
-    this.PermissionSrv.getPermissionsByRole(id)
-      .subscribe((permission: any) => {
-        for(let permiss of permission){
-          if(permiss.mod_id == 21){
-            this.update = permiss['update'];
-            this.deleted = permiss['deleted'];
-            this.create = permiss['create'];
-          }
-        }
-      })
-  } */
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -59,6 +42,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     this.PartidosPoliticosSrv.getPartidosPoliticos(this.token)
     .subscribe((data: any) => {
       this.partidos_politicos = data;
+      console.log(this.partidos_politicos);
       this.url = `${environment.API_URL}images/${data[0].imagen}`;
       console.log(this.url)
     })
@@ -86,20 +70,7 @@ export class ViewPartidosPoliticosComponent implements OnInit {
            (b[0]<=11? ' am' : ' pm');
   }
 
- /*  public partidosPoliticosLanguage(id: any){
-    this.PartidosPoliticosSrv.getPartidosPoliticosById(id)
-    .subscribe((res: any) =>{
-      if(res){
-        setTimeout(() =>{
-          let currentUrl = this.router.url;
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate([currentUrl]);
-        }, 100);
-      }
-    })
-  }
- */
+
   ViewPartidosPoliticosModal(content: any, viewProduct:any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -120,14 +91,11 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     return
   }
 
-  public getClassBasedOnStatus(id: any) {
-    if(id == 1){
-      return "user-badge status-active";
-    }if(id == 0){
-      return "user-badge status-inactive"
-    }
-    return
+  public getClassForEstado(id: any) {
+    const className = id == 1 ? "activo-class" : id == 0 ? "inactivo-class" : "";
+    return className;
   }
+
 
   deletePartidosPoliticosModal(content: any, viewProduct:any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {

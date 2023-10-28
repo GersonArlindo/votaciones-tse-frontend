@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartidosPoliticosService } from '@app/core/services/partido-politico.service';
-import { UsersService } from '@app/core/services/users.service';
 import { environment } from '@encoding/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { switchMap } from 'rxjs';
@@ -36,8 +35,7 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private PartidosPoliticosSrv: PartidosPoliticosService,
-    private UserSrv: UsersService,
+    private PartidosPoliticosSrv: PartidosPoliticosService
   ) { }
 
   ngOnInit(): void {
@@ -61,37 +59,23 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
     });
 
     this.title = 'Agregar Partido';
-     if (this.id) {
+    if (this.id) {
       // edit mode
       this.title = 'Editar Partido';
       this.loading = true;
 
-      this.PartidosPoliticosSrv.getPartidosPoliticosById(this.id,this.token)
-        .pipe(
-          switchMap((data: any) => {
-            console.log(data);
-            if (!data) {
-              throw new Error('Los datos del partido político son indefinidos o nulos.');
-            }
+      this.PartidosPoliticosSrv.getPartidosPoliticosById(this.id, this.token)
+        .subscribe((next: any) => {
+          console.log('Datos recibidos:', next);
+          this.form = this.formBuilder.group({
+            nombre: [next.nombre],
+            siglas: [next.siglas],
+            logo: [next.logo],
+            estado: [next.estado],
+          });
 
-            this.form = this.formBuilder.group({
-              nombre: [data['nombre'], [Validators.required]],
-              siglas: [data['siglas']],
-              estado: [data['estado']],
-              logo: [data['logo']]
-            });
-
-            this.url = `${environment.API_URL}/${this.id}/${data['logo']}`;
-            this.selectedStatus = data['estado'];
-
-            return Promise.resolve(); // Resuelve la promesa vacía para que el observable se complete
-          })
-        )
-        .toPromise()
-        .catch((error: any) => {
-          // Manejar errores aquí
-          console.error('Error en la solicitud HTTP:', error);
-        });
+          this.url = `${environment.API_URL}images/${next['logo']}`;
+        })
     }
   }
 
@@ -158,6 +142,9 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.uploadFiles = event.target.files[0];
     }
+
+    console.log(this.uploadFiles);
+    
   }
 
   get position() { return this.form.controls }
