@@ -56,7 +56,11 @@ const routes: Routes = [
         path: 'generar-qr',
         loadChildren: () => import('./public/components/generar-qr/generar-qr.module').then(m => m.GenerarQrModule)
       },
-      
+      {
+        path: 'usuarios',
+        loadChildren: () => import('./public/components/usuarios/usuarios.module').then(m => m.UsuariosModule)
+      },
+
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },

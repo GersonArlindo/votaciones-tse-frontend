@@ -25,42 +25,56 @@ export class UsersService {
     )
   }
 
-  getUserById(id: any): Observable<users[]> {
-    return this.http.get<getUserResponseData>(`${environment.API_URL_AUTH}user/show/${id}`)
+  getUsuarioById(id:any, token: any): Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}usuarios/${id}`, { headers })
     .pipe(
-      map((response: any) => response.user)
-
+      map(
+        response => response
+      ),
+      catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
     )
   }
 
-  createUsers(data: FormData) : Observable<reponseUserMsg | void>{
-    return this.http.post<reponseUserMsg>(`${environment.API_URL_AUTH}user/add`, data)
+  createUsers(data: any, token: any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post<any>(`${environment.API_URL_AUTH}usuarios`, data, {headers})
     .pipe(
-      map((res:reponseUserMsg)=> {
+      map((res:any)=> {
         return res;
       }),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
     );
   }
 
-  updateUsers(data: FormData, id: any) : Observable<reponseUserMsg | void>{
-    return this.http.put<reponseUserMsg>(`${environment.API_URL_AUTH}user/update/${id}`, data)
+  updateUsers(data: any, id: any, token: any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.put<any>(`${environment.API_URL_AUTH}usuarios/${id}`, data, {headers})
     .pipe(
-      map((res:reponseUserMsg)=> {
+      map((res:any)=> {
         return res;
       }),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
     );
   }
-  
-  deleteUsers(id:any) : Observable<reponseUserMsg>{
-    return this.http.delete<reponseUserMsg>(`${environment.API_URL_AUTH}user/delete/${id}`)
+
+  deleteUsers(id:any,token: any) : Observable<any>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${environment.API_URL_AUTH}usuarios/${id}`, {headers})
     .pipe(
-      map((res:reponseUserMsg) => {
+      map((res:any) => {
         return res;
       }),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
     )
   }
-  
+
 }

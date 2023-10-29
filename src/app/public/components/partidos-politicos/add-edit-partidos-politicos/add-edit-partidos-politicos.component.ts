@@ -65,16 +65,16 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
       this.loading = true;
 
       this.PartidosPoliticosSrv.getPartidosPoliticosById(this.id, this.token)
-        .subscribe((next: any) => {
-          console.log('Datos recibidos:', next);
+        .subscribe((data: any) => {
+          console.log('Datos recibidos:', data);
           this.form = this.formBuilder.group({
-            nombre: [next.nombre],
-            siglas: [next.siglas],
-            logo: [next.logo],
-            estado: [next.estado],
+            nombre: [data.nombre],
+            siglas: [data.siglas],
+            // logo: [next.logo],
+            estado: [data.estado],
           });
 
-          this.url = `${environment.API_URL}images/${next['logo']}`;
+          //this.url = `${environment.API_URL}images/${next['logo']}`;
         })
     }
   }
@@ -89,7 +89,7 @@ export class AddEditPartidosPoliticosComponent implements OnInit {
       this.formData.append("nombre", this.form.get('nombre')!.value);
       this.formData.append("siglas", this.form.get('siglas')!.value);
       this.formData.append("estado", this.selectedStatus)
-      this.formData.append("logo", this.uploadFiles)
+      //this.formData.append("logo", this.uploadFiles)
 
       this.spinner.show();
 
