@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PartidosPoliticosService } from '@app/core/services/partido-politico.service';
 import { environment } from '@encoding/environment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-partidos-politicos',
@@ -14,8 +16,12 @@ import { Table } from 'primeng/table';
 export class ViewPartidosPoliticosComponent implements OnInit {
 
   public partidos_politicos: any[] = [];
+  public estados: any[] = [];
   @ViewChild('dt') table!: Table;
   closeResult:any = "";
+  formEditPartidoPolitico!: FormGroup
+  opcionSeleccionadaEstado: any
+  id_seleccionado: any
 
   public token: any
   update: any;
@@ -28,11 +34,25 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     private PartidosPoliticosSrv: PartidosPoliticosService,
     private primengConfig: PrimeNGConfig,
     private router: Router,
-  ) { }
+    private formBuilder: FormBuilder
+  ) {
+    this.formEditPartidoPolitico = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      siglas: ['', Validators.required],
+      estado: [],
+    })
+   }
 
   ngOnInit(): void {
+
     this.getPartidosPoliticos();
+    this.estados = [
+      { id: "ACTIVO", nombre: "ACTIVO" },
+      { id: "INACTIVO", nombre: "INACTIVO" },
+    ]
   }
+
+
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.table.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -94,6 +114,110 @@ export class ViewPartidosPoliticosComponent implements OnInit {
   public getClassForEstado(id: any) {
     const className = id == 1 ? "activo-class" : id == 0 ? "inactivo-class" : "";
     return className;
+  }
+
+  editarPartidoPolitico(content: any, id: any){
+    this.id_seleccionado = id
+    this.PartidosPoliticosSrv.getPartidosPoliticosById(id, this.token)
+      .subscribe((data: any)=>{
+        if(data){
+          console.log(data)
+          this.opcionSeleccionadaEstado = data.estado
+          this.formEditPartidoPolitico = this.formBuilder.group({
+            nombre: [data.nombre, Validators.required],
+            siglas: [data.siglas, Validators.required],
+            estado: [this.opcionSeleccionadaEstado]
+          })
+          
+        }
+      })
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  GuardarDatosEditadorPartidoPolitico(){
+    const data: any = {
+      nombre: this.formEditPartidoPolitico.value.nombre,
+      siglas: this.formEditPartidoPolitico.value.siglas,
+      estado: this.opcionSeleccionadaEstado
+    }
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Realmente deseas editar este partido!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.PartidosPoliticosSrv.updatePartidosPoliticos(data, this.id_seleccionado, this.token)
+          .subscribe((res: any) => {
+            console.log(res)
+            if(res){
+              Swal.fire(
+                'Actualizado!',
+                'Su registro ha sido actualizado exitosamente.',
+                'success'
+              )
+              setTimeout(() => {
+                window.location.reload();
+              }, 1500);
+            }else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ah ocurrido un error!'
+              })
+            }
+          })
+      }
+    })
+    console.log(data)
+  }
+
+  public eliminarPartidoPolitico(id: any){
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Realmente deseas eliminar este partido!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.PartidosPoliticosSrv.deletePartidosPoliticos(id, this.token)
+          .subscribe((res: any) => {
+            console.log(res)
+            if(res.statusCode == 200){
+              Swal.fire(
+                'Eliminado!',
+                'Su registro ha sido eliminado exitosamente.',
+                'success'
+              )
+              // setTimeout(() => {
+              //   window.location.reload();
+              // }, 1500);
+            }else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ah ocurrido un error!'
+              })
+            }
+          })
+      }
+    })
+  }
+
+  public estadoSeleccionado(event: any){
+    console.log(event);
   }
 
 

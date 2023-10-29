@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DestinoSufragioService } from '@app/core/services/destino-sufragio.service';
 import { JrvService } from '@app/core/services/jrv.service';
 import { UsersService } from '@app/core/services/users.service';
 import { map } from 'rxjs';
@@ -16,6 +17,7 @@ export class ManagementJrvComponent implements OnInit {
   public token: any
 
   dataLoadedUsers: boolean = false;
+  dataLoadedPersonas: boolean = false;
 
   public jrvs: any[] = []
   public miembrosJRV: any[] = []
@@ -24,12 +26,15 @@ export class ManagementJrvComponent implements OnInit {
   public usersOriginal: any[] = []
   public UserSeleccionados: any[] = []
   public TodosMiembrosJrvs: any[] = []
+  public personas: any[] = []
+  public personasOriginal: any[] = []
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private jrvSrv: JrvService,
-    private userSrv: UsersService
+    private userSrv: UsersService,
+    private destinoSufragioSrv: DestinoSufragioService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +43,7 @@ export class ManagementJrvComponent implements OnInit {
     this.getJrvsById()
     this.getMiembrosByIdJrv()
     this.getAllMiembros()
+    this.getDestinoSufragio()
      const localStorageItem = localStorage.getItem('tab-jrv');
 
      if (localStorageItem) {
@@ -59,6 +65,20 @@ export class ManagementJrvComponent implements OnInit {
       }
       console.log(this.miembrosJRV);
     })
+  }
+
+  getDestinoSufragio(){
+    this.destinoSufragioSrv.getPersonasAsignadasDestinoSufragio(this.token)
+      .subscribe((res: any) => {
+        for(let persona of res){
+          if(persona.id_jrv == this.id){
+            this.personas.push(persona)
+            this.personasOriginal.push(persona)
+          }
+        }
+        this.dataLoadedPersonas = true;
+        console.log(res)
+      })
   }
 
   getAllMiembros(){
@@ -105,6 +125,37 @@ export class ManagementJrvComponent implements OnInit {
   public onUsersSelect(event: any){
     this.UserSeleccionados = event
     console.log(this.UserSeleccionados);
+  }
+
+
+  public cambiarEstado(id: any){
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Deseas cambiar el estado de esta JRV!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.jrvSrv.updatePartialJrv(id, this.token)
+          .subscribe((res: any) => {
+            if(res){
+              Swal.fire(
+                'Actualizada!',
+                'Su estado ha sido actualizado',
+                'success'
+              )
+              setTimeout(() => {
+                window.location.reload();
+              }, 1500);
+            }
+          })
+       
+      }
+    })
+    console.log(id)
   }
 
   getUsersDB() {
@@ -178,6 +229,24 @@ export class ManagementJrvComponent implements OnInit {
             return fullName.includes(filterValue) || dui.includes(filterValue);
           });
         }
+  }
+
+  public buscarPersona(event: any, valor: any){
+    console.log('event', event.target.value);
+    // Valor ingresado en el filtro
+    const filterValue = event.target.value.toLowerCase();
+
+    if (filterValue === '') {
+      // Si el filtro está vacío, mostrar toda la data original
+      this.personas = this.personasOriginal;
+    } else {
+      // Aplicar el filtro en ambos campos
+      this.personas = this.personasOriginal.filter((persona: any) => {
+        const fullName = `${persona.informacion_personal.nombres} ${persona.informacion_personal.apellidos}`.toLowerCase();
+        const dui = `${persona.informacion_personal.dui}`.toLowerCase();
+        return fullName.includes(filterValue) || dui.includes(filterValue);
+      });
+    }
   }
 
   public EnviarMiembros(){

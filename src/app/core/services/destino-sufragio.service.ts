@@ -28,4 +28,28 @@ export class DestinoSufragioService {
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
     );
   }
+
+  asignarAJrv(token:any, data:any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post<any>(`${environment.API_URL}destino-sufragio`, data, {headers})
+    .pipe(
+      map((res:any)=> {
+        return res;
+      }),
+      catchError((err) => this.HandlerErrorSrv.handlerError(err))
+    );
+  }
+
+  getPersonasAsignadasDestinoSufragio(token: any): Observable<any>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<any>(`${environment.API_URL}destino-sufragio`, { headers })
+    .pipe(
+      map((response:any) => response),
+      catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
+    )
+  }
 }

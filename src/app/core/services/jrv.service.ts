@@ -123,4 +123,19 @@ export class JrvService {
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
     )
   }
+
+  updatePartialJrv(id: any, token: any): Observable<any | void> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http
+      .patch<any>(`${environment.API_URL}junta-receptora-votos/${id}/cambiar-estado`, {}, {headers}) // Reemplaza 'tu-endpoint' por la URL de tu recurso.
+      .pipe(
+        map((res: any) => {
+          return res;
+        }),
+        catchError((err) => this.HandlerErrorSrv.handlerError(err))
+      );
+  }
+
 }

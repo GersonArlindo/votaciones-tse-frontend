@@ -2,12 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { personaNatural } from '@app/core/models/personas_naturales.interface';
+import { DestinoSufragioService } from '@app/core/services/destino-sufragio.service';
+import { JrvService } from '@app/core/services/jrv.service';
 import { PersonaNaturalService } from '@app/core/services/persona-natural.service';
 import { environment } from '@encoding/environment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-personas-naturales',
@@ -17,10 +20,14 @@ import { Table } from 'primeng/table';
 export class ViewPersonasNaturalesComponent implements OnInit {
 
   public personaNatural: any[] = [];
+  public personaNaturalAsignada: any[] = [];
+  public personaNaturalSinAsignar: any[] = [];
+  public JuntasReceptorasdeVotos: any[] = [];
   @ViewChild('dt') table!: Table;
   closeResult:any = "";
   url:any;
   data:any;
+  public token: any
 
   update: any;
   deleted: any;
@@ -30,12 +37,16 @@ export class ViewPersonasNaturalesComponent implements OnInit {
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private PersonaNaturalSrv: PersonaNaturalService,
+    private JrvSrv: JrvService,
+    private DestinoSufragioSrv: DestinoSufragioService,
     private primengConfig: PrimeNGConfig,
     private router: Router,
     private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.getPersonasAsignadas();
+    this.getJrvs();
     this.getPersonasNaturales();
     //this.getPermissionRole(this.rol_id);
   }
@@ -43,8 +54,34 @@ export class ViewPersonasNaturalesComponent implements OnInit {
   public getPersonasNaturales(){
     this.PersonaNaturalSrv.getPersonaNatural()
     .subscribe((data: any) => {
-      this.personaNatural = (data);
+      for(let pp of data){
+        this.personaNatural.push(pp);
+        if(!this.personaNaturalAsignada.includes(pp.id_persona_natural)){
+          this.personaNaturalSinAsignar.push(pp)
+        }
+      }
+      console.log(this.personaNaturalSinAsignar)
     })
+  }
+
+  public getPersonasAsignadas(){
+    this.DestinoSufragioSrv.getPersonasAsignadasDestinoSufragio(this.token)
+      .subscribe((data: any) => {
+        for(let pna of data){
+          this.personaNaturalAsignada.push(pna.id_persona_natural)
+        }
+        console.log(this.personaNaturalAsignada)
+      })
+  }
+
+  public getJrvs(){
+    this.JrvSrv.getJrv(this.token)
+      .subscribe((res: any) => {
+        for(let jrv of res){
+          this.JuntasReceptorasdeVotos.push(jrv)
+        }
+        //console.log(this.JuntasReceptorasdeVotos)
+      })
   }
 
 
@@ -91,6 +128,114 @@ export class ViewPersonasNaturalesComponent implements OnInit {
     })
   }
 
+  public asignarJrvPersonas() {
+    this.spinner.show()
+    const relaciones: any = {};
+    this.personaNaturalSinAsignar.forEach((persona) => {
+      const idMunicipioPersona = persona.id_municipio;
+      this.JuntasReceptorasdeVotos.forEach((jrv) => {
+        const idMunicipioJRV = jrv.centro_votacion.id_municipio;
+        if (idMunicipioPersona == idMunicipioJRV) {
+          // Verifica si la clave ya existe en el objeto
+          if (!relaciones[idMunicipioJRV]) {
+            // Si no existe, crea un arreglo vacío
+            relaciones[idMunicipioJRV] = [];
+          }
+          // Almacena la relación en el arreglo correspondiente
+          relaciones[idMunicipioJRV].push({
+            id_persona_natural: persona.id_persona_natural,
+            id_jrv: jrv.id_jrv,
+          });
+        }
+      });
+    });
+    return relaciones;
+  }
+
+  public crearYGuardarRelaciones() {
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Deseas iniciar proceso de asignacion de personas naturales a sus respectivos centros de votacion!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.spinner.show()
+        // 1. Llama a la función para obtener el objeto relaciones
+        const relaciones = this.asignarJrvPersonas();
+        console.log(relaciones)
+
+        // 1.1. Verifica si no se han encontrado relaciones
+        if (!relaciones || Object.keys(relaciones).length === 0) {
+          Swal.fire(
+            'Personas ya asignadas',
+            'No se encontraron relaciones para asignar',
+            'warning'
+          );
+          this.spinner.hide();
+          return; // Sal del proceso si no hay relaciones
+        }
+
+        // 2. Convierte el objeto relaciones en un arreglo de relaciones
+        const relacionesArray: any = [];
+        Object.keys(relaciones).forEach((idMunicipio) => {
+          relacionesArray.push(
+            ...relaciones[idMunicipio].map((relacion: any) => ({
+              id_persona_natural: relacion.id_persona_natural,
+              id_jrv: relacion.id_jrv,
+            }))
+          );
+        });
+      
+        // 3. Envía los datos al endpoint
+        relacionesArray.forEach((data: any) => {
+          console.log(data)
+          this.DestinoSufragioSrv.asignarAJrv(this.token, data)
+            .subscribe((res: any) => {
+              Swal.fire(
+                'Exito!',
+                'Las personas han sido asignadas exitosamente!',
+                'success'
+              )
+              setTimeout(() => {
+                this.spinner.hide()
+                window.location.reload();
+              }, 2500);
+              console.log('Datos enviados:', data);
+            });
+        });
+      }
+    })
+
+  }
+  
+  
+
+  // public asignarJrvPersonas(){
+  // const relaciones: any = [];
+
+  // this.personaNatural.forEach((persona) => {
+  //   const idMunicipioPersona = persona.id_municipio;
+
+  //   this.JuntasReceptorasdeVotos.forEach((jrv) => {
+  //     const idMunicipioJRV = jrv.centro_votacion.id_municipio;
+
+  //     if (idMunicipioPersona == idMunicipioJRV) {
+  //       // Coincidencia encontrada, almacena la relación
+  //       relaciones.push({
+  //         id_persona_natural: persona.id_persona_natural,
+  //         id_jrv: jrv.id_jrv,
+  //       });
+  //     }
+  //   });
+  // });
+  // console.log(relaciones)
+  // return relaciones;
+  // }
+
 
 
   ViewPersonaNaturalModal(content: any, viewPersona:any) {
@@ -127,6 +272,7 @@ export class ViewPersonasNaturalesComponent implements OnInit {
 
   getUserInfo(inf: any) {
     const token = this.getTokens();
+    this.token = token
     let payload;
     if (token) {
       payload = token.split(".")[1];
@@ -141,7 +287,6 @@ export class ViewPersonasNaturalesComponent implements OnInit {
     return localStorage.getItem("login-token");
   }
 
-  rol_id: any = this.getUserInfo('rol_id');
-
+  rol_id: any = this.getUserInfo('rol');
 
 }

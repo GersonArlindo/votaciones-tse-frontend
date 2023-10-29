@@ -54,8 +54,11 @@ export class CandidatoService {
   }
 
   
-  updateCandidato(data:any, id: any) : Observable<any | void>{
-    return this.http.put<any>(`${environment.API_URL}candidato-politico/${id}`, data)
+  updateCandidato(data:any, id: any, token: any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.put<any>(`${environment.API_URL}candidato-politico/${id}`, data, {headers})
     .pipe(
       map((res:any)=> {
         return res;
@@ -75,6 +78,20 @@ export class CandidatoService {
       }),
       catchError((err) => this.HandlerErrorSrv.handlerError(err))
     )
+  }
+
+  updateImageCandidato(id: any, data: any, token: any): Observable<any | void> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http
+      .patch<any>(`${environment.API_URL}candidato-politico/${id}/cambiar-foto`, data, {headers}) // Reemplaza 'tu-endpoint' por la URL de tu recurso.
+      .pipe(
+        map((res: any) => {
+          return res;
+        }),
+        catchError((err) => this.HandlerErrorSrv.handlerError(err))
+      );
   }
 
 }

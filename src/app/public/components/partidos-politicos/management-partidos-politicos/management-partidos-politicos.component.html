@@ -6,7 +6,7 @@
 </nav>
 
 <div class="row"  *ngFor="let pp of this.PartidoPolitico">
-    <div class="col-md-12 stretch-card">
+    <div *ngIf="obtenidoPartidoPolitico" class="col-md-12 stretch-card">
         <div class="card">
 
             <div class="headercard">
@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card-container">
-                                    <img *ngIf="obtenidoPartidoPolitico" class="hero-image"
+                                    <img class="hero-image"
                                         [src]="'https://evotes-app-administracion.s3.us-west-2.amazonaws.com/' + pp.logo"
                                         alt="Spinning glass cube" />
                                     <main class="main-content">
@@ -57,7 +57,7 @@
                                         <form class="form" [formGroup]="formBuscar" (ngSubmit)="buscarEnArreglo()">
                                             <input type="text" placeholder="Buscar por DUI o nombre"
                                                 formControlName="valor" class="input_field">
-                                            <button type="submit" [disabled]="!formBuscar.valid">Buscar</button>
+                                            <button type="submit">Buscar</button>
                                         </form>
                                     </div>
 
@@ -91,7 +91,7 @@
                                                 <span>Apellidos:</span>
                                                 <span>{{info.apellidos}}</span>
                                                 <span>Nacimiento:</span>
-                                                <span>{{this.formatearFecha(info.fecha_vencimiento_dui)}}</span>
+                                                <span>{{this.formatearFecha(info.fecha_nacimiento)}}</span>
                                                 <span>Dui:</span>
                                                 <span>{{info.dui}}</span>
                                                 <span>Genero:</span>
@@ -99,8 +99,10 @@
                                             </div>
                                             <div class="checkout--footer">
                                                 <label class="price"><sup></sup></label>
-                                                <button class="checkout-btn"
+                                                <button *ngIf="pp.candidatos.length <= 0" class="checkout-btn"
                                                     (click)="vincularCandidato(info.id_persona_natural)">Vincular</button>
+                                                <button *ngIf="pp.candidatos.length >= 1" class="checkout-btn"
+                                                    (click)="editarCandidato(pp.candidatos[0].id_candidato, info.id_persona_natural)">Editar Candidato</button>
                                             </div>
                                         </div>
                                     </div>

@@ -50,9 +50,12 @@
             {{jrv.centro_votacion.municipios.departamentos.nombre}}</div>
           <div class="my-description">Direccion: {{jrv.centro_votacion.direccion}}</div>
         </div>
-        <!-- <button class="my-button">
-              Buy now
-            </button> -->
+        <button *ngIf="jrv.estado == 'CERRADA'" (click)="cambiarEstado(jrv.id_jrv)" class="my-button">
+              Aperturar
+        </button>
+        <button *ngIf="jrv.estado == 'ABIERTA'" (click)="cambiarEstado(jrv.id_jrv)" class="my-button">
+          Cerrar
+    </button>
       </div>
 
     </div>
@@ -66,6 +69,7 @@
               <th scope="col">#</th>
               <th scope="col">Nombres</th>
               <th scope="col">Apellidos</th>
+              <th scope="col">Rol</th>
               <th scope="col">Estado</th>
               <th scope="col">Acciones</th>
             </tr>
@@ -75,12 +79,13 @@
               <th scope="row">{{i + 1}}</th>
               <td>{{miembro.usuario.nombres}}</td>
               <td>{{miembro.usuario.apellidos}}</td>
+              <td>{{miembro.usuario.Rol.nombre}}</td>
               <td>{{miembro.estado}}</td>
               <td><a (click)="eliminarUsuarioDeJrv(miembro.id_jrv_miembro)"
                 class="p-button p-button-rounded p-button-danger" style="margin-left: -8px;"><span class="mdi mdi-delete-outline"></span></a>&nbsp;</td>
             </tr>
             <tr>
-              <td *ngIf="this.miembrosJRV.length <= 0" colspan="4">
+              <td *ngIf="this.miembrosJRV.length <= 0" colspan="6">
                 Aun NO se han agregado miembros a esta JRV.
               </td>
             </tr>
@@ -167,7 +172,74 @@
         </p-table>
       </div>
       <div *ngIf="this.valorTemplate=='dos'">
-        <h1>Template 3</h1>
+        <h1>Personas Asignadas a esta jrv</h1>
+        <br>
+        <p-table *ngIf="dataLoadedPersonas" [value]="personas" dataKey="id_persona_natural" [rows]="25" [showCurrentPageReport]="true" [paginator]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+          [globalFilterFields]="['id_persona_natural']">
+          <ng-template pTemplate="caption">
+            <div class="table-header">
+              Buscar Persona Natural
+              <span class="p-input-icon-left">
+                <div class="btn-text-right">
+                  <input pInputText type="text" class="form-control" id="_bck-color"
+                    (input)="buscarPersona($event, 'contains')" />
+                </div>
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="id_persona_natural" style="min-width: 5rem">
+                <div class="flex justify-content-between align-items-center">
+                  Id
+                  <p-sortIcon field="id_persona_natural"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="informacion_personal.nombres" style="min-width: 17rem">
+                <div class="flex justify-content-between align-items-center">
+                  Nombre
+                  <p-sortIcon field="informacion_personal.nombres"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="informacion_personal.dui" style="min-width: 10rem">
+                <div class="flex justify-content-between align-items-center">
+                 Dui
+                  <p-sortIcon field="informacion_personal.dui"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="informacion_personal.genero" style="min-width: 10rem">
+                <div class="flex justify-content-between align-items-center">
+                  Genero
+                  <p-sortIcon field="informacion_personal.genero"></p-sortIcon>
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-personas>
+            <tr class="p-selectable-row">
+              <td>
+                <span class="rounded-pill">&nbsp; {{personas.id_persona_natural}} &nbsp;</span>
+              </td>
+              <td>
+                <i class="mdi mdi-user"></i>
+                {{personas.informacion_personal.nombres}} &nbsp; {{personas.informacion_personal.apellidos}}
+              </td>
+              <td>
+                {{personas.informacion_personal.dui}}
+              </td>
+              <td>
+                {{personas.informacion_personal.genero}}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">Usuarios no encontrados.</td>
+            </tr>
+          </ng-template>
+        </p-table>
       </div>
     </div>
   </div>

@@ -23,8 +23,10 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
   public personaNatural: any[] = [];
   public personaNaturalEncontrada: any[] = [];
   public candidatos: any[] = []
+  public id_candidatos: any[] = []
 
   public formData: any = new FormData();
+  public formDataEdit: any = new FormData();
 
   public obtenidoPartidoPolitico: boolean = false
 
@@ -69,6 +71,7 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
     .subscribe((data: any) => {
       for(let candidato of data){
         this.candidatos.push(candidato)
+        this.id_candidatos.push(candidato.id_persona_natural)
       }
       console.log(this.candidatos)
     })
@@ -78,6 +81,10 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
     this.personaNaturalEncontrada = []
     this.valor = this.formBuscar.value.valor;
     console.log(this.valor);
+      if(this.valor == ''){
+        this.personaNaturalEncontrada = []
+        return
+      }
       this.personaNaturalEncontrada = this.personaNatural.filter((persona) => {
       const nombreCompleto = persona.nombres + ' ' + persona.apellidos;
       const valorMinusculas = this.valor.toLowerCase();
@@ -124,10 +131,76 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
         })
       }
     })
-
-
-    
   }
+
+  editarCandidato(id_candidato: any, id_persona_natural: any){
+    if(this.id_candidatos.includes(id_persona_natural)){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Esta persona Ya es candidato en otro partido!'
+      })
+      return
+    }
+    console.log(id_candidato)
+    const data: any = {
+      estado: "ACTIVO" ,
+      id_partido_politico: Number(this.id),
+      id_persona_natural: id_persona_natural
+    }
+    console.log(data)
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "Deseas editar este candidato de este partido politico!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.candidatoSrv.updateCandidato(data, id_candidato, this.token)
+        .subscribe((res: any) => {
+          console.log(res);
+          if(res){
+            this.cambiarImagenCandidato(id_candidato)
+          }
+        })
+      }
+    })
+
+  }
+
+  public cambiarImagenCandidato(id_candidato: any){
+    if(this.uploadFiles){
+      this.formDataEdit.append("foto_candidato", this.uploadFiles);
+      this.candidatoSrv.updateImageCandidato(id_candidato, this.formDataEdit, this.token)
+        .subscribe((res: any) => {
+          console.log(res)
+          if(res){
+            Swal.fire(
+              'Editado!',
+              'Candidato editado exitosamente!',
+              'success'
+            )
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
+          }
+        })
+    }else{
+      Swal.fire(
+        'Editado!',
+        'Candidato editado exitosamente!',
+        'success'
+      )
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
+  }
+
+
 
   onFileSelect(event: any) {
     if (event.target.files && event.target.files[0]) {
