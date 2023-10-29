@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '@app/core/services/usuarios.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
 
@@ -21,16 +22,29 @@ export class ViewUsuariosComponent implements OnInit {
   public token: any
   public status: any[] = [];
   public usuarioEncontrado: any[] = [];
+  public eventStatus: any;
+  public selectedStatus!: boolean;
+  public selectedRol!: number;
+  public formData: any = new FormData();
   formBuscar!: FormGroup
   valor: any
-  public eventRol: any;
 
+
+  form!: FormGroup;
+  update: any;
+  deleted: any;
+  create: any;
+  id?: string;
+  submitting = false;
+  submitted = false;
+  title!: string;
 
   constructor(
     private usuariosSrv: UsuariosService,
     private modalService: NgbModal,
     private primengConfig: PrimeNGConfig,
     private router: Router,
+    private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
   ) {
     this.formBuscar = formBuilder.group({
@@ -63,7 +77,14 @@ export class ViewUsuariosComponent implements OnInit {
 
     ]
 
-
+    this.form = this.formBuilder.group({
+      usuario: ['', [Validators.required]],
+      nombres: ['', [Validators.required]],
+      apellidos: ['', [Validators.required]],
+      dui: ['', [Validators.required]],
+      estado: [''],
+      rol: [''],
+    });
 
 
 
@@ -78,22 +99,12 @@ export class ViewUsuariosComponent implements OnInit {
     })
   }
 
-  public getRol(event: any) {
-    this.eventRol = event;
+  public getStatus(event: any) {
+    this.eventStatus = event;
   }
 
 
 
-  deletePartidosPoliticosModal(content: any, viewProduct:any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      if (result === 'yes') {
-       // this.partidosPoliticosLanguage(viewProduct);
-      }
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -103,6 +114,34 @@ export class ViewUsuariosComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  get position() { return this.form.controls }
+
+  onSubmit(): void {
+    this.submitted = true;
+    if (this.submitted && this.position['nombres']?.errors) {
+    }
+    if (this.submitted && this.position['apellidos']?.errors) {
+    }
+    if (this.submitted && this.position['usuario']?.errors) {
+    }
+    if (this.submitted && this.position['dui']?.errors) {
+    }
+    if (this.submitted && this.position['estado']?.errors) {
+    }
+    if (this.submitted && this.position['rol']?.errors) {
+    }
+  }
+
+  public isValid() {
+    return !this.form.valid
+  }
+
+  isValidField(field: string) {
+    return (
+      (this.form.get(field) || this.form.get(field)?.dirty) && !this.form.get(field)?.valid
+    );
   }
 
   public convertStatus(estado: any){

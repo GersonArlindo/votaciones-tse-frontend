@@ -1,87 +1,26 @@
-<div class="row">
-  <div class="col-12 grid-margin">
-    <div class="card">
-      <div class="position-relative">
-        <figure class="overflow-hidden mb-0 d-flex justify-content-center">
-          <img src="assets/images/banner1.png" class="rounded-top" alt="profile cover">
-        </figure>
-        <div class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
-            <div>
-              <img class="wd-70 ht-70 rounded-circle" [src]="imageData" alt="profile">
-              <!-- <img class="wd-70 rounded-circle" id="_img-round" src="assets/images/img.jpg" alt="profile"><br> -->
-              <span class="h4 ms-3 text-dark">{{name}} {{lastName}}</span>
-            </div>
-            <div class="d-none d-md-block">
-              <button class="btn btn-primary btn-icon-text">
-                <i class="feather icon-edit btn-icon-prepend"></i> Edit profile
-              </button>
-            </div>
-        </div>
-      </div>
-      <div class="d-flex justify-content-center p-3 rounded-bottom">
-        <ul class="d-flex align-items-center m-0 p-0">
-          <li class="d-flex align-items-center active">
-            <i class="feather icon-columns me-1 icon-md text-primary"></i>
-            <a class="pt-1px d-none d-md-block text-primary" routerLink=".">Timeline</a>
-          </li>
-          <li class="ms-3 ps-3 border-start d-flex align-items-center">
-            <i class="feather icon-user me-1 icon-md"></i>
-            <a class="pt-1px d-none d-md-block text-body" routerLink=".">About</a>
-          </li>
-          <li class="ms-3 ps-3 border-start d-flex align-items-center">
-            <i class="feather icon-users me-1 icon-md"></i>
-            <a class="pt-1px d-none d-md-block text-body" routerLink=".">Friends <span class="text-muted tx-12">3,765</span></a>
-          </li>
-          <li class="ms-3 ps-3 border-start d-flex align-items-center">
-            <i class="feather icon-image me-1 icon-md"></i>
-            <a class="pt-1px d-none d-md-block text-body" routerLink=".">Photos</a>
-          </li>
-          <li class="ms-3 ps-3 border-start d-flex align-items-center">
-            <i class="feather icon-video me-1 icon-md"></i>
-            <a class="pt-1px d-none d-md-block text-body" routerLink=".">Videos</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row profile-body">
-  <!-- middle wrapper start -->
-  <div class="col-md-8 col-xl-12 middle-wrapper">
-    <div class="row">
-      <div class="col-md-12 grid-margin">
-        <div class="card rounded">
-          <div class="card-header">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center">
-                <img class="img-xs rounded-circle" [src]="imageData" alt="profile">												
-                <div class="ms-2">
-                  <p>{{name}} {{lastName}}</p>
-                  <p class="tx-11 text-muted">1 min ago</p>
-                </div>
-              </div>
-              <div ngbDropdown>
-                <button class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton2" ngbDropdownToggle>
-                  <i class="feather icon-more-horizontal icon-lg pb-3px"></i>
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
-                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i class="feather icon-meh icon-sm me-2"></i> <span class="">Unfollow</span></a>
-                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i class="feather icon-corner-right-up icon-sm me-2"></i> <span class="">Go to post</span></a>
-                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i class="feather icon-share-2 icon-sm me-2"></i> <span class="">Share</span></a>
-                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i class="feather icon-copy icon-sm me-2"></i> <span class="">Copy link</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <p class="mb-3 tx-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus minima delectus nemo unde quae recusandae assumenda.</p>
-          </div>
-          <div class="card-footer">
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero d-flex align-items-center">
 
+  <div class="container">
+    <div class="row" *ngFor="let user of usuario">
+      <div class="col-lg-6 d-flex flex-column justify-content-center text-center">
+        <h1 data-aos="fade-up">{{user.nombres}} {{user.apellidos}}</h1>
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <h2 data-aos="fade-up" data-aos-delay="400">ROL: &nbsp; <b>{{user.Rol.nombre.toUpperCase()}}</b></h2>
+          </div>
+          <div class="col-md-6 text-center">
+            <h2 data-aos="fade-up" data-aos-delay="400">DUI: &nbsp; <b>{{user.dui}}</b></h2>
           </div>
         </div>
+
+
+        <h2  class="badge {{getClassForEstado(user.estado)}}">{{user.usuario}}&nbsp;-&nbsp;{{convertStatus(user.estado)}}</h2>
+      </div>
+      <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+        <img src="../../../../../assets/images/hero-img.png" class="img-fluid" alt="">
       </div>
     </div>
   </div>
-  <!-- middle wrapper end -->
-</div>
+
+</section><!-- End Hero -->

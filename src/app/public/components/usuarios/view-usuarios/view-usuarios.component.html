@@ -10,7 +10,13 @@
     <div class="card">
       <div class="headercard">
         <h5 id="_title-header-h5">Usuarios</h5>
-        <div class="btn-text-right headercard"></div>
+        <div class="btn-text-right headercard">
+          <button  status="success" id="_btn-success" routerLink="/usuarios/add"
+            class="dt-button create-new btn btn-primary ml-2" tabindex="0" aria-controls="DataTables_Table_0"
+            type="button">
+            <span class="d-none d-sm-inline-block"> <i class="mdi mdi-plus"></i> Add Usuario</span>
+          </button>
+        </div>
       </div>
       <hr />
       <div class="card-body">
@@ -99,14 +105,15 @@
                   </span>
                 </td>
                 <td style="text-align: left; margin-left: -5px">
-                  <!-- <a *ngIf="deleted == 1" (click)="deletePersonaNaturalModal(contentDelete, personaNatural.id_persona)"
+                 <!--<a  (click)="deletePersonaNaturalModal(contentDelete, personaNatural.id_persona)"
                     class="p-button p-button-rounded p-button-warning" style="margin-left: -8px;"><i
-                      class="mdi mdi-trash-can-outline"></i></a>&nbsp;
-                  <a *ngIf="update == 1" [routerLink]="['/persona-natural/edit', personaNatural.id_persona]"
-                    class="p-button p-button-rounded p-button-success"><i class="mdi mdi-pencil"></i></a> &nbsp; -->
+                      class="mdi mdi-trash-can-outline"></i></a>&nbsp;-->
+                  <a  [routerLink]="['/usuarios/edit', usuarios.id_usuario]"
+                    class="p-button p-button-rounded p-button-success"><i class="mdi mdi-pencil"></i></a> &nbsp;
                   <a class="p-button p-button-rounded p-button-view"><i class="mdi mdi-eye"></i></a>
                 </td>
               </tr>
+
               <!-- <ng-template #contentView let-d="dismiss">
                 <div class="modal-header modaltitle">
                   <h4 class="modal-title" id="modal-basic-title">

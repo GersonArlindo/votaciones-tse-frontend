@@ -18,6 +18,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UsuariosComponent } from './usuarios.component';
+import { AddEditUsuariosComponent } from './add-edit-usuarios/add-edit-usuarios.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -45,6 +46,14 @@ const routes: Routes = [
       {
         path: 'view',
         component: ViewUsuariosComponent,
+      },
+      {
+        path: 'add',
+        component: AddEditUsuariosComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: AddEditUsuariosComponent,
       }
     ]
   },
@@ -54,7 +63,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     UsuariosComponent,
-    ViewUsuariosComponent
+    ViewUsuariosComponent,
+    AddEditUsuariosComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
