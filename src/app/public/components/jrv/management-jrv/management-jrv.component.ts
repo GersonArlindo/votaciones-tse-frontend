@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DestinoSufragioService } from '@app/core/services/destino-sufragio.service';
 import { JrvService } from '@app/core/services/jrv.service';
+import { PersonaNaturalService } from '@app/core/services/persona-natural.service';
 import { UsersService } from '@app/core/services/users.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -16,8 +19,14 @@ export class ManagementJrvComponent implements OnInit {
   public id!: any
   public token: any
 
+  public id_persona_a_asignar: any
+
+  formAsignar!: FormGroup
+
   dataLoadedUsers: boolean = false;
   dataLoadedPersonas: boolean = false;
+
+  closeResult:any = "";
 
   public jrvs: any[] = []
   public miembrosJRV: any[] = []
@@ -28,17 +37,26 @@ export class ManagementJrvComponent implements OnInit {
   public TodosMiembrosJrvs: any[] = []
   public personas: any[] = []
   public personasOriginal: any[] = []
+  public PersonaNaturales: any[] = []
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private jrvSrv: JrvService,
     private userSrv: UsersService,
-    private destinoSufragioSrv: DestinoSufragioService
-  ) { }
+    private destinoSufragioSrv: DestinoSufragioService,
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder,
+    private personasNaturales:PersonaNaturalService
+  ) { 
+    this.formAsignar = formBuilder.group({
+      persona: []
+    })
+  }
 
   ngOnInit(): void {
     this.getUsersDB()
+    this.getPersonasNaturales()
     this.id = this.route.snapshot.params['id'];
     this.getJrvsById()
     this.getMiembrosByIdJrv()
@@ -51,6 +69,25 @@ export class ManagementJrvComponent implements OnInit {
      } else {
        this.valorTemplate = ""; // O asigna otro valor por defecto
      }
+  }
+
+  public getPersonasNaturales(){
+    this.personasNaturales.getPersonaNatural()
+      .subscribe((data: any) => {
+        for(let personas of data){
+          this.PersonaNaturales.push(personas)
+        }
+        console.log(this.PersonaNaturales)
+      })
+  }
+
+  public Asignar(){
+    console.log("ENTRE")
+  }
+
+  public personaCapturada(event: any){
+    this.id_persona_a_asignar = event
+    console.log(event)
   }
 
   public getEstado(estado: boolean): string {
@@ -80,6 +117,29 @@ export class ManagementJrvComponent implements OnInit {
         console.log(res)
       })
   }
+
+  AsignarPersonaNaturalModal(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      if (result === 'yes') {
+        
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+
 
   getAllMiembros(){
     this.jrvSrv.getAllMiembrosByIdJrvs(this.token).pipe(

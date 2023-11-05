@@ -33,6 +33,8 @@ export class ViewPersonasNaturalesComponent implements OnInit {
   deleted: any;
   create: any;
 
+  dataCargada: boolean = false
+
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -60,6 +62,7 @@ export class ViewPersonasNaturalesComponent implements OnInit {
           this.personaNaturalSinAsignar.push(pp)
         }
       }
+      this.dataCargada = true
       console.log(this.personaNaturalSinAsignar)
     })
   }
@@ -211,7 +214,6 @@ export class ViewPersonasNaturalesComponent implements OnInit {
     })
 
   }
-  
   
 
   // public asignarJrvPersonas(){

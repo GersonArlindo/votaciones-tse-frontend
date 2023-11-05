@@ -186,6 +186,7 @@
                     (input)="buscarPersona($event, 'contains')" />
                 </div>
               </span>
+              <button class="boton-custom align-right" (click)="AsignarPersonaNaturalModal(contentAsignar)"> Agregar </button>
             </div>
           </ng-template>
           <ng-template pTemplate="header">
@@ -215,6 +216,36 @@
                 </div>
               </th>
             </tr>
+          </ng-template>
+
+          <ng-template #contentAsignar let-d="dismiss">
+            <div class="modal-header modaltitle">
+              <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-account"></i> Asignar Persona Natural</h4>
+            </div>
+            <div class="modal-body">
+              <div class="card">
+                <div class="card-body cardview">
+                  <form [formGroup]="formAsignar" (ngSubmit)="Asignar()">
+                    <div class="col-sm-12">
+                      <div class="mb-3">
+                        <label for="company">Persona</label>
+                        <ng-select formControlName="persona" [multiple]="false" (change)="personaCapturada($event)" [closeOnSelect]="false" class="data-ng-select" [ngModelOptions]="{ standalone: true }"  >
+                          <ng-option *ngFor="let persona of this.PersonaNaturales" [value]="persona.id_persona_natural">{{persona.nombres}} - {{persona.dui}}</ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-primary submit" [disabled]="!formAsignar.valid">Guardar <i
+                        class="mdi mdi-file-document-edit"></i></button>&nbsp;
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="_btn-back" type="submit" name="submitButton"
+                class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
+            </div>
           </ng-template>
 
           <ng-template pTemplate="body" let-personas>
