@@ -1,7 +1,8 @@
 <div class="main-wrapper">
 
     <!-- partial:sidebar -->
-    <app-sidebar></app-sidebar>
+    <app-sidebar *ngIf="rol == 'root' || rol == 'admin'"></app-sidebar>
+    <app-sidebar-presidente *ngIf="rol == 'presidente' || rol == 'secretario' || rol == 'vocal'"></app-sidebar-presidente>
     <!-- partial -->
   
     <div class="page-wrapper">

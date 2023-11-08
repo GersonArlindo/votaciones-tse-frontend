@@ -19,18 +19,12 @@ import { Observable, throwError } from 'rxjs';
 // }
 
 export class HandlerErrorService {
-  public handlerError(err: {
-    message: any;
-    status: number;
-    error: any;
-  }): Observable<never> {
-    let errorMessage = 'An errror occured retrienving data';
-    const { status, error } = err;
-
-    if(status === 400) {
-      return throwError(error);
+  public handlerError(err: any): Observable<never> {
+    let errorMessage = 'An error occurred while retrieving data';
+    if (err.error && err.error.error) {
+      // Si el error contiene una propiedad 'error', utiliza ese mensaje.
+      errorMessage = err.error.error;
     }
-
     return throwError(errorMessage);
   }
 }

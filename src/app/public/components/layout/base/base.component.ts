@@ -27,4 +27,21 @@ export class BaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getUserInfo(inf: any) {
+    const token = this.getTokens();
+    let payload;
+    if (token) {
+      payload = token.split(".")[1];
+      payload = window.atob(payload);
+      return JSON.parse(payload)[`${inf}`];
+    } else {
+      return null;
+    }
+  }
+
+  getTokens() {
+    return localStorage.getItem("login-token");
+  }
+
+  rol: any = this.getUserInfo('rol');
 }

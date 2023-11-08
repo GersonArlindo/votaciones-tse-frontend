@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CentroVotacionService } from '@app/core/services/centro-votacion.service';
 import { PartidosPoliticosService } from '@app/core/services/partido-politico.service';
 import { environment } from '@encoding/environment';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -23,6 +24,9 @@ export class ViewPartidosPoliticosComponent implements OnInit {
   opcionSeleccionadaEstado: any
   id_seleccionado: any
 
+  public estatusCentroVotacion: any = []
+  public statusCentroVotacionBoolean: boolean = false
+
   public token: any
   update: any;
   deleted: any;
@@ -34,7 +38,8 @@ export class ViewPartidosPoliticosComponent implements OnInit {
     private PartidosPoliticosSrv: PartidosPoliticosService,
     private primengConfig: PrimeNGConfig,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private centroVotacionSrv: CentroVotacionService
   ) {
     this.formEditPartidoPolitico = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -46,10 +51,34 @@ export class ViewPartidosPoliticosComponent implements OnInit {
   ngOnInit(): void {
 
     this.getPartidosPoliticos();
+    this.getStatusCentroVotacion()
     this.estados = [
       { id: "ACTIVO", nombre: "ACTIVO" },
       { id: "INACTIVO", nombre: "INACTIVO" },
     ]
+  }
+
+  public getStatusCentroVotacion() {
+    this.centroVotacionSrv.getCentrosVotaciones(this.token)
+      .subscribe((data) => {
+        for (let status of data) {
+          this.estatusCentroVotacion.push(status.estado);
+        }
+  
+        console.log(this.estatusCentroVotacion);
+  
+        // Verificar si todos son "CERRADA"
+        const todosCerrados = this.estatusCentroVotacion.every((estado: any) => estado === 'CERRADA');
+  
+        // Verificar si al menos uno es "ABIERTA"
+        const algunoAbierto = this.estatusCentroVotacion.some((estado: any) => estado === 'ABIERTA');
+  
+        if (todosCerrados) {
+          this.statusCentroVotacionBoolean = true
+        } else if (algunoAbierto) {
+          this.statusCentroVotacionBoolean = false
+        }
+      });
   }
 
 

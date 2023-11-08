@@ -95,7 +95,7 @@
       <div *ngIf="this.valorTemplate=='uno'">
         <h1>Agregar Miembros</h1>
         <br>
-        <p-table *ngIf="dataLoadedUsers" [value]="users" dataKey="id_usuario" [rows]="25" [showCurrentPageReport]="true" [paginator]="true"
+        <p-table *ngIf="dataLoadedUsers" [value]="users" dataKey="id_usuario" [rows]="5" [showCurrentPageReport]="true" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
           [globalFilterFields]="['id_usuario']">
           <ng-template pTemplate="caption">
@@ -174,7 +174,7 @@
       <div *ngIf="this.valorTemplate=='dos'">
         <h1>Personas Asignadas a esta jrv</h1>
         <br>
-        <p-table *ngIf="dataLoadedPersonas" [value]="personas" dataKey="id_persona_natural" [rows]="25" [showCurrentPageReport]="true" [paginator]="true"
+        <p-table *ngIf="dataLoadedPersonas" [value]="personas" dataKey="id_persona_natural" [rows]="5" [showCurrentPageReport]="true" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
           [globalFilterFields]="['id_persona_natural']">
           <ng-template pTemplate="caption">
@@ -186,7 +186,7 @@
                     (input)="buscarPersona($event, 'contains')" />
                 </div>
               </span>
-              <button class="boton-custom align-right" (click)="AsignarPersonaNaturalModal(contentAsignar)"> Agregar </button>
+              <button data-toggle="tooltip" data-placement="top" title="Agregar Personas a esta JRV" class="boton-custom align-right" (click)="AsignarPersonaNaturalModal(contentAsignar)"> Agregar </button>
             </div>
           </ng-template>
           <ng-template pTemplate="header">
@@ -215,6 +215,11 @@
                   <p-sortIcon field="informacion_personal.genero"></p-sortIcon>
                 </div>
               </th>
+              <th style="min-width: 09rem">
+                <div class="flex justify-content-between align-items-center">
+                  Acciones
+                </div>
+              </th>
             </tr>
           </ng-template>
 
@@ -235,8 +240,9 @@
                       </div>
                     </div>
                     <div class="col-sm-12">
-                      <button type="submit" class="btn btn-primary submit" [disabled]="!formAsignar.valid">Guardar <i
-                        class="mdi mdi-file-document-edit"></i></button>&nbsp;
+                      <button type="submit" class="btn btn-primary submit" [disabled]="!id_persona_a_asignar">
+                        Guardar <i class="mdi mdi-file-document-edit"></i>
+                      </button>&nbsp;
                       </div>
                   </form>
                 </div>
@@ -262,6 +268,10 @@
               </td>
               <td>
                 {{personas.informacion_personal.genero}}
+              </td>
+              <td style="text-align: left; margin-left: -5px;">
+                <a data-toggle="tooltip" data-placement="top" title="Validar Persona" (click)="validarUsuario(personas.informacion_personal.dui)"
+                  class="p-button p-button-rounded p-button-warning" style="margin-left: -8px;"><span class="mdi mdi-check-underline-circle-outline"></span></a>&nbsp;
               </td>
             </tr>
           </ng-template>

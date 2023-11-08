@@ -6,14 +6,14 @@ import MetisMenu from 'metismenujs';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import { Router, NavigationEnd } from '@angular/router';
-
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  selector: 'app-sidebar-presidente',
+  templateUrl: './sidebar-presidente.component.html',
+  styleUrls: ['./sidebar-presidente.component.scss']
 })
-export class SidebarComponent implements OnInit, AfterViewInit {
+export class SidebarPresidenteComponent implements OnInit {
 
+  
   @ViewChild('sidebarToggler') sidebarToggler!: ElementRef;
 
   menuItems: MenuItem[] = [];
@@ -45,6 +45,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     if (storedTheme) {
       this.document.body.classList.add(storedTheme);
     }
+    
     this.menuItems = MENU;
 
     /**
@@ -125,7 +126,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
    */
   onSidebarThemeChange(event: Event) {
     const selectedTheme = (<HTMLInputElement>event.target).value;
-
     // Guardar el tema seleccionado en el localStorage
     localStorage.setItem('sidebarTheme', selectedTheme);
   
@@ -256,6 +256,5 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         }
     }
   };
-
 
 }

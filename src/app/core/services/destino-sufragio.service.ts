@@ -52,4 +52,17 @@ export class DestinoSufragioService {
       catchError((err: any) => this.HandlerErrorSrv.handlerError(err))
     )
   }
+
+  validarPersonaNatural(data:any, dui: any, token: any) : Observable<any | void>{
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.put<any>(`${environment.API_URL}destino-sufragio/validar-qr/${dui}`, data, {headers})
+    .pipe(
+      map((res:any)=> {
+        return res;
+      }),
+      catchError((err) => this.HandlerErrorSrv.handlerError(err))
+    );
+  }
 }

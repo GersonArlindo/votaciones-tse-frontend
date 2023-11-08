@@ -38,6 +38,7 @@ export class ManagementJrvComponent implements OnInit {
   public personas: any[] = []
   public personasOriginal: any[] = []
   public PersonaNaturales: any[] = []
+  public getDestinoSufragioPersonas: any[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -82,12 +83,45 @@ export class ManagementJrvComponent implements OnInit {
   }
 
   public Asignar(){
-    console.log("ENTRE")
+    const data: any = {
+      id_persona_natural: this.id_persona_a_asignar,
+      id_jrv: Number(this.id)
+    }
+    console.log(data)
+    this.destinoSufragioSrv.asignarAJrv(this.token, data)
+      .subscribe((res: any) => {
+        if(res){
+          Swal.fire({
+            title: "Excelente!",
+            text: "Usuario ha sido asignado!",
+            icon: "success"
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        }else{
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ha ocurrido un error al asignar a esta persona!"
+          });
+        }
+      })
   }
 
   public personaCapturada(event: any){
-    this.id_persona_a_asignar = event
-    console.log(event)
+    if(this.getDestinoSufragioPersonas.includes(event)){
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Esta persona ya esta asignada a una JRV!"
+      });
+      return
+    }else{
+      this.id_persona_a_asignar = event
+      console.log(event)
+    }
+    
   }
 
   public getEstado(estado: boolean): string {
@@ -108,13 +142,14 @@ export class ManagementJrvComponent implements OnInit {
     this.destinoSufragioSrv.getPersonasAsignadasDestinoSufragio(this.token)
       .subscribe((res: any) => {
         for(let persona of res){
+          this.getDestinoSufragioPersonas.push(persona.id_persona_natural)
           if(persona.id_jrv == this.id){
             this.personas.push(persona)
             this.personasOriginal.push(persona)
           }
         }
         this.dataLoadedPersonas = true;
-        console.log(res)
+        console.log(this.getDestinoSufragioPersonas)
       })
   }
 
@@ -308,6 +343,41 @@ export class ManagementJrvComponent implements OnInit {
       });
     }
   }
+
+  public validarUsuario(dui: any){
+    Swal.fire({
+      title: "Estas seguro que quieres validar a esta persona?",
+      text: "Si validas a esta persona tendra acceso a poder votar!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Validar!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.destinoSufragioSrv.validarPersonaNatural(dui, dui, this.token)
+        .subscribe(
+          (res: any) => {
+            Swal.fire({
+              title: "Éxito!",
+              text: "Usuario Validado exitosamente!",
+              icon: "success"
+            });
+          },
+          (error) => {
+            console.error(error); // Imprime el error en la consola
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: error // Muestra el mensaje de error
+            });
+          }
+        );
+    }
+  });
+  console.log(dui);
+}
 
   public EnviarMiembros(){
    if(this.UserSeleccionados.length >= 1){

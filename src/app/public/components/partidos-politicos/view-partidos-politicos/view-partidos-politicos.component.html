@@ -36,13 +36,13 @@
                   </div>
 
                   <div class="button-container">
-                    <button class="cart-button button"   [routerLink]="['/partidos-politicos/management', partido.id_partido_politico]">
+                    <button *ngIf="this.statusCentroVotacionBoolean" class="cart-button button"   [routerLink]="['/partidos-politicos/management', partido.id_partido_politico]">
                       <span class="mdi mdi-eye"></span>
                     </button> &nbsp;
-                    <button class="cart-button button"   (click)="editarPartidoPolitico(contentUpdate, partido.id_partido_politico)">
+                    <button *ngIf="this.statusCentroVotacionBoolean" class="cart-button button"   (click)="editarPartidoPolitico(contentUpdate, partido.id_partido_politico)">
                       <span class="mdi mdi-pencil"></span>
                     </button>&nbsp;
-                    <button class="cart-button button"   (click)="eliminarPartidoPolitico(partido.id_partido_politico)">
+                    <button *ngIf="this.statusCentroVotacionBoolean" class="cart-button button"   (click)="eliminarPartidoPolitico(partido.id_partido_politico)">
                       <span class="mdi mdi-delete"></span>
                     </button>
                   </div>
