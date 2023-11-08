@@ -69,6 +69,7 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
   public getCandidatos(){
     this.candidatoSrv.getCandidato(this.token)
     .subscribe((data: any) => {
+      console.log(data)
       for(let candidato of data){
         this.candidatos.push(candidato)
         this.id_candidatos.push(candidato.id_persona_natural)
