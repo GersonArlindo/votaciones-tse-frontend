@@ -5,7 +5,7 @@
     </ol>
 </nav>
 
-<div class="row"  *ngFor="let pp of this.PartidoPolitico">
+<div class="row" *ngFor="let pp of this.PartidoPolitico">
     <div *ngIf="obtenidoPartidoPolitico" class="col-md-12 stretch-card">
         <div class="card">
 
@@ -64,21 +64,24 @@
                                     <div class="card cart" *ngIf="this.personaNaturalEncontrada.length >= 1">
                                         <label class="title">Suba su Imagen</label>
                                         <div class="products">
-                                                <div class="form-group">
-                                                    <div
-                                                      class="custom-file"
-                                                      class="btn btn-default button-rounded-36 float-bottom-right img-data"
-                                                    >
-                                                      <input
-                                                        (change)="onFileSelect($event)"
+                                            <div class="form-group">
+                                                <div class="custom-file"
+                                                    class="btn btn-default button-rounded-36 float-bottom-right img-data">
+                                                    <input (change)="onFileSelect($event)"
                                                         class="form-control custom-file-input cursor-pointer"
-                                                        id="attachment"
-                                                        name="attachment"
-                                                        type="file"
-                                                        id="formFile"
-                                                      />
-                                                    </div>
-                                                  </div>
+                                                        id="attachment" name="attachment" type="file" id="formFile" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="card cart" *ngIf="this.personaNaturalEncontrada.length >= 1">
+                                        <label class="title">Rol</label>
+                                        <div class="products">
+                                            <ng-select [multiple]="false" (change)="rol_capturado($event)" [closeOnSelect]="false" class="data-ng-select" [ngModelOptions]="{ standalone: true }"  >
+                                                <ng-option *ngFor="let rol of this.rol_candidato" [value]="rol.name">{{rol.name}}</ng-option>
+                                              </ng-select>
                                         </div>
                                     </div>
 
@@ -99,10 +102,11 @@
                                             </div>
                                             <div class="checkout--footer">
                                                 <label class="price"><sup></sup></label>
-                                                <button *ngIf="pp.candidatos.length <= 0" class="checkout-btn"
+                                                <button *ngIf="pp.candidatos.length <= 2" class="checkout-btn"
                                                     (click)="vincularCandidato(info.id_persona_natural)">Vincular</button>
-                                                <button *ngIf="pp.candidatos.length >= 1" class="checkout-btn"
-                                                    (click)="editarCandidato(pp.candidatos[0].id_candidato, info.id_persona_natural)">Editar Candidato</button>
+                                                <button *ngIf="pp.candidatos.length >2 " class="checkout-btn"
+                                                    (click)="editarCandidato(pp.candidatos[0].id_candidato, info.id_persona_natural)">Editar
+                                                    Candidato</button>
                                             </div>
                                         </div>
                                     </div>
@@ -114,14 +118,21 @@
                                         <span *ngFor="let candb of this.candidatos">
                                             <span *ngIf="candidato.id_candidato == candb.id_candidato">
                                                 <div class="custom-product-tumb">
-                                                    <img [src]="'https://evotes-app-administracion.s3.us-west-2.amazonaws.com/' + candb.foto_candidato" alt="">
+                                                    <img [src]="'https://evotes-app-administracion.s3.us-west-2.amazonaws.com/' + candb.foto_candidato"
+                                                        alt="">
                                                 </div>
                                                 <div class="custom-product-details">
-                                                    <span class="custom-product-catagory">DUI: {{candb.informacion_personal.dui}}</span>
-                                                    <h4 style="color: #363636;">{{candb.informacion_personal.nombres}} {{candb.informacion_personal.apellidos}}</h4>
-                                                    <p>Fecha de Nacimiento: {{this.formatearFecha(candb.informacion_personal.fecha_nacimiento)}}</p>
+                                                    <span class="custom-product-catagory">DUI:
+                                                        {{candb.informacion_personal.dui}}</span>
+                                                    <h4 style="color: #363636;">{{candb.informacion_personal.nombres}}
+                                                        {{candb.informacion_personal.apellidos}}</h4>
+                                                    <p>Fecha de Nacimiento:
+                                                        {{this.formatearFecha(candb.informacion_personal.fecha_nacimiento)}}
+                                                    </p>
                                                     <div class="custom-product-bottom-details">
-                                                        <div class="custom-product-price"><small>Genero:</small>{{candb.informacion_personal.genero}}</div>
+                                                        <div class="custom-product-price">
+                                                            <small>Genero:</small>{{candb.informacion_personal.genero}}
+                                                        </div>
                                                         <div class="custom-product-links">
                                                             <a href=""><i class="fa fa-heart"></i></a>
                                                             <a href=""><i class="fa fa-shopping-cart"></i></a>

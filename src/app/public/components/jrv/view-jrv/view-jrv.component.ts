@@ -61,11 +61,23 @@ export class ViewJrvComponent implements OnInit {
   public getJrvs() {
     this.jrvSrv.getJrv(this.token)
       .subscribe((data: any) => {
-        console.log(data);
-        for (let jrv of data){
-          this.jrvs.push(jrv)
+        if(this.rol_id == 'root' || this.rol_id == 'admin'){
+          for (let jrv of data){
+            this.jrvs.push(jrv)
+          }
+          this.dataLoadedJrv = true;
+        }else{
+          console.log("entre al else")
+          for (let jrv of data){
+            const algunoIncluyeEntero = jrv.jrv_miembros.some((elemento: any) => {
+              return typeof elemento.id_usuario === 'number' && elemento.id_usuario === this.user_id;
+            });
+            if(algunoIncluyeEntero){
+              this.jrvs.push(jrv)
+            }
+          }
+          this.dataLoadedJrv = true;
         }
-        this.dataLoadedJrv = true;
       })
   }
 
@@ -341,7 +353,5 @@ export class ViewJrvComponent implements OnInit {
     }
   
     rol_id: any = this.getUserInfo('rol');
-    
-    
- 
+    user_id: any = this.getUserInfo('id');
 }

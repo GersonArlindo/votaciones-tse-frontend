@@ -56,4 +56,10 @@ export class PersonaNaturalService {
         catchError((err) => this.HandlerErrorSrv.handlerError(err))
       );
   }
+
+  getPersonaNaturalByDui(dui: any): Observable<personaNatural[]> {
+    return this.http
+      .get<any>(`${environment.API_URL}persona-natural/dui/${dui}`)
+      .pipe(map((response: any) => response));
+  }
 }

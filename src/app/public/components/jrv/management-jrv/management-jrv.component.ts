@@ -211,8 +211,15 @@ export class ManagementJrvComponent implements OnInit {
                 window.location.reload();
               }, 1500);
             }
+          },
+          (error) => {
+            console.error(error); // Imprime el error en la consola
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: error.message // Muestra el mensaje de error
+            });
           })
-        
       }
     })
   }
@@ -344,6 +351,7 @@ export class ManagementJrvComponent implements OnInit {
     }
   }
 
+  //ESTA FUNCION NO SE ESTA USANDO
   public validarUsuario(dui: any){
     Swal.fire({
       title: "Estas seguro que quieres validar a esta persona?",
@@ -377,6 +385,42 @@ export class ManagementJrvComponent implements OnInit {
     }
   });
   console.log(dui);
+}
+
+public validarLlegadaPersonaNaturlaAJrv(dui: any){
+  let cadenaRecuperada: any = localStorage.getItem(`dui-${dui}`);
+  const objetoRecuperado = JSON.parse(cadenaRecuperada);
+  if (objetoRecuperado) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Persona Natural ya asistio a esta JRV!"
+    });
+    return
+  }
+  Swal.fire({
+    title: "Estas seguro?",
+    text: `Deseas validar la asistencia a este centro de votacion a la persona con dui ${dui}!`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Validar!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.personasNaturales.getPersonaNaturalByDui(dui)
+      .subscribe((data: any) => {
+        let info_persona = JSON.stringify(data);
+        localStorage.setItem(`dui-${dui}`, info_persona)
+        Swal.fire({
+          title: "Validado!",
+          text: "Persona Natural asistio a esta JRV.",
+          icon: "success"
+        });
+      })
+    }
+  });
+
 }
 
   public EnviarMiembros(){

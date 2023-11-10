@@ -25,10 +25,14 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
   public candidatos: any[] = []
   public id_candidatos: any[] = []
 
+  public rol_candidato: any[] = [];
+
   public formData: any = new FormData();
   public formDataEdit: any = new FormData();
 
   public obtenidoPartidoPolitico: boolean = false
+
+  public rol_seleccionado: any
 
   public uploadFiles: any;
   public url = 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg';
@@ -53,6 +57,16 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
     this.traerPartidoPoliticoById()
     this.getPersonasNaturales()
     this.getCandidatos()
+
+    this.rol_candidato = [
+      {
+        name: 'PRESIDENTE'
+      },
+      {
+        name: 'VICEPRESIDENTE'
+      }
+    ]
+
   }
 
   public getPersonasNaturales(){
@@ -64,6 +78,11 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
       console.log(this.personaNatural)
     })
     
+  }
+
+  public rol_capturado(event: any){
+    this.rol_seleccionado = event
+    console.log(event)
   }
 
   public getCandidatos(){
@@ -104,6 +123,7 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
     this.formData.append("id_partido_politico", Number(this.id));
     this.formData.append("id_persona_natural", id_persona_natural);
     this.formData.append("foto_candidato", this.uploadFiles);
+    this.formData.append("rol", this.rol_seleccionado);
 
     Swal.fire({
       title: 'Estas seguro?',
@@ -129,6 +149,14 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
             }, 1500);
           }
           console.log(res)
+        },
+        (error) => {
+          console.error(error); // Imprime el error en la consola
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.message // Muestra el mensaje de error
+          });
         })
       }
     })
