@@ -9,6 +9,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-management-jrv',
   templateUrl: './management-jrv.component.html',
@@ -48,7 +49,7 @@ export class ManagementJrvComponent implements OnInit {
     private destinoSufragioSrv: DestinoSufragioService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private personasNaturales:PersonaNaturalService
+    private personasNaturales:PersonaNaturalService,
   ) { 
     this.formAsignar = formBuilder.group({
       persona: []
@@ -155,6 +156,17 @@ export class ManagementJrvComponent implements OnInit {
 
   AsignarPersonaNaturalModal(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      if (result === 'yes') {
+        
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  ValidarPersonaNaturalModal(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
       if (result === 'yes') {
         
