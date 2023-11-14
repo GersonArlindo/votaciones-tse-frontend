@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CentroVotacionService } from '@app/core/services/centro-votacion.service';
+import { JrvService } from '@app/core/services/jrv.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Table } from 'primeng/table';
@@ -41,6 +42,7 @@ export class ViewCentroVotacionComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
+    private jrvSrv: JrvService
   ) {
     this.formCentroVotacion = formBuilder.group({
       nombre: ['', Validators.required],
@@ -257,14 +259,34 @@ export class ViewCentroVotacionComponent implements OnInit {
   public GetCentrosVotacion(){
     this.CentroVotacionSrv.getCentrosVotaciones(this.token)
       .subscribe((data: any) => {
-        for(let cv of data){
-          this.Centros_Votacion.push(cv)
-          this.Centros_Votacion_Original.push(cv)
+        if(this.rol_id == 'root' || this.rol_id == 'admin'){
+          for(let cv of data){
+            this.Centros_Votacion.push(cv)
+            this.Centros_Votacion_Original.push(cv)
+          }
+          this.dataLoadedCentroVotacion = true;
+        }else{
+          this.jrvSrv.getJrv(this.token)
+          .subscribe((dataJrv: any) => {
+            for (let jrv of dataJrv){
+              const algunoIncluyeEntero = jrv.jrv_miembros.some((elemento: any) => {
+                return typeof elemento.id_usuario === 'number' && elemento.id_usuario === this.user_id;
+              });
+              if(algunoIncluyeEntero){
+                for(let cv of data){
+                  this.Centros_Votacion.push(cv)
+                  this.Centros_Votacion_Original.push(cv)
+                }
+                this.dataLoadedCentroVotacion = true;
+              }
+              this.dataLoadedCentroVotacion = true;
+            }
+          })
         }
-        this.dataLoadedCentroVotacion = true;
       })
       console.log(this.Centros_Votacion)
   }
+
 
   public editCentroVotacionModal(content: any, id: any){
     this.idParaEditarCentroVotacion = id
@@ -509,6 +531,5 @@ export class ViewCentroVotacionComponent implements OnInit {
   }
 
   rol_id: any = this.getUserInfo('rol');
-
-
+  user_id: any = this.getUserInfo('id');
 }
