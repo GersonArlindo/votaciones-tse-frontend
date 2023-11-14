@@ -186,6 +186,9 @@
                     (input)="buscarPersona($event, 'contains')" />
                 </div>
               </span>
+              &nbsp;
+              <button data-toggle="tooltip" data-placement="top" title="Validar Persona" class="boton-custom" (click)="ValidarPersonaNaturalModal(contentValidar)"> Validar </button>
+
               <button data-toggle="tooltip" data-placement="top" title="Agregar Personas a esta JRV" class="boton-custom align-right" (click)="AsignarPersonaNaturalModal(contentAsignar)"> Agregar </button>
             </div>
           </ng-template>
@@ -246,6 +249,21 @@
                       </div>
                   </form>
                 </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="_btn-back" type="submit" name="submitButton"
+                class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
+            </div>
+          </ng-template>
+
+          <ng-template #contentValidar let-d="dismiss">
+            <div class="modal-header modaltitle">
+              <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-account"></i> Validar Persona Natural</h4>
+            </div>
+            <div class="modal-body">
+              <div class="card">
+                  <h1>Aqui el lector de qr</h1>
               </div>
             </div>
             <div class="modal-footer">

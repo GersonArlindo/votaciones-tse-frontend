@@ -61,6 +61,7 @@
     "ngx-owl-carousel-o": "^14.0.1",
     "ngx-perfect-scrollbar": "^10.1.1",
     "ngx-quill": "^19.0.1",
+    "ngx-scanner-qrcode": "^1.4.0",
     "ngx-sortablejs": "^11.1.0",
     "ngx-spinner": "^15.0.1",
     "primeicons": "^5.0.0",

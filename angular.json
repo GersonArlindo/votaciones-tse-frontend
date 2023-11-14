@@ -122,7 +122,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/logo.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
+              }
             ],
             "styles": [
               "src/styles.scss"

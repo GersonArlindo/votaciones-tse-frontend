@@ -22,6 +22,7 @@ import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { LoginGuard } from './core/guards/login.guard';
 import { DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -53,7 +54,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     NgxSpinnerModule,
     HttpInterceptorModule,
     MatTableModule,
-    TableModule
+    TableModule,
+    NgxScannerQrcodeModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
