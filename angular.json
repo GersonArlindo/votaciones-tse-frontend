@@ -45,7 +45,12 @@
             "assets": [
               "src/logo.ico",
               "src/assets",
-              "src/.htaccess"
+              "src/.htaccess",
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
+              }
             ],
             "styles": [
               "./node_modules/@fullcalendar/common/main.css",
@@ -122,12 +127,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/logo.ico",
-              "src/assets",
-              {
-                "glob": "_redirects",
-                "input": "src",
-                "output": "/"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss"

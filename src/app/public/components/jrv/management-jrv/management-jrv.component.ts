@@ -16,6 +16,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./management-jrv.component.scss']
 })
 export class ManagementJrvComponent implements OnInit {
+
+
   public valorTemplate: any
   public id!: any
   public token: any
@@ -399,6 +401,10 @@ export class ManagementJrvComponent implements OnInit {
   console.log(dui);
 }
 
+public imprimirActas(){
+  this.destinoSufragioSrv.downloadPDF()
+}
+
 public validarLlegadaPersonaNaturlaAJrv(dui: any){
   let cadenaRecuperada: any = localStorage.getItem(`dui-${dui}`);
   const objetoRecuperado = JSON.parse(cadenaRecuperada);
@@ -461,7 +467,6 @@ public validarLlegadaPersonaNaturlaAJrv(dui: any){
       .subscribe((data: any) => {
         this.jrvs.push(data)
         console.log(this.jrvs);
-
       })
   }
 
@@ -483,5 +488,4 @@ public validarLlegadaPersonaNaturlaAJrv(dui: any){
   }
 
   rol_id: any = this.getUserInfo('rol');
-
 }

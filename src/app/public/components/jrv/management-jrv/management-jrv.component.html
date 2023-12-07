@@ -34,6 +34,18 @@
             <line x1="12" y1="8" x2="12.01" y2="8" />
           </svg>
         </button>
+        <button *ngIf="this.rol_id == 'root' || this.rol_id == 'presidente' || this.rol_id == 'admin'" class="button" (click)="imprimirActas()" data-toggle="tooltip" data-placement="top"
+          title="Mas informacion">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-file-text">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10 9 9 9 8 9" />
+          </svg>
+        </button>
       </div>
 
       <br>
@@ -51,11 +63,11 @@
           <div class="my-description">Direccion: {{jrv.centro_votacion.direccion}}</div>
         </div>
         <button *ngIf="jrv.estado == 'CERRADA'" (click)="cambiarEstado(jrv.id_jrv)" class="my-button">
-              Aperturar
+          Aperturar
         </button>
         <button *ngIf="jrv.estado == 'ABIERTA'" (click)="cambiarEstado(jrv.id_jrv)" class="my-button">
           Cerrar
-    </button>
+        </button>
       </div>
 
     </div>
@@ -82,7 +94,8 @@
               <td>{{miembro.usuario.Rol.nombre}}</td>
               <td>{{miembro.estado}}</td>
               <td><a (click)="eliminarUsuarioDeJrv(miembro.id_jrv_miembro)"
-                class="p-button p-button-rounded p-button-danger" style="margin-left: -8px;"><span class="mdi mdi-delete-outline"></span></a>&nbsp;</td>
+                  class="p-button p-button-rounded p-button-danger" style="margin-left: -8px;"><span
+                    class="mdi mdi-delete-outline"></span></a>&nbsp;</td>
             </tr>
             <tr>
               <td *ngIf="this.miembrosJRV.length <= 0" colspan="6">
@@ -95,9 +108,9 @@
       <div *ngIf="this.valorTemplate=='uno'">
         <h1>Agregar Miembros</h1>
         <br>
-        <p-table *ngIf="dataLoadedUsers" [value]="users" dataKey="id_usuario" [rows]="5" [showCurrentPageReport]="true" [paginator]="true"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-          [globalFilterFields]="['id_usuario']">
+        <p-table *ngIf="dataLoadedUsers" [value]="users" dataKey="id_usuario" [rows]="5" [showCurrentPageReport]="true"
+          [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [filterDelay]="0" [globalFilterFields]="['id_usuario']">
           <ng-template pTemplate="caption">
             <div class="table-header">
               Buscar Usuario
@@ -125,7 +138,7 @@
               </th>
               <th pSortableColumn="dui" style="min-width: 10rem">
                 <div class="flex justify-content-between align-items-center">
-                 Dui
+                  Dui
                   <p-sortIcon field="dui"></p-sortIcon>
                 </div>
               </th>
@@ -159,8 +172,8 @@
                 {{this.getEstado(users.estado)}}
               </td>
               <td style="text-align: left; margin-left: -5px;">
-                <a (click)="agregarUseraJrv(users.id_usuario)"
-                  class="p-button p-button-rounded p-button-warning" style="margin-left: -8px;"><span class="mdi mdi-account-plus-outline"></span></a>&nbsp;
+                <a (click)="agregarUseraJrv(users.id_usuario)" class="p-button p-button-rounded p-button-warning"
+                  style="margin-left: -8px;"><span class="mdi mdi-account-plus-outline"></span></a>&nbsp;
               </td>
             </tr>
           </ng-template>
@@ -174,7 +187,8 @@
       <div *ngIf="this.valorTemplate=='dos'">
         <h1>Personas Asignadas a esta jrv</h1>
         <br>
-        <p-table *ngIf="dataLoadedPersonas" [value]="personas" dataKey="id_persona_natural" [rows]="5" [showCurrentPageReport]="true" [paginator]="true"
+        <p-table *ngIf="dataLoadedPersonas" [value]="personas" dataKey="id_persona_natural" [rows]="5"
+          [showCurrentPageReport]="true" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
           [globalFilterFields]="['id_persona_natural']">
           <ng-template pTemplate="caption">
@@ -187,9 +201,11 @@
                 </div>
               </span>
               &nbsp;
-              <button data-toggle="tooltip" data-placement="top" title="Validar Persona" class="boton-custom" (click)="ValidarPersonaNaturalModal(contentValidar)"> Validar </button>
+              <button data-toggle="tooltip" data-placement="top" title="Validar Persona" class="boton-custom"
+                (click)="ValidarPersonaNaturalModal(contentValidar)"> Validar </button>
 
-              <button data-toggle="tooltip" data-placement="top" title="Agregar Personas a esta JRV" class="boton-custom align-right" (click)="AsignarPersonaNaturalModal(contentAsignar)"> Agregar </button>
+              <button data-toggle="tooltip" data-placement="top" title="Agregar Personas a esta JRV"
+                class="boton-custom align-right" (click)="AsignarPersonaNaturalModal(contentAsignar)"> Agregar </button>
             </div>
           </ng-template>
           <ng-template pTemplate="header">
@@ -208,7 +224,7 @@
               </th>
               <th pSortableColumn="informacion_personal.dui" style="min-width: 10rem">
                 <div class="flex justify-content-between align-items-center">
-                 Dui
+                  Dui
                   <p-sortIcon field="informacion_personal.dui"></p-sortIcon>
                 </div>
               </th>
@@ -228,7 +244,8 @@
 
           <ng-template #contentAsignar let-d="dismiss">
             <div class="modal-header modaltitle">
-              <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-account"></i> Asignar Persona Natural</h4>
+              <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-account"></i> Asignar Persona Natural
+              </h4>
             </div>
             <div class="modal-body">
               <div class="card">
@@ -237,8 +254,10 @@
                     <div class="col-sm-12">
                       <div class="mb-3">
                         <label for="company">Persona</label>
-                        <ng-select formControlName="persona" [multiple]="false" (change)="personaCapturada($event)" [closeOnSelect]="false" class="data-ng-select" [ngModelOptions]="{ standalone: true }"  >
-                          <ng-option *ngFor="let persona of this.PersonaNaturales" [value]="persona.id_persona_natural">{{persona.nombres}} - {{persona.dui}}</ng-option>
+                        <ng-select formControlName="persona" [multiple]="false" (change)="personaCapturada($event)"
+                          [closeOnSelect]="false" class="data-ng-select" [ngModelOptions]="{ standalone: true }">
+                          <ng-option *ngFor="let persona of this.PersonaNaturales" [value]="persona.id_persona_natural">
+                            {{persona.nombres}} - {{persona.dui}}</ng-option>
                         </ng-select>
                       </div>
                     </div>
@@ -246,29 +265,32 @@
                       <button type="submit" class="btn btn-primary submit" [disabled]="!id_persona_a_asignar">
                         Guardar <i class="mdi mdi-file-document-edit"></i>
                       </button>&nbsp;
-                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button id="_btn-back" type="submit" name="submitButton"
-                class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
+              <button id="_btn-back" type="submit" name="submitButton" class="btn btn-outline-dark"
+                (click)="d('Cross click')">Regresar</button>
             </div>
           </ng-template>
 
           <ng-template #contentValidar let-d="dismiss">
             <div class="modal-header modaltitle">
-              <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-account"></i> Validar Persona Natural</h4>
+              <h4 class="modal-title " id="modal-basic-title"><i class="mdi mdi-account"></i> Validar Persona Natural
+              </h4>
             </div>
             <div class="modal-body">
               <div class="card">
-                  <h1>Aqui el lector de qr</h1>
+                <!--AQUI EL HTML PARA VALIDAR QR-->
+                <app-qr-reader></app-qr-reader>
+                <!--AQUI EL HTML PARA VALIDAR QR-->
               </div>
             </div>
             <div class="modal-footer">
-              <button id="_btn-back" type="submit" name="submitButton"
-                class="btn btn-outline-dark" (click)="d('Cross click')">Regresar</button>
+              <button id="_btn-back" type="submit" name="submitButton" class="btn btn-outline-dark"
+                (click)="d('Cross click')">Regresar</button>
             </div>
           </ng-template>
 
@@ -289,14 +311,16 @@
               </td>
               <!--ANTES ESTE BOTON SERVIA PARA VALIDAR LA PERSONA NATURAL PERO AHORA LO HACE EL QR-->
               <td style="text-align: left; margin-left: -5px;">
-                <a data-toggle="tooltip" data-placement="top" title="Validar Persona" (click)="validarLlegadaPersonaNaturlaAJrv(personas.informacion_personal.dui)"
-                  class="p-button p-button-rounded p-button-warning" style="margin-left: -8px;"><span class="mdi mdi-check-underline-circle-outline"></span></a>&nbsp;
+                <a data-toggle="tooltip" data-placement="top" title="Validar Persona"
+                  (click)="validarLlegadaPersonaNaturlaAJrv(personas.informacion_personal.dui)"
+                  class="p-button p-button-rounded p-button-warning" style="margin-left: -8px;"><span
+                    class="mdi mdi-check-underline-circle-outline"></span></a>&nbsp;
               </td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-              <td colspan="8">Usuarios no encontrados.</td>
+              <td colspan="8">Personas no encontradas.</td>
             </tr>
           </ng-template>
         </p-table>

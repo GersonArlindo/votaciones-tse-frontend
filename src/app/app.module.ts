@@ -21,8 +21,7 @@ import {TableModule} from 'primeng/table';
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { LoginGuard } from './core/guards/login.guard';
 import { DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
-
-import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -55,7 +54,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     HttpInterceptorModule,
     MatTableModule,
     TableModule,
-    NgxScannerQrcodeModule
+    ZXingScannerModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

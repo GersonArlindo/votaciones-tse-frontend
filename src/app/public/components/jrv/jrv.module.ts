@@ -22,6 +22,9 @@ import { DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { ManagementJrvComponent } from './management-jrv/management-jrv.component';
 // Ng-select
 import { NgSelectModule } from '@ng-select/ng-select';
+import { QrReaderComponent } from './qr-reader/qr-reader.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -52,6 +55,10 @@ const routes: Routes = [
       {
         path: 'management-jrv/:id',
         component: ManagementJrvComponent,
+      },      
+      {
+        path: 'qr-reader',
+        component: QrReaderComponent,
       }
     ]
   },
@@ -61,7 +68,8 @@ const routes: Routes = [
   declarations: [
     JrvComponent,
     ViewJrvComponent,
-    ManagementJrvComponent
+    ManagementJrvComponent,
+    QrReaderComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
@@ -85,6 +93,7 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    ZXingScannerModule
   ],
   providers: [
     {

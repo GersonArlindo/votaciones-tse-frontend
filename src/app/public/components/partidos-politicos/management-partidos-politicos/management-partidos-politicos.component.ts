@@ -162,6 +162,56 @@ export class ManagementPartidosPoliticosComponent implements OnInit {
     })
   }
 
+  eliminarCandidato(id: any){
+    Swal.fire({
+      title: "Estas seguro de esta accion?",
+      text: "Quieres eliminar este candidato definitivamente!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirmar!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.candidatoSrv.deleteCandidato(id, this.token)
+          .subscribe((res: any) => {
+            if(res){
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              })
+              setTimeout(() => {
+                window.location.reload()
+              }, 1500);
+            }
+          },
+          (error) => {
+            if (error) {
+              // Handle the 404 error here
+              const errorMessage = error || 'Ha ocurrido un error!';
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: errorMessage
+              })
+              // Puedes tomar medidas específicas para manejar el error 404, como mostrar un mensaje al usuario.
+            } else {
+              // Handle other errors
+              console.error('Error en la eliminacion del candidato', error);
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Ha ocurrido un error al momento de eliminar este candidato!`
+              })
+              // Puedes manejar otros tipos de errores aquí.
+            }
+          })
+      }
+    });
+  }
+
   editarCandidato(id_candidato: any, id_persona_natural: any){
     if(this.id_candidatos.includes(id_persona_natural)){
       Swal.fire({
